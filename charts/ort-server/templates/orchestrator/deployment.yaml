@@ -20,37 +20,10 @@ spec:
         - name: ort-server-orchestrator
           image: "{{ .Values.containerRegistry }}/ort-server-orchestrator:{{ .Chart.AppVersion }}"
           env:
-            # Database
-            - name: DB_HOST
-              value: {{ .Values.database.host }}
-            - name: DB_PORT
-              value: "{{ .Values.database.port }}"
-            - name: DB_NAME
-              value: {{ .Values.database.name }}
-            - name: DB_SCHEMA
-              value: {{ .Values.database.schema }}
-            - name: DB_USERNAME
-              value: {{ .Values.database.username }}
-            - name: DB_PASSWORD
-              value: {{ .Values.database.password }}
-            - name: DB_SSL_MODE
-              value: {{ .Values.database.sslMode }}
-
-            # User secret provider
-            {{- if .Values.secrets.fileBased.enabled }}
-            - name: SECRETS_PROVIDER_NAME
-              value: fileBased
-            - name: FILE_BASED_PATH
-              value: {{ .Values.secrets.fileBased.path }}
-            {{- end }}
-
-            # Admin secret provider
-            - name: ALLOW_SECRETS_FROM_CONFIG
-              value: "true"
-            # Allow setting all typesafe config properties with environment variables. This is required because not all
-            # config properties have environment variable substitutions configured.
-            - name: JAVA_TOOL_OPTIONS
-              value: "-Dconfig.override_with_env_vars=true"
+            {{- include "ortserver.env.adminSecrets" . | nindent 12 }}
+            {{- include "ortserver.env.database" . | nindent 12 }}
+            {{- include "ortserver.env.typesafeConfigOverride" . | nindent 12 }}
+            {{- include "ortserver.env.userSecrets" . | nindent 12 }}
 
             # Orchestrator receiver
             {{- if .Values.transport.rabbitmq.enabled }}
