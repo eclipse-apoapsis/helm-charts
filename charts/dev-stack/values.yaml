@@ -119,11 +119,66 @@ dev-postgres:
             nodePort: 31432
 
 dev-rabbitmq:
-  auth:
-    username: ortserver
-    password: ortpassword
   persistence:
     enabled: false
+  definitions:
+    enabled: true
+    users:
+      - name: ortserver
+        password: ortpassword
+        tags:
+          - administrator
+    permissions:
+      - user: ortserver
+        vhost: "/"
+        configure: ".*"
+        write: ".*"
+        read: ".*"
+    queues:
+      - name: advisor
+        vhost: "/"
+        durable: true
+        auto_delete: false
+        arguments:
+          x-queue-type: classic
+      - name: analyzer
+        vhost: "/"
+        durable: true
+        auto_delete: false
+        arguments:
+          x-queue-type: classic
+      - name: core
+        vhost: "/"
+        durable: true
+        auto_delete: false
+        arguments:
+          x-queue-type: classic
+      - name: evaluator
+        vhost: "/"
+        durable: true
+        auto_delete: false
+        arguments:
+          x-queue-type: classic
+      - name: orchestrator
+        vhost: "/"
+        durable: true
+        auto_delete: false
+        arguments:
+          x-queue-type: classic
+      - name: reporter
+        vhost: "/"
+        durable: true
+        auto_delete: false
+        arguments:
+          x-queue-type: classic
+      - name: scanner
+        vhost: "/"
+        durable: true
+        auto_delete: false
+        arguments:
+          x-queue-type: classic
+    vhosts:
+      - name: "/"
   extraObjects:
     - apiVersion: v1
       kind: Service
