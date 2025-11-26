@@ -8,5 +8,14 @@
   ],
   "dependencyDashboard": false,
   "labels": ["dependencies"],
-  "prHourlyLimit": 5
+  "prHourlyLimit": 5,
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": ["^charts/ort-server/Chart\\.yaml$"],
+      "matchStrings": ["appVersion:\\s*\"?(?<currentValue>[^\"\\s]+)\"?"],
+      "depNameTemplate": "eclipse-apoapsis/ort-server",
+      "datasourceTemplate": "github-releases"
+    }
+  ]
 }
