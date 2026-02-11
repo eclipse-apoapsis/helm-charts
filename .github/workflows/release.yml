@@ -1,0 +1,52 @@
+name: Release Helm Chart
+
+on:
+  push:
+    branches:
+    - main
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Let release please check if a release needs to be created and if release PRs need to be updated.
+    #    See: https://github.com/googleapis/release-please?tab=readme-ov-file#release-please-bot-does-not-create-a-release-pr-why
+    - uses: googleapis/release-please-action@v4
+      id: release
+      with:
+        token: ${{ secrets.GH_API_TOKEN }}
+
+    # 2. Publish the ORT Server Helm chart if it was updated.
+    - name: Checkout
+      if: ${{ steps.release.outputs['charts/ort-server--release_created'] }}
+      uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+
+    - name: Install Helm
+      if: ${{ steps.release.outputs['charts/ort-server--release_created'] }}
+      uses: azure/setup-helm@v4
+
+    - name: Login to GHCR
+      if: ${{ steps.release.outputs['charts/ort-server--release_created'] }}
+      run: |
+        echo "${{ secrets.GH_API_TOKEN }}" | helm registry login ghcr.io \
+          --username ${{ github.actor }} \
+          --password-stdin
+
+    - name: Publish ORT Server
+      if: ${{ steps.release.outputs['charts/ort-server--release_created'] }}
+      run: |
+        VERSION=${{ steps.release.outputs['charts/ort-server--version'] }}
+        REPO_OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+
+        helm package charts/ort-server
+        helm push ort-server-$VERSION.tgz oci://ghcr.io/$REPO_OWNER/charts
+
+    - name: Upload ORT Server Chart to GitHub Release
+      if: ${{ steps.release.outputs['charts/ort-server--release_created'] }}
+      env:
+        GH_TOKEN: ${{ secrets.GH_API_TOKEN }}
+      run: |
+        VERSION=${{ steps.release.outputs['charts/ort-server--version'] }}
+        TAG_NAME=${{ steps.release.outputs['charts/ort-server--tag_name'] }}
+        gh release upload $TAG_NAME ort-server-$VERSION.tgz
