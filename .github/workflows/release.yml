@@ -12,7 +12,7 @@ jobs:
     steps:
     # 1. Let release please check if a release needs to be created and if release PRs need to be updated.
     #    See: https://github.com/googleapis/release-please?tab=readme-ov-file#release-please-bot-does-not-create-a-release-pr-why
-    - uses: googleapis/release-please-action@v4
+    - uses: googleapis/release-please-action@16a9c90856f42705d54a6fda1823352bdc62cf38 # v4
       id: release
       with:
         token: ${{ secrets.GH_API_TOKEN }}
@@ -24,7 +24,7 @@ jobs:
 
     - name: Install Helm
       if: ${{ steps.release.outputs['charts/ort-server--release_created'] }}
-      uses: azure/setup-helm@v4
+      uses: azure/setup-helm@1a275c3b69536ee54be43f2070a358922e12c8d4 # v4
 
     - name: Login to GHCR
       if: ${{ steps.release.outputs['charts/ort-server--release_created'] }}
