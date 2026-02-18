@@ -1,22 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ort-server-ui
+  name: {{ include "ortserver.fullname" . }}-ui
   namespace: {{ .Release.Namespace }}
   labels:
-    app: ort-server-ui
+    {{- include "ortserver.labels" . | nindent 4 }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ort-server-ui
+      {{- include "ortserver.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: ui
   template:
     metadata:
       labels:
-        app: ort-server-ui
+        {{- include "ortserver.labels" . | nindent 8 }}
+        {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+        app.kubernetes.io/component: ui
     spec:
       containers:
-      - name: ort-server-ui
+      - name: {{ include "ortserver.fullname" . }}-ui
         image: "{{ .Values.containerRegistry }}/ort-server-ui:{{ .Chart.AppVersion }}"
         ports:
         - containerPort: 8080

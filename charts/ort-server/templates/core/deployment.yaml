@@ -1,26 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ort-server-core
+  name: {{ include "ortserver.fullname" . }}-core
   namespace: {{ .Release.Namespace }}
   labels:
-    app: ort-server-core
+    {{- include "ortserver.labels" . | nindent 4 }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ort-server-core
+      {{- include "ortserver.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: core
   template:
     metadata:
       labels:
-        app: ort-server-core
+        {{- include "ortserver.labels" . | nindent 8 }}
+        {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+        app.kubernetes.io/component: core
     spec:
       volumes:
         {{- if .Values.core.extraVolumes }}
         {{- toYaml .Values.core.extraVolumes | nindent 8 }}
         {{- end }}
       containers:
-        - name: ort-server-core
+        - name: {{ include "ortserver.fullname" . }}-core
           image: "{{ .Values.containerRegistry }}/ort-server-core:{{ .Chart.AppVersion }}"
           ports:
             - containerPort: 8080

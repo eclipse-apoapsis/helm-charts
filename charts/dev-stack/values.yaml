@@ -53,10 +53,16 @@ ort-server:
       metadata:
         name: ort-server-core-nodeport
         namespace: "{{ .Release.Namespace }}"
+        labels:
+          app.kubernetes.io/name: "{{ include \"ortserver.name\" . }}"
+          app.kubernetes.io/instance: "{{ .Release.Name }}"
+          app.kubernetes.io/component: core
       spec:
         type: NodePort
         selector:
-          app: ort-server-core
+          app.kubernetes.io/name: "{{ include \"ortserver.name\" . }}"
+          app.kubernetes.io/instance: "{{ .Release.Name }}"
+          app.kubernetes.io/component: core
         ports:
           - name: ort-server-core
             port: 8081
@@ -67,10 +73,16 @@ ort-server:
       metadata:
         name: ort-server-ui-nodeport
         namespace: "{{ .Release.Namespace }}"
+        labels:
+          app.kubernetes.io/name: "{{ include \"ortserver.name\" . }}"
+          app.kubernetes.io/instance: "{{ .Release.Name }}"
+          app.kubernetes.io/component: ui
       spec:
         type: NodePort
         selector:
-          app: ort-server-ui
+          app.kubernetes.io/name: "{{ include \"ortserver.name\" . }}"
+          app.kubernetes.io/instance: "{{ .Release.Name }}"
+          app.kubernetes.io/component: ui
         ports:
           - name: ort-server-ui
             port: 8082

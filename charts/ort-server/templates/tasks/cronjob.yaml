@@ -3,8 +3,10 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: ort-server-{{ .name }}
+  name: {{ include "ortserver.fullname" $ }}-{{ .name }}
   namespace: {{ $.Release.Namespace }}
+  labels:
+    {{- include "ortserver.labels" $ | nindent 4 }}
 spec:
   schedule: {{ .schedule | quote }}
   concurrencyPolicy: Forbid
@@ -13,11 +15,17 @@ spec:
   jobTemplate:
     spec:
       template:
+        metadata:
+          labels:
+            {{- include "ortserver.labels" $ | nindent 12 }}
+            {{- with $.Values.podLabels }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
         spec:
           restartPolicy: Never
-          serviceAccountName: ort-server-tasks-sa
+          serviceAccountName: {{ include "ortserver.fullname" $ }}-tasks-sa
           containers:
-            - name: ort-server-{{ .name }}-task
+            - name: {{ include "ortserver.fullname" $ }}-{{ .name }}-task
               image: "{{ $.Values.containerRegistry }}/ort-server-maintenance-tasks:{{ $.Chart.AppVersion }}"
               env:
                 {{- include "ortserver.env.adminSecrets" $ | nindent 16 }}

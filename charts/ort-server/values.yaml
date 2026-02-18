@@ -1,5 +1,14 @@
 containerRegistry: ghcr.io/eclipse-apoapsis
 
+## @param nameOverride String to partially override ortserver.fullname
+nameOverride: ""
+## @param fullnameOverride String to fully override ortserver.fullname
+fullnameOverride: ""
+## @param commonLabels Map of labels to add to all deployed objects
+commonLabels: {}
+## @param podLabels Map of labels to add to all pods
+podLabels: {}
+
 configFileProvider:
   gitConfig:
     enabled: true

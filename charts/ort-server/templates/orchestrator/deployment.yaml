@@ -1,23 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ort-server-orchestrator
+  name: {{ include "ortserver.fullname" . }}-orchestrator
   namespace: {{ .Release.Namespace }}
   labels:
-    app: ort-server-orchestrator
+    {{- include "ortserver.labels" . | nindent 4 }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ort-server-orchestrator
+      {{- include "ortserver.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: orchestrator
   template:
     metadata:
       labels:
-        app: ort-server-orchestrator
+        {{- include "ortserver.labels" . | nindent 8 }}
+        {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+        app.kubernetes.io/component: orchestrator
     spec:
-      serviceAccountName: ort-server-orchestrator-sa
+      serviceAccountName: {{ include "ortserver.fullname" . }}-orchestrator-sa
       containers:
-        - name: ort-server-orchestrator
+        - name: {{ include "ortserver.fullname" . }}-orchestrator
           image: "{{ .Values.containerRegistry }}/ort-server-orchestrator:{{ .Chart.AppVersion }}"
           env:
             {{- include "ortserver.env.adminSecrets" . | nindent 12 }}
