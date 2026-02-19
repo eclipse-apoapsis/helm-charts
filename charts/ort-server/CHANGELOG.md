@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.2.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.1.0...ort-server-v0.2.0) (2026-02-19)
+
+
+### Features
+
+* Add service accounts for all pods ([4f895d1](https://github.com/eclipse-apoapsis/helm-charts/commit/4f895d18d7c816fcad3443212e912c8beb9eed81))
+* Improve resource names and labels ([1cc0597](https://github.com/eclipse-apoapsis/helm-charts/commit/1cc05974f59ee1eee16809db21d6ed8267a57b86))
+
+
+### Dependencies
+
+* update dependency eclipse-apoapsis/ort-server to v0.53.0 ([767b8d3](https://github.com/eclipse-apoapsis/helm-charts/commit/767b8d3d840d6d9e214ff1ff0e2e5f8a09163e8d))
+
 ## [0.1.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.0.1...ort-server-v0.1.0) (2026-02-12)
 
 
