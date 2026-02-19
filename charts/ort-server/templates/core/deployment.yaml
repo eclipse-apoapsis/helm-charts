@@ -20,6 +20,7 @@ spec:
         {{- end }}
         app.kubernetes.io/component: core
     spec:
+      serviceAccountName: {{ include "ortserver.fullname" . }}-core-sa
       volumes:
         {{- if .Values.core.extraVolumes }}
         {{- toYaml .Values.core.extraVolumes | nindent 8 }}

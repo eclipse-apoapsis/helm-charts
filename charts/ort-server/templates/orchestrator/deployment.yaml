@@ -89,7 +89,7 @@ spec:
             - name: ADVISOR_SENDER_TRANSPORT_MEMORY_LIMIT
               value: {{ .Values.transport.kubernetes.advisor.memoryLimit }}
             - name: ADVISOR_SERVICE_ACCOUNT
-              value: ort-server-orchestrator-sa
+              value: {{ include "ortserver.fullname" . }}-workers-sa
             # Advisor worker config used by sender
             {{- if .Values.configFileProvider.gitConfig.enabled }}
             - name: ADVISOR_CONFIG_FILE_PROVIDER
@@ -122,7 +122,7 @@ spec:
             - name: ANALYZER_SENDER_TRANSPORT_MEMORY_LIMIT
               value: {{ .Values.transport.kubernetes.analyzer.memoryLimit }}
             - name: ANALYZER_SERVICE_ACCOUNT
-              value: ort-server-orchestrator-sa
+              value: {{ include "ortserver.fullname" . }}-workers-sa
             # Analyzer worker config used by sender
             {{- if .Values.configFileProvider.gitConfig.enabled }}
             - name: ANALYZER_CONFIG_FILE_PROVIDER
@@ -155,7 +155,7 @@ spec:
             - name: CONFIG_SENDER_TRANSPORT_MEMORY_LIMIT
               value: {{ .Values.transport.kubernetes.config.memoryLimit }}
             - name: CONFIG_SERVICE_ACCOUNT
-              value: ort-server-orchestrator-sa
+              value: {{ include "ortserver.fullname" . }}-workers-sa
             # Config worker config used by sender
             {{- if .Values.configFileProvider.gitConfig.enabled }}
             - name: CONFIG_CONFIG_FILE_PROVIDER
@@ -188,7 +188,7 @@ spec:
             - name: EVALUATOR_SENDER_TRANSPORT_MEMORY_LIMIT
               value: {{ .Values.transport.kubernetes.evaluator.memoryLimit }}
             - name: EVALUATOR_SERVICE_ACCOUNT
-              value: ort-server-orchestrator-sa
+              value: {{ include "ortserver.fullname" . }}-workers-sa
             # Analyzer worker config used by sender
             {{- if .Values.configFileProvider.gitConfig.enabled }}
             - name: EVALUATOR_CONFIG_FILE_PROVIDER
@@ -221,7 +221,7 @@ spec:
             - name: REPORTER_SENDER_TRANSPORT_MEMORY_LIMIT
               value: {{ .Values.transport.kubernetes.reporter.memoryLimit }}
             - name: REPORTER_SERVICE_ACCOUNT
-              value: ort-server-orchestrator-sa
+              value: {{ include "ortserver.fullname" . }}-workers-sa
             # Analyzer worker config used by sender
             {{- if .Values.configFileProvider.gitConfig.enabled }}
             - name: REPORTER_CONFIG_FILE_PROVIDER
@@ -254,7 +254,7 @@ spec:
             - name: SCANNER_SENDER_TRANSPORT_MEMORY_LIMIT
               value: {{ .Values.transport.kubernetes.scanner.memoryLimit }}
             - name: SCANNER_SERVICE_ACCOUNT
-              value: ort-server-orchestrator-sa
+              value: {{ include "ortserver.fullname" . }}-workers-sa
             # Analyzer worker config used by sender
             {{- if .Values.configFileProvider.gitConfig.enabled }}
             - name: SCANNER_CONFIG_FILE_PROVIDER
