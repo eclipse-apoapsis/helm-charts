@@ -3,4 +3,4 @@ name: ort-server
 description: A generic Helm chart for the ORT Server.
 type: application
 version: 0.2.0
-appVersion: "0.53.0"
+appVersion: "0.54.0"
