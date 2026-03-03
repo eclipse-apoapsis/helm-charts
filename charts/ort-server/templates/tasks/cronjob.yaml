@@ -24,6 +24,7 @@ spec:
         spec:
           restartPolicy: Never
           serviceAccountName: {{ include "ortserver.fullname" $ }}-tasks-sa
+          {{- include "ortserver.imagePullSecret" $ | nindent 10 }}
           containers:
             - name: {{ include "ortserver.fullname" $ }}-{{ .name }}-task
               image: "{{ $.Values.containerRegistry }}/ort-server-maintenance-tasks:{{ $.Chart.AppVersion }}"

@@ -1,4 +1,6 @@
 containerRegistry: ghcr.io/eclipse-apoapsis
+## @param imagePullSecret Name of the image pull secret to use for pulling the Docker images
+imagePullSecret: null
 
 ## @param nameOverride String to partially override ortserver.fullname
 nameOverride: ""

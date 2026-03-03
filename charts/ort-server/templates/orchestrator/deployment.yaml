@@ -21,6 +21,7 @@ spec:
         app.kubernetes.io/component: orchestrator
     spec:
       serviceAccountName: {{ include "ortserver.fullname" . }}-orchestrator-sa
+      {{- include "ortserver.imagePullSecret" . | nindent 6 }}
       containers:
         - name: {{ include "ortserver.fullname" . }}-orchestrator
           image: "{{ .Values.containerRegistry }}/ort-server-orchestrator:{{ .Chart.AppVersion }}"
@@ -80,6 +81,10 @@ spec:
               value: "{{ .Values.containerRegistry }}/ort-server-advisor-worker:{{ .Chart.AppVersion }}"
             - name: ADVISOR_SENDER_TRANSPORT_IMAGE_PULL_POLICY
               value: {{ .Values.transport.kubernetes.imagePullPolicy }}
+            {{- with .Values.imagePullSecret }}
+            - name: ADVISOR_SENDER_TRANSPORT_IMAGE_PULL_SECRET
+              value: {{ . | quote }}
+            {{- end }}
             - name: ADVISOR_SENDER_TRANSPORT_BACKOFF_LIMIT
               value: "{{ .Values.transport.kubernetes.backoffLimit }}"
             - name: ADVISOR_SENDER_TRANSPORT_RESTART_POLICY
@@ -113,6 +118,10 @@ spec:
               value: "{{ .Values.containerRegistry }}/ort-server-analyzer-worker:{{ .Chart.AppVersion }}"
             - name: ANALYZER_SENDER_TRANSPORT_IMAGE_PULL_POLICY
               value: {{ .Values.transport.kubernetes.imagePullPolicy }}
+            {{- with .Values.imagePullSecret }}
+            - name: ANALYZER_SENDER_TRANSPORT_IMAGE_PULL_SECRET
+              value: {{ . | quote }}
+            {{- end }}
             - name: ANALYZER_SENDER_TRANSPORT_BACKOFF_LIMIT
               value: "{{ .Values.transport.kubernetes.backoffLimit }}"
             - name: ANALYZER_SENDER_TRANSPORT_RESTART_POLICY
@@ -146,6 +155,10 @@ spec:
               value: "{{ .Values.containerRegistry }}/ort-server-config-worker:{{ .Chart.AppVersion }}"
             - name: CONFIG_SENDER_TRANSPORT_IMAGE_PULL_POLICY
               value: {{ .Values.transport.kubernetes.imagePullPolicy }}
+            {{- with .Values.imagePullSecret }}
+            - name: CONFIG_SENDER_TRANSPORT_IMAGE_PULL_SECRET
+              value: {{ . | quote }}
+            {{- end }}
             - name: CONFIG_SENDER_TRANSPORT_BACKOFF_LIMIT
               value: "{{ .Values.transport.kubernetes.backoffLimit }}"
             - name: CONFIG_SENDER_TRANSPORT_RESTART_POLICY
@@ -179,6 +192,10 @@ spec:
               value: "{{ .Values.containerRegistry }}/ort-server-evaluator-worker:{{ .Chart.AppVersion }}"
             - name: EVALUATOR_SENDER_TRANSPORT_IMAGE_PULL_POLICY
               value: {{ .Values.transport.kubernetes.imagePullPolicy }}
+            {{- with .Values.imagePullSecret }}
+            - name: EVALUATOR_SENDER_TRANSPORT_IMAGE_PULL_SECRET
+              value: {{ . | quote }}
+            {{- end }}
             - name: EVALUATOR_SENDER_TRANSPORT_BACKOFF_LIMIT
               value: "{{ .Values.transport.kubernetes.backoffLimit }}"
             - name: EVALUATOR_SENDER_TRANSPORT_RESTART_POLICY
@@ -212,6 +229,10 @@ spec:
               value: "{{ .Values.containerRegistry }}/ort-server-reporter-worker:{{ .Chart.AppVersion }}"
             - name: REPORTER_SENDER_TRANSPORT_IMAGE_PULL_POLICY
               value: {{ .Values.transport.kubernetes.imagePullPolicy }}
+            {{- with .Values.imagePullSecret }}
+            - name: REPORTER_SENDER_TRANSPORT_IMAGE_PULL_SECRET
+              value: {{ . | quote }}
+            {{- end }}
             - name: REPORTER_SENDER_TRANSPORT_BACKOFF_LIMIT
               value: "{{ .Values.transport.kubernetes.backoffLimit }}"
             - name: REPORTER_SENDER_TRANSPORT_RESTART_POLICY
@@ -245,6 +266,10 @@ spec:
               value: "{{ .Values.containerRegistry }}/ort-server-scanner-worker:{{ .Chart.AppVersion }}"
             - name: SCANNER_SENDER_TRANSPORT_IMAGE_PULL_POLICY
               value: {{ .Values.transport.kubernetes.imagePullPolicy }}
+            {{- with .Values.imagePullSecret }}
+            - name: SCANNER_SENDER_TRANSPORT_IMAGE_PULL_SECRET
+              value: {{ . | quote }}
+            {{- end }}
             - name: SCANNER_SENDER_TRANSPORT_BACKOFF_LIMIT
               value: "{{ .Values.transport.kubernetes.backoffLimit }}"
             - name: SCANNER_SENDER_TRANSPORT_RESTART_POLICY

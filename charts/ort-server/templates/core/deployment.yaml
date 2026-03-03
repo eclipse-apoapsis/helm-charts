@@ -25,6 +25,7 @@ spec:
         {{- if .Values.core.extraVolumes }}
         {{- toYaml .Values.core.extraVolumes | nindent 8 }}
         {{- end }}
+      {{- include "ortserver.imagePullSecret" . | nindent 6 }}
       containers:
         - name: {{ include "ortserver.fullname" . }}-core
           image: "{{ .Values.containerRegistry }}/ort-server-core:{{ .Chart.AppVersion }}"

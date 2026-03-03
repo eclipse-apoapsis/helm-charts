@@ -81,3 +81,14 @@ Render a value that might contain templates.
     {{- $value }}
   {{- end }}
 {{- end -}}
+
+{{/*
+Image pull secret
+If imagePullSecret is defined in the values, render the imagePullSecrets section.
+*/}}
+{{- define "ortserver.imagePullSecret" -}}
+{{- if .Values.imagePullSecret }}
+imagePullSecrets:
+  - name: {{ .Values.imagePullSecret | quote }}
+{{- end }}
+{{- end }}

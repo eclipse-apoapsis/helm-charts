@@ -21,6 +21,7 @@ spec:
         app.kubernetes.io/component: ui
     spec:
       serviceAccountName: {{ include "ortserver.fullname" . }}-ui-sa
+      {{- include "ortserver.imagePullSecret" . | nindent 6 }}
       containers:
       - name: {{ include "ortserver.fullname" . }}-ui
         image: "{{ .Values.containerRegistry }}/ort-server-ui:{{ .Chart.AppVersion }}"
