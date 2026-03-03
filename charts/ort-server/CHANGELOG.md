@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.3.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.2.1...ort-server-v0.3.0) (2026-03-03)
+
+
+### Features
+
+* Make the image pull secret configurable ([f547281](https://github.com/eclipse-apoapsis/helm-charts/commit/f547281057838dc3175704361fcbb19ba83880c8))
+
+
+### Dependencies
+
+* update dependency eclipse-apoapsis/ort-server to v0.55.0 ([53cb1b9](https://github.com/eclipse-apoapsis/helm-charts/commit/53cb1b96b37818e09ccb3a678ad813d42cd8169c))
+
 ## [0.2.1](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.2.0...ort-server-v0.2.1) (2026-02-27)
 
 
