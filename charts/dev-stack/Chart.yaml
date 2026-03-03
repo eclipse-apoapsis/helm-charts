@@ -15,5 +15,5 @@ dependencies:
     repository: "oci://registry-1.docker.io/cloudpirates"
     alias: dev-keycloak
   - name: ort-server
-    version: 0.1.0
+    version: ">=0.0.0"
     repository: "file://../ort-server"
