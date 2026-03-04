@@ -1,4 +1,4 @@
-{{- range .Values.tasks }}
+{{- range .Values.tasks.configs }}
 ---
 apiVersion: batch/v1
 kind: CronJob
@@ -24,10 +24,18 @@ spec:
         spec:
           restartPolicy: Never
           serviceAccountName: {{ include "ortserver.fullname" $ }}-tasks-sa
+          volumes:
+            {{- if $.Values.tasks.extraVolumes }}
+            {{- toYaml $.Values.tasks.extraVolumes | nindent 12 }}
+            {{- end }}
           {{- include "ortserver.imagePullSecret" $ | nindent 10 }}
           containers:
             - name: {{ include "ortserver.fullname" $ }}-{{ .name }}-task
               image: "{{ $.Values.containerRegistry }}/ort-server-maintenance-tasks:{{ $.Chart.AppVersion }}"
+              volumeMounts:
+                {{- if $.Values.tasks.extraVolumeMounts }}
+                {{- toYaml $.Values.tasks.extraVolumeMounts | nindent 16 }}
+                {{- end }}
               env:
                 {{- include "ortserver.env.adminSecrets" $ | nindent 16 }}
                 {{- include "ortserver.env.database" $ | nindent 16 }}

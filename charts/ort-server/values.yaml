@@ -98,7 +98,15 @@ core:
     apiSecret: ort-server
     clientId: admin-cli
     subjectClientId: ort-server
+  ## @param core.extraVolumes Additional volumes for the core deployment
   extraVolumes: []
+  ## @param core.extraVolumeMounts Additional volume mounts for the core deployment
+  extraVolumeMounts: []
+
+orchestrator:
+  ## @param orchestrator.extraVolumes Additional volumes for the orchestrator deployment
+  extraVolumes: []
+  ## @param orchestrator.extraVolumeMounts Additional volume mounts for the orchestrator deployment
   extraVolumeMounts: []
 
 advisor:
@@ -120,40 +128,45 @@ scanner:
   mountPvcs: ""
 
 tasks:
-  - name: delete-old-ort-runs
-    schedule: "15 0 * * *"
-    dataRetention:
-      ortRunDays: 90
-  - name: delete-orphaned-entities
-    schedule: "30 1 * * *"
-    vcsInfo:
-      limit: 1024
-      chunkSize: 64
-    remoteArtifacts:
-      limit: 1024
-      chunkSize: 64
-    snippets:
-      limit: 1048576
-      chunkSize: 1024
-    snippetFindings:
-      limit: 1048576
-      chunkSize: 1024
-  - name: kubernetes-reaper
-    schedule: "*/5 * * * *"
-    reaperMaxAge: 600
-  - name: kubernetes-long-running-jobs-finder
-    schedule: "*/5 * * * *"
-    timeouts:
-      configWorker: 1
-      analyzerWorker: 120
-      advisorWorker: 2
-      scannerWorker: 1440
-      evaluatorWorker: 5
-      reporterWorker: 30
-      notifierWorker: 10
-  - name: kubernetes-lost-jobs-finder
-    schedule: "*/2 * * * *"
-    lostJobsMinAge: 30
+  ## @param tasks.extraVolumes Additional volumes for the task cron jobs
+  extraVolumes: []
+  ## @param tasks.extraVolumeMounts Additional volume mounts for the task cron jobs
+  extraVolumeMounts: []
+  configs:
+    - name: delete-old-ort-runs
+      schedule: "15 0 * * *"
+      dataRetention:
+        ortRunDays: 90
+    - name: delete-orphaned-entities
+      schedule: "30 1 * * *"
+      vcsInfo:
+        limit: 1024
+        chunkSize: 64
+      remoteArtifacts:
+        limit: 1024
+        chunkSize: 64
+      snippets:
+        limit: 1048576
+        chunkSize: 1024
+      snippetFindings:
+        limit: 1048576
+        chunkSize: 1024
+    - name: kubernetes-reaper
+      schedule: "*/5 * * * *"
+      reaperMaxAge: 600
+    - name: kubernetes-long-running-jobs-finder
+      schedule: "*/5 * * * *"
+      timeouts:
+        configWorker: 1
+        analyzerWorker: 120
+        advisorWorker: 2
+        scannerWorker: 1440
+        evaluatorWorker: 5
+        reporterWorker: 30
+        notifierWorker: 10
+    - name: kubernetes-lost-jobs-finder
+      schedule: "*/2 * * * *"
+      lostJobsMinAge: 30
 
 ui:
   url: ""

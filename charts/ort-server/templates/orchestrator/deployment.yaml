@@ -21,10 +21,18 @@ spec:
         app.kubernetes.io/component: orchestrator
     spec:
       serviceAccountName: {{ include "ortserver.fullname" . }}-orchestrator-sa
+      volumes:
+        {{- if .Values.orchestrator.extraVolumes }}
+        {{- toYaml .Values.orchestrator.extraVolumes | nindent 8 }}
+        {{- end }}
       {{- include "ortserver.imagePullSecret" . | nindent 6 }}
       containers:
         - name: {{ include "ortserver.fullname" . }}-orchestrator
           image: "{{ .Values.containerRegistry }}/ort-server-orchestrator:{{ .Chart.AppVersion }}"
+          volumeMounts:
+            {{- if .Values.orchestrator.extraVolumeMounts }}
+            {{- toYaml .Values.orchestrator.extraVolumeMounts | nindent 12 }}
+            {{- end }}
           env:
             {{- include "ortserver.env.adminSecrets" . | nindent 12 }}
             {{- include "ortserver.env.database" . | nindent 12 }}
