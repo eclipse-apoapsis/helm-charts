@@ -33,6 +33,8 @@ secrets:
 configSecrets:
   name: secret-file
   files: ""
+  ## @param configSecrets.allowSecretsFromConfig If enabled, secrets are read from environment variables, otherwise from the configured files.
+  allowSecretsFromConfig: true
 
 storage:
   database:

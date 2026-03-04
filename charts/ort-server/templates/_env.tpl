@@ -19,7 +19,7 @@
 {{/* Environment variables to configure the provider for admin secrets. */}}
 {{- define "ortserver.env.adminSecrets" -}}
 - name: ALLOW_SECRETS_FROM_CONFIG
-  value: "true"
+  value: "{{ .Values.configSecrets.allowSecretsFromConfig }}"
 {{- end -}}
 
 {{/* Environment variables to configure the provider for user secrets. */}}
