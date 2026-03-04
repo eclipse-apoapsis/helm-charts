@@ -35,6 +35,12 @@ spec:
                 {{- include "ortserver.env.reportStorage" $ | nindent 16 }}
                 {{- include "ortserver.env.typesafeConfigOverride" $ | nindent 16 }}
 
+                # Config secrets
+                - name: TASKS_SECRET_PROVIDER
+                  value: {{ $.Values.configSecrets.name }}
+                - name: TASKS_SECRET_FILES
+                  value: {{ $.Values.configSecrets.files }}
+
                 # Orchestrator sender
                 {{- if $.Values.transport.rabbitmq.enabled }}
                 - name: ORCHESTRATOR_SENDER_TRANSPORT_TYPE

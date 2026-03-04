@@ -34,6 +34,12 @@ spec:
             {{- include "ortserver.env.typesafeConfigOverride" . | nindent 12 }}
             {{- include "ortserver.env.userSecrets" . | nindent 12 }}
 
+            # Config secrets
+            - name: ORCHESTRATOR_SECRET_PROVIDER
+              value: {{ .Values.configSecrets.name }}
+            - name: ORCHESTRATOR_SECRET_FILES
+              value: {{ .Values.configSecrets.files }}
+
             # Orchestrator receiver
             {{- if .Values.transport.rabbitmq.enabled }}
             - name: ORCHESTRATOR_RECEIVER_TRANSPORT_TYPE

@@ -52,6 +52,12 @@ spec:
             {{- include "ortserver.env.typesafeConfigOverride" . | nindent 12 }}
             {{- include "ortserver.env.userSecrets" . | nindent 12 }}
 
+            # Config secrets
+            - name: CORE_SECRET_PROVIDER
+              value: {{ .Values.configSecrets.name }}
+            - name: CORE_SECRET_FILES
+              value: {{ .Values.configSecrets.files }}
+
             # Webserver
             - name: PORT
               value: "8080"
