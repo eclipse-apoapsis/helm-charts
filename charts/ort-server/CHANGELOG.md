@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.1](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.5.0...ort-server-v0.5.1) (2026-03-05)
+
+
+### Bug Fixes
+
+* Fix the check if the core liveness probe is enabled ([08d0df5](https://github.com/eclipse-apoapsis/helm-charts/commit/08d0df57fe339252489dd8ddcf2d2d146c8e1999))
+
 ## [0.5.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.4.0...ort-server-v0.5.0) (2026-03-05)
 
 
