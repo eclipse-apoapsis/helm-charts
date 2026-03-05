@@ -98,6 +98,19 @@ core:
     apiSecret: ort-server
     clientId: admin-cli
     subjectClientId: ort-server
+  livenessProbe:
+    ## @param core.livenessProbe.enabled Enable livenessProbe for the core deployment
+    enabled: true
+    ## @param core.livenessProbe.initialDelaySeconds Initial delay before the liveness probe is initiated
+    initialDelaySeconds: 60
+    ## @param core.livenessProbe.periodSeconds Period between liveness probe checks
+    periodSeconds: 10
+    ## @param core.livenessProbe.timeoutSeconds Timeout for the liveness probe
+    timeoutSeconds: 5
+    ## @param core.livenessProbe.successThreshold Minimum consecutive successes for the liveness probe to be considered successful
+    successThreshold: 1
+    ## @param core.livenessProbe.failureThreshold Minimum consecutive failures for the liveness probe to be considered failed
+    failureThreshold: 6
   ## @param core.extraVolumes Additional volumes for the core deployment
   extraVolumes: []
   ## @param core.extraVolumeMounts Additional volume mounts for the core deployment
