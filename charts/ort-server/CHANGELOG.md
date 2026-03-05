@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.4.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.3.0...ort-server-v0.4.0) (2026-03-05)
+
+
+### Features
+
+* add option to pass extra environment variables ([8c44d22](https://github.com/eclipse-apoapsis/helm-charts/commit/8c44d22b0e93a4a7de0e20afb80226ee3575336c))
+* Configure the config secret provider ([72985c0](https://github.com/eclipse-apoapsis/helm-charts/commit/72985c0bb49ebb33032734c6ad703d213e37d52d))
+* Make `allowSecretsFromConfig` configurable ([5c2c029](https://github.com/eclipse-apoapsis/helm-charts/commit/5c2c0294823ea1f90bad0db83a8c96ed282385dc))
+* Support extra volumes and volume mounts for orchestrator and tasks ([850ad58](https://github.com/eclipse-apoapsis/helm-charts/commit/850ad584897d9d8c2be8bf060fdf91a9d44887b5))
+
 ## [0.3.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.2.1...ort-server-v0.3.0) (2026-03-03)
 
 
