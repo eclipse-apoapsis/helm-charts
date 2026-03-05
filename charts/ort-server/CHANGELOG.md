@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.4.0...ort-server-v0.5.0) (2026-03-05)
+
+
+### Features
+
+* Make the liveness probe for core configurable ([75e40dc](https://github.com/eclipse-apoapsis/helm-charts/commit/75e40dcfba9e143b944103faf8c1396435e5afc7))
+
 ## [0.4.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.3.0...ort-server-v0.4.0) (2026-03-05)
 
 
