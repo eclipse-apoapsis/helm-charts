@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.6.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.5.2...ort-server-v0.6.0) (2026-03-19)
+
+
+### Features
+
+* Support extra volumes and volume mounts for the UI ([846c56f](https://github.com/eclipse-apoapsis/helm-charts/commit/846c56f30d499f0a2b64e25c91402ca11457b9b7))
+
+
+### Dependencies
+
+* update dependency eclipse-apoapsis/ort-server to v0.57.1 ([e8b31d5](https://github.com/eclipse-apoapsis/helm-charts/commit/e8b31d5fd4a504db0668ddc7c61b8a16636e903d))
+
 ## [0.5.2](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.5.1...ort-server-v0.5.2) (2026-03-13)
 
 
