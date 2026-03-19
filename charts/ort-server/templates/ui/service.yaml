@@ -8,10 +8,10 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-  - port: {{ .Values.ui.service.port }}
-    targetPort: 8080
-    protocol: TCP
-    name: http
+    - port: {{ .Values.ui.service.port }}
+      targetPort: 8080
+      protocol: TCP
+      name: http
   selector:
     {{- include "ortserver.selectorLabels" . | nindent 4 }}
     app.kubernetes.io/component: ui
