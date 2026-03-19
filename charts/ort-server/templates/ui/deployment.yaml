@@ -23,16 +23,16 @@ spec:
       serviceAccountName: {{ include "ortserver.fullname" . }}-ui-sa
       {{- include "ortserver.imagePullSecret" . | nindent 6 }}
       containers:
-      - name: {{ include "ortserver.fullname" . }}-ui
-        image: "{{ .Values.containerRegistry }}/ort-server-ui:{{ .Chart.AppVersion }}"
-        ports:
-        - containerPort: 8080
-        env:
-        - name: UI_URL
-          value: {{ .Values.ui.url }}
-        - name: UI_API_URL
-          value: {{ .Values.ui.apiUrl }}
-        - name: UI_AUTHORITY
-          value: {{ .Values.ui.authority }}
-        - name: UI_CLIENT_ID
-          value: {{ .Values.ui.clientId }}
+        - name: {{ include "ortserver.fullname" . }}-ui
+          image: "{{ .Values.containerRegistry }}/ort-server-ui:{{ .Chart.AppVersion }}"
+          ports:
+            - containerPort: 8080
+          env:
+            - name: UI_URL
+              value: {{ .Values.ui.url }}
+            - name: UI_API_URL
+              value: {{ .Values.ui.apiUrl }}
+            - name: UI_AUTHORITY
+              value: {{ .Values.ui.authority }}
+            - name: UI_CLIENT_ID
+              value: {{ .Values.ui.clientId }}
