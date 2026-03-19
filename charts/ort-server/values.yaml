@@ -190,5 +190,9 @@ ui:
   clientId: ""
   service:
     port: 8082
+  ## @param ui.extraVolumes Additional volumes for the UI deployment
+  extraVolumes: []
+  ## @param ui.extraVolumeMounts Additional volume mounts for the UI deployment
+  extraVolumeMounts: []
 
 extraObjects: []
