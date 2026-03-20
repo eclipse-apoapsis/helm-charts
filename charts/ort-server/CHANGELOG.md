@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.7.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.6.0...ort-server-v0.7.0) (2026-03-20)
+
+
+### Features
+
+* Add options to import certificates ([b519144](https://github.com/eclipse-apoapsis/helm-charts/commit/b5191448c2ec1d50ec9ead8a44f3e32aa529b510))
+* Make the resource requests and limits configurable ([5a31e45](https://github.com/eclipse-apoapsis/helm-charts/commit/5a31e450cc78e32696f2a36b9d8421eb79b3f476))
+
 ## [0.6.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.5.2...ort-server-v0.6.0) (2026-03-19)
 
 
