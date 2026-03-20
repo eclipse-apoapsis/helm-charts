@@ -29,6 +29,10 @@ spec:
       containers:
         - name: {{ include "ortserver.fullname" . }}-ui
           image: "{{ .Values.containerRegistry }}/ort-server-ui:{{ .Chart.AppVersion }}"
+          {{- with .Values.ui.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
           ports:
             - containerPort: 8080
           volumeMounts:

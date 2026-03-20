@@ -111,6 +111,14 @@ core:
     successThreshold: 1
     ## @param core.livenessProbe.failureThreshold Minimum consecutive failures for the liveness probe to be considered failed
     failureThreshold: 6
+  ## @param core.resources CPU and memory requests and limits for the core deployment
+  resources:
+    requests:
+      cpu: 100m
+      memory: 512Mi
+    limits:
+      cpu: 2
+      memory: 2Gi
   ## @param core.extraVolumes Additional volumes for the core deployment
   extraVolumes: []
   ## @param core.extraVolumeMounts Additional volume mounts for the core deployment
@@ -118,6 +126,14 @@ core:
   extraEnv: []
 
 orchestrator:
+  ## @param orchestrator.resources CPU and memory requests and limits for the orchestrator deployment
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 1
+      memory: 1Gi
   ## @param orchestrator.extraVolumes Additional volumes for the orchestrator deployment
   extraVolumes: []
   ## @param orchestrator.extraVolumeMounts Additional volume mounts for the orchestrator deployment
@@ -143,6 +159,14 @@ scanner:
   mountPvcs: ""
 
 tasks:
+  ## @param tasks.resources CPU and memory requests and limits for the task cron jobs
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 1
+      memory: 1Gi
   ## @param tasks.extraVolumes Additional volumes for the task cron jobs
   extraVolumes: []
   ## @param tasks.extraVolumeMounts Additional volume mounts for the task cron jobs
@@ -190,6 +214,14 @@ ui:
   clientId: ""
   service:
     port: 8082
+  ## @param ui.resources CPU and memory requests and limits for the UI deployment
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 500m
+      memory: 256Mi
   ## @param ui.extraVolumes Additional volumes for the UI deployment
   extraVolumes: []
   ## @param ui.extraVolumeMounts Additional volume mounts for the UI deployment

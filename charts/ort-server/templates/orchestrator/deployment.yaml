@@ -29,6 +29,10 @@ spec:
       containers:
         - name: {{ include "ortserver.fullname" . }}-orchestrator
           image: "{{ .Values.containerRegistry }}/ort-server-orchestrator:{{ .Chart.AppVersion }}"
+          {{- with .Values.orchestrator.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
           volumeMounts:
             {{- if .Values.orchestrator.extraVolumeMounts }}
             {{- toYaml .Values.orchestrator.extraVolumeMounts | nindent 12 }}
