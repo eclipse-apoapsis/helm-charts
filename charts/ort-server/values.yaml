@@ -119,6 +119,12 @@ core:
     limits:
       cpu: 2
       memory: 2Gi
+  certificates:
+    ## @param core.certificates.path Path to a directory containing PEM-encoded certificates to import into the Java
+    ## keystore at startup. Each file in the directory must contain one PEM-encoded certificate. When set, the container
+    ## command is overridden to run the import script before starting the application. Typical usage: mount a Kubernetes
+    ## Secret (one key per certificate) via extraVolumes and extraVolumeMounts, then set this to the mount path.
+    path: ""
   ## @param core.extraVolumes Additional volumes for the core deployment
   extraVolumes: []
   ## @param core.extraVolumeMounts Additional volume mounts for the core deployment
@@ -167,6 +173,12 @@ tasks:
     limits:
       cpu: 1
       memory: 1Gi
+  certificates:
+    ## @param tasks.certificates.path Path to a directory containing PEM-encoded certificates to import into the Java
+    ## keystore at startup. Each file in the directory must contain one PEM-encoded certificate. When set, the container
+    ## command is overridden to run the import script before starting the application. Typical usage: mount a Kubernetes
+    ## Secret (one key per certificate) via extraVolumes and extraVolumeMounts, then set this to the mount path.
+    path: ""
   ## @param tasks.extraVolumes Additional volumes for the task cron jobs
   extraVolumes: []
   ## @param tasks.extraVolumeMounts Additional volume mounts for the task cron jobs

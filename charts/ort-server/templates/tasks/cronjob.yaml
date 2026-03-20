@@ -32,6 +32,10 @@ spec:
           containers:
             - name: {{ include "ortserver.fullname" $ }}-{{ .name }}-task
               image: "{{ $.Values.containerRegistry }}/ort-server-maintenance-tasks:{{ $.Chart.AppVersion }}"
+              {{- if $.Values.tasks.certificates.path }}
+              command: ["/bin/sh"]
+              args: ["-c", "/etc/scripts/import_certificates.sh {{ $.Values.tasks.certificates.path }} && exec java -cp @/app/jib-classpath-file @/app/jib-main-class-file"]
+              {{- end }}
               {{- with $.Values.tasks.resources }}
               resources:
                 {{- toYaml . | nindent 16 }}
