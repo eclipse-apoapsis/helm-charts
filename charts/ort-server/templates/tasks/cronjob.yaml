@@ -32,6 +32,10 @@ spec:
           containers:
             - name: {{ include "ortserver.fullname" $ }}-{{ .name }}-task
               image: "{{ $.Values.containerRegistry }}/ort-server-maintenance-tasks:{{ $.Chart.AppVersion }}"
+              {{- with $.Values.tasks.resources }}
+              resources:
+                {{- toYaml . | nindent 16 }}
+              {{- end }}
               volumeMounts:
                 {{- if $.Values.tasks.extraVolumeMounts }}
                 {{- toYaml $.Values.tasks.extraVolumeMounts | nindent 16 }}
