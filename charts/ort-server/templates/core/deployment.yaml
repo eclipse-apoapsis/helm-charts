@@ -26,6 +26,10 @@ spec:
         {{- toYaml .Values.core.extraVolumes | nindent 8 }}
         {{- end }}
       {{- include "ortserver.imagePullSecret" . | nindent 6 }}
+      {{- if .Values.core.extraInitContainers }}
+      initContainers:
+        {{- toYaml .Values.core.extraInitContainers | nindent 8 }}
+      {{- end }}
       containers:
         - name: {{ include "ortserver.fullname" . }}-core
           image: "{{ .Values.containerRegistry }}/ort-server-core:{{ .Chart.AppVersion }}"

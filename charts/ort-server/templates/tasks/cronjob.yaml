@@ -29,6 +29,10 @@ spec:
             {{- toYaml $.Values.tasks.extraVolumes | nindent 12 }}
             {{- end }}
           {{- include "ortserver.imagePullSecret" $ | nindent 10 }}
+          {{- if $.Values.tasks.extraInitContainers }}
+          initContainers:
+            {{- toYaml $.Values.tasks.extraInitContainers | nindent 12 }}
+          {{- end }}
           containers:
             - name: {{ include "ortserver.fullname" $ }}-{{ .name }}-task
               image: "{{ $.Values.containerRegistry }}/ort-server-maintenance-tasks:{{ $.Chart.AppVersion }}"

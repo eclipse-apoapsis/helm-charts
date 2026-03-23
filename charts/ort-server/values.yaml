@@ -130,6 +130,8 @@ core:
   ## @param core.extraVolumeMounts Additional volume mounts for the core deployment
   extraVolumeMounts: []
   extraEnv: []
+  ## @param core.extraInitContainers Additional init containers for the core deployment
+  extraInitContainers: []
 
 orchestrator:
   ## @param orchestrator.resources CPU and memory requests and limits for the orchestrator deployment
@@ -145,6 +147,8 @@ orchestrator:
   ## @param orchestrator.extraVolumeMounts Additional volume mounts for the orchestrator deployment
   extraVolumeMounts: []
   extraEnv: []
+  ## @param orchestrator.extraInitContainers Additional init containers for the orchestrator deployment
+  extraInitContainers: []
 
 advisor:
   mountPvcs: ""
@@ -183,6 +187,8 @@ tasks:
   extraVolumes: []
   ## @param tasks.extraVolumeMounts Additional volume mounts for the task cron jobs
   extraVolumeMounts: []
+  ## @param tasks.extraInitContainers Additional init containers for the task cron jobs
+  extraInitContainers: []
   configs:
     - name: delete-old-ort-runs
       schedule: "15 0 * * *"
