@@ -141,4 +141,7 @@ spec:
                 - name: MONITOR_LOST_JOBS_MIN_AGE
                   value: "{{ .lostJobsMinAge }}"
                 {{- end }}
+                {{- with $.Values.tasks.extraEnv }}
+                {{- toYaml . | nindent 16 }}
+                {{- end }}
 {{- end }}
