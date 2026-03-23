@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.8.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.7.0...ort-server-v0.8.0) (2026-03-23)
+
+
+### Features
+
+* Add support for custom init containers ([b88b4dc](https://github.com/eclipse-apoapsis/helm-charts/commit/b88b4dc00b3756dc9c60370a5d7ef4d9c73dd80a))
+* Support extra environment variables for the task cronjobs ([bbc9b9e](https://github.com/eclipse-apoapsis/helm-charts/commit/bbc9b9e4ed703fa0527a9f382f000002db7bfba7))
+
 ## [0.7.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.6.0...ort-server-v0.7.0) (2026-03-20)
 
 
