@@ -85,36 +85,120 @@ properties have environment variable substitutions configured.
 
 {{/* Environment variables to configure the file archive storage. */}}
 {{- define "ortserver.env.fileArchiveStorage" -}}
-{{- if .Values.storage.database.enabled }}
+{{- if .Values.storage.azureBlob.enabled }}
+- name: FILE_ARCHIVE_STORAGE_NAME
+  value: azure-blob
+{{- if .Values.storage.azureBlob.endpointUrl }}
+- name: FILE_ARCHIVE_STORAGE_ENDPOINT_URL
+  value: {{ .Values.storage.azureBlob.endpointUrl | quote }}
+{{- end }}
+{{- if .Values.storage.azureBlob.accountName }}
+- name: FILE_ARCHIVE_STORAGE_ACCOUNT_NAME
+  value: {{ .Values.storage.azureBlob.accountName | quote }}
+{{- end }}
+- name: FILE_ARCHIVE_STORAGE_CONTAINER_NAME
+  value: {{ .Values.storage.azureBlob.containers.fileArchives | quote }}
+{{- else if .Values.storage.database.enabled }}
 - name: FILE_ARCHIVE_STORAGE_NAME
   value: database
 - name: FILE_ARCHIVE_STORAGE_NAMESPACE
   value: {{ .Values.storage.database.namespaces.fileArchives }}
 - name: FILE_ARCHIVE_STORAGE_IN_MEMORY_LIMIT
   value: "{{ .Values.storage.database.inMemoryLimit }}"
+{{- else if .Values.storage.s3.enabled }}
+- name: FILE_ARCHIVE_STORAGE_NAME
+  value: s3
+- name: FILE_ARCHIVE_STORAGE_ENDPOINT_URL
+  value: {{ .Values.storage.s3.endpointUrl | quote }}
+- name: FILE_ARCHIVE_STORAGE_ACCESS_KEY
+  value: {{ .Values.storage.s3.accessKey | quote }}
+- name: FILE_ARCHIVE_STORAGE_SECRET_KEY
+  value: {{ .Values.storage.s3.secretKey | quote }}
+{{- if .Values.storage.s3.region }}
+- name: FILE_ARCHIVE_STORAGE_REGION
+  value: {{ .Values.storage.s3.region | quote }}
+{{- end }}
+- name: FILE_ARCHIVE_STORAGE_BUCKET_NAME
+  value: {{ .Values.storage.s3.buckets.fileArchives | quote }}
 {{- end }}
 {{- end -}}
 
 {{/* Environment variables to configure the file list storage. */}}
 {{- define "ortserver.env.fileListStorage" -}}
-{{- if .Values.storage.database.enabled }}
+{{- if .Values.storage.azureBlob.enabled }}
+- name: FILE_LIST_STORAGE_NAME
+  value: azure-blob
+{{- if .Values.storage.azureBlob.endpointUrl }}
+- name: FILE_LIST_STORAGE_ENDPOINT_URL
+  value: {{ .Values.storage.azureBlob.endpointUrl | quote }}
+{{- end }}
+{{- if .Values.storage.azureBlob.accountName }}
+- name: FILE_LIST_STORAGE_ACCOUNT_NAME
+  value: {{ .Values.storage.azureBlob.accountName | quote }}
+{{- end }}
+- name: FILE_LIST_STORAGE_CONTAINER_NAME
+  value: {{ .Values.storage.azureBlob.containers.fileLists | quote }}
+{{- else if .Values.storage.database.enabled }}
 - name: FILE_LIST_STORAGE_NAME
   value: database
 - name: FILE_LIST_STORAGE_NAMESPACE
   value: {{ .Values.storage.database.namespaces.fileLists }}
 - name: FILE_LIST_STORAGE_IN_MEMORY_LIMIT
   value: "{{ .Values.storage.database.inMemoryLimit }}"
+{{- else if .Values.storage.s3.enabled }}
+- name: FILE_LIST_STORAGE_NAME
+  value: s3
+- name: FILE_LIST_STORAGE_ENDPOINT_URL
+  value: {{ .Values.storage.s3.endpointUrl | quote }}
+- name: FILE_LIST_STORAGE_ACCESS_KEY
+  value: {{ .Values.storage.s3.accessKey | quote }}
+- name: FILE_LIST_STORAGE_SECRET_KEY
+  value: {{ .Values.storage.s3.secretKey | quote }}
+{{- if .Values.storage.s3.region }}
+- name: FILE_LIST_STORAGE_REGION
+  value: {{ .Values.storage.s3.region | quote }}
+{{- end }}
+- name: FILE_LIST_STORAGE_BUCKET_NAME
+  value: {{ .Values.storage.s3.buckets.fileLists | quote }}
 {{- end }}
 {{- end -}}
 
 {{/* Environment variables to configure the report storage. */}}
 {{- define "ortserver.env.reportStorage" -}}
-{{- if .Values.storage.database.enabled }}
+{{- if .Values.storage.azureBlob.enabled }}
+- name: REPORT_STORAGE_NAME
+  value: azure-blob
+{{- if .Values.storage.azureBlob.endpointUrl }}
+- name: REPORT_STORAGE_ENDPOINT_URL
+  value: {{ .Values.storage.azureBlob.endpointUrl | quote }}
+{{- end }}
+{{- if .Values.storage.azureBlob.accountName }}
+- name: REPORT_STORAGE_ACCOUNT_NAME
+  value: {{ .Values.storage.azureBlob.accountName | quote }}
+{{- end }}
+- name: REPORT_STORAGE_CONTAINER_NAME
+  value: {{ .Values.storage.azureBlob.containers.reports | quote }}
+{{- else if .Values.storage.database.enabled }}
 - name: REPORT_STORAGE_NAME
   value: database
 - name: REPORT_STORAGE_NAMESPACE
   value: {{ .Values.storage.database.namespaces.reports }}
 - name: REPORT_STORAGE_IN_MEMORY_LIMIT
   value: "{{ .Values.storage.database.inMemoryLimit }}"
+{{- else if .Values.storage.s3.enabled }}
+- name: REPORT_STORAGE_NAME
+  value: s3
+- name: REPORT_STORAGE_ENDPOINT_URL
+  value: {{ .Values.storage.s3.endpointUrl | quote }}
+- name: REPORT_STORAGE_ACCESS_KEY
+  value: {{ .Values.storage.s3.accessKey | quote }}
+- name: REPORT_STORAGE_SECRET_KEY
+  value: {{ .Values.storage.s3.secretKey | quote }}
+{{- if .Values.storage.s3.region }}
+- name: REPORT_STORAGE_REGION
+  value: {{ .Values.storage.s3.region | quote }}
+{{- end }}
+- name: REPORT_STORAGE_BUCKET_NAME
+  value: {{ .Values.storage.s3.buckets.reports | quote }}
 {{- end }}
 {{- end -}}
