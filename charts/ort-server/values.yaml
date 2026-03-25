@@ -41,7 +41,7 @@ secrets:
     ## @param secrets.database.keyVersion Version of the encryption key. Do not change, key rotation is not yet supported.
     keyVersion: 1
   fileBased:
-    ## @param secrets.fileBased.enabled If enabled, user secrets are stored in a file. This should only be used of testing, not in production.
+    ## @param secrets.fileBased.enabled If enabled, user secrets are stored in a file. This should only be used for testing, not in production.
     enabled: true
     ## @param secrets.fileBased.path Path to the file where user secrets are stored.
     path: /mnt/secrets/secrets
