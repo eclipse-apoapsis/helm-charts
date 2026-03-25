@@ -81,12 +81,49 @@ configSecrets:
   allowSecretsFromConfig: true
 
 storage:
+  azureBlob:
+    ## @param storage.azureBlob.enabled If enabled, Azure Blob Storage is used for storing file archives, file lists, and reports.
+    enabled: false
+    ## @param storage.azureBlob.endpointUrl The endpoint URL of the Azure Blob Storage account. Mutually exclusive with accountName.
+    endpointUrl: ""
+    ## @param storage.azureBlob.accountName The name of the Azure Blob Storage account when using the default blob storage endpoint. Mutually exclusive with endpointUrl.
+    accountName: ""
+    containers:
+      ## @param storage.azureBlob.containers.fileArchives The name of the Azure Blob Storage container to use for storing file archives.
+      fileArchives: file-archives
+      ## @param storage.azureBlob.containers.fileLists The name of the Azure Blob Storage container to use for storing file lists.
+      fileLists: file-lists
+      ## @param storage.azureBlob.containers.reports The name of the Azure Blob Storage container to use for storing reports.
+      reports: reports
   database:
+    ## @param storage.database.enabled If enabled, the database is used for storing file archives, file lists, and reports. This is not recommended for production use.
     enabled: true
+    ## @param storage.database.inMemoryLimit The maximum of data to load into memory before buffering to disk.
     inMemoryLimit: 1048576
     namespaces:
+      ## @param storage.database.namespaces.fileArchives The namespace to use for storing file archives in the database.
       fileArchives: fileArchives
+      ## @param storage.database.namespaces.fileLists The namespace to use for storing file lists in the database.
       fileLists: fileLists
+      ## @param storage.database.namespaces.reports The namespace to use for storing reports in the database.
+      reports: reports
+  s3:
+    ## @param storage.s3.enabled If enabled, an S3-compatible object storage is used for storing file archives, file lists, and reports.
+    enabled: false
+    ## @param storage.s3.endpointUrl The endpoint URL of the S3-compatible object storage.
+    endpointUrl: ""
+    ## @param storage.s3.accessKey The access key to use.
+    accessKey: ""
+    ## @param storage.s3.secretKey The secret key to use.
+    secretKey: ""
+    ## @param storage.s3.region The optional region of the S3-compatible object storage.
+    region: ""
+    buckets:
+      ## @param storage.s3.buckets.fileArchives The name of the S3 bucket to use for storing file archives.
+      fileArchives: file-archives
+      ## @param storage.s3.buckets.fileLists The name of the S3 bucket to use for storing file lists.
+      fileLists: file-lists
+      ## @param storage.s3.buckets.reports The name of the S3 bucket to use for storing reports.
       reports: reports
 
 transport:
