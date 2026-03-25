@@ -26,9 +26,53 @@ database:
   sslMode: require
 
 secrets:
+  azureKeyVault:
+    ## @param secrets.azureKeyVault.enabled If enabled, user secrets are stored in Azure Key Vault.
+    enabled: false
+    ## @param secrets.azureKeyVault.keyVaultName The name of the Azure Key Vault to use.
+    keyVaultName: ""
+  database:
+    ## @param secrets.database.enabled If enabled, database credentials are stored in the database.
+    enabled: false
+    ## @param secrets.database.masterPassword Master password for encrypting secrets stored in the database. Must be at least 16 characters long.
+    masterPassword: ""
+    ## @param secrets.database.salt Salt for encrypting secrets stored in the database. Must be a hex-encoded string of at least 32 hex characters.
+    salt: ""
+    ## @param secrets.database.keyVersion Version of the encryption key. Do not change, key rotation is not yet supported.
+    keyVersion: 1
   fileBased:
+    ## @param secrets.fileBased.enabled If enabled, user secrets are stored in a file. This should only be used of testing, not in production.
     enabled: true
+    ## @param secrets.fileBased.path Path to the file where user secrets are stored.
     path: /mnt/secrets/secrets
+  scaleway:
+    ## @param secrets.scaleway.enabled If enabled, user secrets are stored in Scaleway Secret Manager.
+    enabled: false
+    ## @param secrets.scaleway.serverUrl The URL of the Scaleway Secret Manager API.
+    serverUrl: https://api.scaleway.com/
+    ## @param secrets.scaleway.apiVersion The API version of the Scaleway Secret Manager to use.
+    apiVersion: v1beta1
+    ## @param secrets.scaleway.region The region where the Scaleway Secret Manager is hosted.
+    region: fr-par
+    ## @param secrets.scaleway.projectId The ID of the Scaleway project where secrets are stored.
+    projectId: ""
+    ## @param secrets.scaleway.secretKey The secret key for accessing the Scaleway Secret Manager.
+    secretKey: ""
+  vault:
+    ## @param secrets.vault.enabled If enabled, user secrets are stored in HashiCorp Vault.
+    enabled: false
+    ## @param secrets.vault.uri The URI of the Vault server.
+    uri: ""
+    ## @param secrets.vault.roleId The role ID assigned to this client application.
+    roleId: ""
+    ## @param secrets.vault.secretId The secret ID assigned to this client application.
+    secretId: ""
+    ## @param secrets.vault.path The path in Vault where secrets are stored.
+    rootPath: ""
+    ## @param secrets.vault.engineVersion The path prefix under which the secrets engine is located.
+    prefix: secret
+    ## @param secrets.vault.namespace The Vault namespace to use for storing secrets. This is only relevant if Vault namespaces are enabled in the Vault server.
+    namespace: null
 
 configSecrets:
   name: secret-file

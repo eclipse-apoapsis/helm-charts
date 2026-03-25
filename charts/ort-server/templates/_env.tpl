@@ -24,11 +24,53 @@
 
 {{/* Environment variables to configure the provider for user secrets. */}}
 {{- define "ortserver.env.userSecrets" -}}
-{{- if .Values.secrets.fileBased.enabled }}
+{{- if .Values.secrets.azureKeyVault.enabled }}
+- name: SECRETS_PROVIDER_NAME
+  value: azure-keyvault
+- name: AZURE_KEY_VAULT_NAME
+  value: {{ .Values.secrets.azureKeyVault.keyVaultName | quote }}
+{{- else if .Values.secrets.database.enabled }}
+- name: SECRETS_PROVIDER_NAME
+  value: database
+- name: DATABASE_SECRETS_MASTER_PASSWORD
+  value: {{ .Values.secrets.database.masterPassword | quote }}
+- name: DATABASE_SECRETS_SALT
+  value: {{ .Values.secrets.database.salt | quote }}
+- name: DATABASE_SECRETS_KEY_VERSION
+  value: "{{ .Values.secrets.database.keyVersion }}"
+{{- else if .Values.secrets.fileBased.enabled }}
 - name: SECRETS_PROVIDER_NAME
   value: fileBased
 - name: FILE_BASED_PATH
-  value: {{ .Values.secrets.fileBased.path }}
+  value: {{ .Values.secrets.fileBased.path | quote }}
+{{- else if .Values.secrets.scaleway.enabled }}
+- name: SECRETS_PROVIDER_NAME
+  value: scaleway
+- name: SCW_SERVER_URL
+  value: {{ .Values.secrets.scaleway.serverUrl | quote }}
+- name: SCW_API_VERSION
+  value: {{ .Values.secrets.scaleway.apiVersion | quote }}
+- name: SCW_REGION
+  value: {{ .Values.secrets.scaleway.region | quote }}
+- name: SCW_PROJECT_ID
+  value: {{ .Values.secrets.scaleway.projectId | quote }}
+- name: SCW_SECRET_KEY
+  value: {{ .Values.secrets.scaleway.secretKey | quote }}
+{{- else if .Values.secrets.vault.enabled }}
+- name: SECRETS_PROVIDER_NAME
+  value: vault
+- name: VAULT_URI
+  value: {{ .Values.secrets.vault.uri | quote }}
+- name: VAULT_ROLE_ID
+  value: {{ .Values.secrets.vault.roleId | quote }}
+- name: VAULT_SECRET_ID
+  value: {{ .Values.secrets.vault.secretId | quote }}
+- name: VAULT_ROOT_PATH
+  value: {{ .Values.secrets.vault.rootPath | quote }}
+- name: VAULT_PREFIX
+  value: {{ .Values.secrets.vault.prefix | quote }}
+- name: VAULT_NAMESPACE
+  value: {{ .Values.secrets.vault.namespace | quote }}
 {{- end }}
 {{- end -}}
 
