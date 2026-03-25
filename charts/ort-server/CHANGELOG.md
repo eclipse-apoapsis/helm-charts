@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.9.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.8.1...ort-server-v0.9.0) (2026-03-25)
+
+
+### Features
+
+* Add support for all file storages ([2dbcec9](https://github.com/eclipse-apoapsis/helm-charts/commit/2dbcec909cd5cdffe4abd866ff5ce27f8d9feb6a))
+* Add support for all secret storages ([bd53b05](https://github.com/eclipse-apoapsis/helm-charts/commit/bd53b05d9fe2ae5186934c3b3efa84086dba0947))
+
 ## [0.8.1](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.8.0...ort-server-v0.8.1) (2026-03-24)
 
 
