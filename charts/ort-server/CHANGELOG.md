@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.10.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.9.0...ort-server-v0.10.0) (2026-04-01)
+
+
+### Features
+
+* Add support for S3 storage key prefixes ([b27ca4e](https://github.com/eclipse-apoapsis/helm-charts/commit/b27ca4e2818e82f445f4185b0f66170392d27ea0))
+
+
+### Dependencies
+
+* update dependency eclipse-apoapsis/ort-server to v0.59.0 ([be873c6](https://github.com/eclipse-apoapsis/helm-charts/commit/be873c6f0793b483059efc5c9d78c64c42723ee4))
+
 ## [0.9.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.8.1...ort-server-v0.9.0) (2026-03-25)
 
 
