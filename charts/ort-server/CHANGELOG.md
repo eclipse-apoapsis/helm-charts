@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.11.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.10.0...ort-server-v0.11.0) (2026-04-01)
+
+
+### Features
+
+* Make the user ID for the Kubernetes transport configurable ([0d532cc](https://github.com/eclipse-apoapsis/helm-charts/commit/0d532cc120658f7cffec0b46fdb8fadbef4ec0fd))
+
 ## [0.10.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.9.0...ort-server-v0.10.0) (2026-04-01)
 
 
