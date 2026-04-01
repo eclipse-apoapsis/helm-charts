@@ -120,6 +120,10 @@ properties have environment variable substitutions configured.
 {{- end }}
 - name: FILE_ARCHIVE_STORAGE_BUCKET_NAME
   value: {{ .Values.storage.s3.buckets.fileArchives | quote }}
+{{- if .Values.storage.s3.prefixes.fileArchives }}
+- name: FILE_ARCHIVE_STORAGE_KEY_PREFIX
+  value: {{ .Values.storage.s3.prefixes.fileArchives | quote }}
+{{- end }}
 {{- end }}
 {{- end -}}
 
@@ -160,6 +164,10 @@ properties have environment variable substitutions configured.
 {{- end }}
 - name: FILE_LIST_STORAGE_BUCKET_NAME
   value: {{ .Values.storage.s3.buckets.fileLists | quote }}
+{{- if .Values.storage.s3.prefixes.fileLists }}
+- name: FILE_LIST_STORAGE_KEY_PREFIX
+  value: {{ .Values.storage.s3.prefixes.fileLists | quote }}
+{{- end }}
 {{- end }}
 {{- end -}}
 
@@ -200,5 +208,9 @@ properties have environment variable substitutions configured.
 {{- end }}
 - name: REPORT_STORAGE_BUCKET_NAME
   value: {{ .Values.storage.s3.buckets.reports | quote }}
+{{- if .Values.storage.s3.prefixes.reports }}
+- name: REPORT_STORAGE_KEY_PREFIX
+  value: {{ .Values.storage.s3.prefixes.reports | quote }}
+{{- end }}
 {{- end }}
 {{- end -}}

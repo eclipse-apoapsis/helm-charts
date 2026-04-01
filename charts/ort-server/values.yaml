@@ -125,6 +125,16 @@ storage:
       fileLists: file-lists
       ## @param storage.s3.buckets.reports The name of the S3 bucket to use for storing reports.
       reports: reports
+    prefixes:
+      ## @param storage.s3.prefixes.fileArchives An optional prefix to use for storing file archives in the S3 bucket.
+      ## Required when sharing the bucket with file lists or reports to avoid name collisions.
+      fileArchives: ""
+      ## @param storage.s3.prefixes.fileLists An optional prefix to use for storing file lists in the S3 bucket.
+      ## Required when sharing the bucket with file archives or reports to avoid name collisions.
+      fileLists: ""
+      ## @param storage.s3.prefixes.reports An optional prefix to use for storing reports in the S3 bucket.
+      ## Required when sharing the bucket with file archives or file lists to avoid name collisions.
+      reports: ""
 
 transport:
   queues:
