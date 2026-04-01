@@ -117,6 +117,8 @@ spec:
               value: {{ .Values.transport.kubernetes.advisor.memoryLimit }}
             - name: ADVISOR_SERVICE_ACCOUNT
               value: {{ include "ortserver.fullname" . }}-workers-sa
+            - name: ADVISOR_USER_ID
+              value: "{{ .Values.transport.kubernetes.userId }}"
             # Advisor worker config used by sender
             {{- if .Values.configFileProvider.gitConfig.enabled }}
             - name: ADVISOR_CONFIG_FILE_PROVIDER
@@ -154,6 +156,8 @@ spec:
               value: {{ .Values.transport.kubernetes.analyzer.memoryLimit }}
             - name: ANALYZER_SERVICE_ACCOUNT
               value: {{ include "ortserver.fullname" . }}-workers-sa
+            - name: ANALYZER_USER_ID
+              value: "{{ .Values.transport.kubernetes.userId }}"
             # Analyzer worker config used by sender
             {{- if .Values.configFileProvider.gitConfig.enabled }}
             - name: ANALYZER_CONFIG_FILE_PROVIDER
@@ -191,6 +195,8 @@ spec:
               value: {{ .Values.transport.kubernetes.config.memoryLimit }}
             - name: CONFIG_SERVICE_ACCOUNT
               value: {{ include "ortserver.fullname" . }}-workers-sa
+            - name: CONFIG_USER_ID
+              value: "{{ .Values.transport.kubernetes.userId }}"
             # Config worker config used by sender
             {{- if .Values.configFileProvider.gitConfig.enabled }}
             - name: CONFIG_CONFIG_FILE_PROVIDER
@@ -228,6 +234,8 @@ spec:
               value: {{ .Values.transport.kubernetes.evaluator.memoryLimit }}
             - name: EVALUATOR_SERVICE_ACCOUNT
               value: {{ include "ortserver.fullname" . }}-workers-sa
+            - name: EVALUATOR_USER_ID
+              value: "{{ .Values.transport.kubernetes.userId }}"
             # Analyzer worker config used by sender
             {{- if .Values.configFileProvider.gitConfig.enabled }}
             - name: EVALUATOR_CONFIG_FILE_PROVIDER
@@ -265,6 +273,8 @@ spec:
               value: {{ .Values.transport.kubernetes.reporter.memoryLimit }}
             - name: REPORTER_SERVICE_ACCOUNT
               value: {{ include "ortserver.fullname" . }}-workers-sa
+            - name: REPORTER_USER_ID
+              value: "{{ .Values.transport.kubernetes.userId }}"
             # Analyzer worker config used by sender
             {{- if .Values.configFileProvider.gitConfig.enabled }}
             - name: REPORTER_CONFIG_FILE_PROVIDER
@@ -302,6 +312,8 @@ spec:
               value: {{ .Values.transport.kubernetes.scanner.memoryLimit }}
             - name: SCANNER_SERVICE_ACCOUNT
               value: {{ include "ortserver.fullname" . }}-workers-sa
+            - name: SCANNER_USER_ID
+              value: "{{ .Values.transport.kubernetes.userId }}"
             # Analyzer worker config used by sender
             {{- if .Values.configFileProvider.gitConfig.enabled }}
             - name: SCANNER_CONFIG_FILE_PROVIDER
