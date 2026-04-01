@@ -92,3 +92,20 @@ imagePullSecrets:
   - name: {{ .Values.imagePullSecret | quote }}
 {{- end }}
 {{- end }}
+
+{{/*
+Worker labels as comma-separated string
+Merges commonLabels and podLabels (podLabels take precedence) and returns them as a
+comma-separated list of key=value pairs, e.g. "label1=value1,label2=value2".
+Returns an empty string when no labels are configured.
+*/}}
+{{- define "ortserver.workerLabelsAsString" -}}
+{{- $common := .Values.commonLabels | default dict -}}
+{{- $pod := .Values.podLabels | default dict -}}
+{{- $merged := merge (deepCopy $pod) $common -}}
+{{- $pairs := list -}}
+{{- range $k, $v := $merged -}}
+  {{- $pairs = append $pairs (printf "%s=%s" $k $v) -}}
+{{- end -}}
+{{- join "," $pairs -}}
+{{- end }}
