@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.12.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.11.0...ort-server-v0.12.0) (2026-04-01)
+
+
+### Features
+
+* Add the common and pod labels also to worker pods ([7214d56](https://github.com/eclipse-apoapsis/helm-charts/commit/7214d5633f913d6c6e216b3e6f49befca9fc7ac6))
+
+
+### Bug Fixes
+
+* Prevent mutation of .Values.commonLabels in ortserver.labels ([0581c45](https://github.com/eclipse-apoapsis/helm-charts/commit/0581c45bf033410be0a140934dcec2c00365ebcd))
+
 ## [0.11.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.10.0...ort-server-v0.11.0) (2026-04-01)
 
 
