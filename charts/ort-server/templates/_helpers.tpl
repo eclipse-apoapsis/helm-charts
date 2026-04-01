@@ -50,7 +50,7 @@ commonLabels take precedence over selector labels, which take precedence over de
     "app.kubernetes.io/managed-by" .Release.Service
     "app.kubernetes.io/version" .Chart.AppVersion -}}
 {{- $selectorLabels := include "ortserver.selectorLabels" . | fromYaml -}}
-{{- $commonLabels := .Values.commonLabels | default dict -}}
+{{- $commonLabels := deepCopy (.Values.commonLabels | default dict) -}}
 {{- merge $commonLabels $selectorLabels $default | toYaml }}
 {{- end }}
 
