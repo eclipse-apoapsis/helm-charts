@@ -117,6 +117,10 @@ spec:
               value: {{ .Values.transport.kubernetes.advisor.memoryLimit }}
             - name: ADVISOR_SERVICE_ACCOUNT
               value: {{ include "ortserver.fullname" . }}-workers-sa
+            {{- with include "ortserver.workerLabelsAsString" . }}
+            - name: ADVISOR_LABELS
+              value: {{ . | quote }}
+            {{- end }}
             - name: ADVISOR_USER_ID
               value: "{{ .Values.transport.kubernetes.userId }}"
             # Advisor worker config used by sender
@@ -156,6 +160,10 @@ spec:
               value: {{ .Values.transport.kubernetes.analyzer.memoryLimit }}
             - name: ANALYZER_SERVICE_ACCOUNT
               value: {{ include "ortserver.fullname" . }}-workers-sa
+            {{- with include "ortserver.workerLabelsAsString" . }}
+            - name: ANALYZER_LABELS
+              value: {{ . | quote }}
+            {{- end }}
             - name: ANALYZER_USER_ID
               value: "{{ .Values.transport.kubernetes.userId }}"
             # Analyzer worker config used by sender
@@ -195,6 +203,10 @@ spec:
               value: {{ .Values.transport.kubernetes.config.memoryLimit }}
             - name: CONFIG_SERVICE_ACCOUNT
               value: {{ include "ortserver.fullname" . }}-workers-sa
+            {{- with include "ortserver.workerLabelsAsString" . }}
+            - name: CONFIG_LABELS
+              value: {{ . | quote }}
+            {{- end }}
             - name: CONFIG_USER_ID
               value: "{{ .Values.transport.kubernetes.userId }}"
             # Config worker config used by sender
@@ -234,6 +246,10 @@ spec:
               value: {{ .Values.transport.kubernetes.evaluator.memoryLimit }}
             - name: EVALUATOR_SERVICE_ACCOUNT
               value: {{ include "ortserver.fullname" . }}-workers-sa
+            {{- with include "ortserver.workerLabelsAsString" . }}
+            - name: EVALUATOR_LABELS
+              value: {{ . | quote }}
+            {{- end }}
             - name: EVALUATOR_USER_ID
               value: "{{ .Values.transport.kubernetes.userId }}"
             # Analyzer worker config used by sender
@@ -273,6 +289,10 @@ spec:
               value: {{ .Values.transport.kubernetes.reporter.memoryLimit }}
             - name: REPORTER_SERVICE_ACCOUNT
               value: {{ include "ortserver.fullname" . }}-workers-sa
+            {{- with include "ortserver.workerLabelsAsString" . }}
+            - name: REPORTER_LABELS
+              value: {{ . | quote }}
+            {{- end }}
             - name: REPORTER_USER_ID
               value: "{{ .Values.transport.kubernetes.userId }}"
             # Analyzer worker config used by sender
@@ -312,6 +332,10 @@ spec:
               value: {{ .Values.transport.kubernetes.scanner.memoryLimit }}
             - name: SCANNER_SERVICE_ACCOUNT
               value: {{ include "ortserver.fullname" . }}-workers-sa
+            {{- with include "ortserver.workerLabelsAsString" . }}
+            - name: SCANNER_LABELS
+              value: {{ . | quote }}
+            {{- end }}
             - name: SCANNER_USER_ID
               value: "{{ .Values.transport.kubernetes.userId }}"
             # Analyzer worker config used by sender
