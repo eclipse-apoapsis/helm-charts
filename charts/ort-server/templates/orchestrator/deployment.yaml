@@ -132,6 +132,8 @@ spec:
             {{- end }}
             - name: ADVISOR_MOUNT_PVCS
               value: {{ .Values.advisor.mountPvcs }}
+            - name: ADVISOR_MOUNT_SECRETS
+              value: {{ .Values.advisor.mountSecrets }}
             - name: ADVISOR_SECRET_PROVIDER
               value: {{ .Values.configSecrets.name }}
             - name: ADVISOR_SECRET_FILES
@@ -175,6 +177,8 @@ spec:
             {{- end }}
             - name: ANALYZER_MOUNT_PVCS
               value: {{ .Values.analyzer.mountPvcs }}
+            - name: ANALYZER_MOUNT_SECRETS
+              value: {{ .Values.analyzer.mountSecrets }}
             - name: ANALYZER_SECRET_PROVIDER
               value: {{ .Values.configSecrets.name }}
             - name: ANALYZER_SECRET_FILES
@@ -218,6 +222,8 @@ spec:
             {{- end }}
             - name: CONFIG_MOUNT_PVCS
               value: {{ .Values.config.mountPvcs }}
+            - name: CONFIG_MOUNT_SECRETS
+              value: {{ .Values.config.mountSecrets }}
             - name: CONFIG_SECRET_PROVIDER
               value: {{ .Values.configSecrets.name }}
             - name: CONFIG_SECRET_FILES
@@ -261,6 +267,8 @@ spec:
             {{- end }}
             - name: EVALUATOR_MOUNT_PVCS
               value: {{ .Values.evaluator.mountPvcs }}
+            - name: EVALUATOR_MOUNT_SECRETS
+              value: {{ .Values.evaluator.mountSecrets }}
             - name: EVALUATOR_SECRET_PROVIDER
               value: {{ .Values.configSecrets.name }}
             - name: EVALUATOR_SECRET_FILES
@@ -304,6 +312,8 @@ spec:
             {{- end }}
             - name: REPORTER_MOUNT_PVCS
               value: {{ .Values.reporter.mountPvcs }}
+            - name: REPORTER_MOUNT_SECRETS
+              value: {{ .Values.reporter.mountSecrets }}
             - name: REPORTER_SECRET_PROVIDER
               value: {{ .Values.configSecrets.name }}
             - name: REPORTER_SECRET_FILES
@@ -347,6 +357,8 @@ spec:
             {{- end }}
             - name: SCANNER_MOUNT_PVCS
               value: {{ .Values.scanner.mountPvcs }}
+            - name: SCANNER_MOUNT_SECRETS
+              value: {{ .Values.scanner.mountSecrets }}
             - name: SCANNER_SECRET_PROVIDER
               value: {{ .Values.configSecrets.name }}
             - name: SCANNER_SECRET_FILES
