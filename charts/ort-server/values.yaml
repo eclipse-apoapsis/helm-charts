@@ -246,6 +246,10 @@ orchestrator:
   extraInitContainers: []
 
 advisor:
+  ## @param advisor.mountEmptyDirs EmptyDir volumes to mount into the advisor worker pods. Each entry must be in the
+  ## format "name->path", where "name" is the name of the EmptyDir volume and "path" is the path inside the container to
+  ## mount the volume to. Multiple entries must be separated by whitespace.
+  mountEmptyDirs: ""
   ## @param advisor.mountPvcs PVCs to mount into the advisor worker pods. Each entry must be in the format
   ## "pvcName->path,access", where "pvcName" is the name of the PVC to mount, "path" is the path inside the container
   ## to mount the PVC to, and "access" is either "R" for read-only or "W" for read-write access. Multiple entries must
@@ -257,6 +261,10 @@ advisor:
   mountSecrets: ""
 
 analyzer:
+  ## @param analyzer.mountEmptyDirs EmptyDir volumes to mount into the analyzer worker pods. Each entry must be in the
+  ## format "name->path", where "name" is the name of the EmptyDir volume and "path" is the path inside the container to
+  ## mount the volume to. Multiple entries must be separated by whitespace.
+  mountEmptyDirs: ""
   ## @param analyzer.mountPvcs PVCs to mount into the analyzer worker pods. Each entry must be in the format
   ## "pvcName->path,access", where "pvcName" is the name of the PVC to mount, "path" is the path inside the container
   ## to mount the PVC to, and "access" is either "R" for read-only or "W" for read-write access. Multiple entries must
@@ -268,6 +276,10 @@ analyzer:
   mountSecrets: ""
 
 config:
+  ## @param config.mountEmptyDirs EmptyDir volumes to mount into the config worker pods. Each entry must be in the
+  ## format "name->path", where "name" is the name of the EmptyDir volume and "path" is the path inside the container to
+  ## mount the volume to. Multiple entries must be separated by whitespace.
+  mountEmptyDirs: ""
   ## @param config.mountPvcs PVCs to mount into the config worker pods. Each entry must be in the format
   ## "pvcName->path,access", where "pvcName" is the name of the PVC to mount, "path" is the path inside the container
   ## to mount the PVC to, and "access" is either "R" for read-only or "W" for read-write access. Multiple entries must
@@ -279,6 +291,10 @@ config:
   mountSecrets: ""
 
 evaluator:
+  ## @param evaluator.mountEmptyDirs EmptyDir volumes to mount into the evaluator worker pods. Each entry must be in the
+  ## format "name->path", where "name" is the name of the EmptyDir volume and "path" is the path inside the container to
+  ## mount the volume to. Multiple entries must be separated by whitespace.
+  mountEmptyDirs: ""
   ## @param evaluator.mountPvcs PVCs to mount into the evaluator worker pods. Each entry must be in the format
   ## "pvcName->path,access", where "pvcName" is the name of the PVC to mount, "path" is the path inside the container
   ## to mount the PVC to, and "access" is either "R" for read-only or "W" for read-write access. Multiple entries must
@@ -290,6 +306,10 @@ evaluator:
   mountSecrets: ""
 
 reporter:
+  ## @param reporter.mountEmptyDirs EmptyDir volumes to mount into the reporter worker pods. Each entry must be in the
+  ## format "name->path", where "name" is the name of the EmptyDir volume and "path" is the path inside the container to
+  ## mount the volume to. Multiple entries must be separated by whitespace.
+  mountEmptyDirs: ""
   ## @param reporter.mountPvcs PVCs to mount into the reporter worker pods. Each entry must be in the format
   ## "pvcName->path,access", where "pvcName" is the name of the PVC to mount, "path" is the path inside the container
   ## to mount the PVC to, and "access" is either "R" for read-only or "W" for read-write access. Multiple entries must
@@ -301,6 +321,10 @@ reporter:
   mountSecrets: ""
 
 scanner:
+  ## @param scanner.mountEmptyDirs EmptyDir volumes to mount into the scanner worker pods. Each entry must be in the
+  ## format "name->path", where "name" is the name of the EmptyDir volume and "path" is the path inside the container to
+  ## mount the volume to. Multiple entries must be separated by whitespace.
+  mountEmptyDirs: ""
   ## @param scanner.mountPvcs PVCs to mount into the scanner worker pods. Each entry must be in the format
   ## "pvcName->path,access", where "pvcName" is the name of the PVC to mount, "path" is the path inside the container
   ## to mount the PVC to, and "access" is either "R" for read-only or "W" for read-write access. Multiple entries must
