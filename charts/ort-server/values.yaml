@@ -246,21 +246,45 @@ orchestrator:
   extraInitContainers: []
 
 advisor:
+  ## @param advisor.mountPvcs PVCs to mount into the advisor worker pods. Each entry must be in the format
+  ## "pvcName->path,access", where "pvcName" is the name of the PVC to mount, "path" is the path inside the container
+  ## to mount the PVC to, and "access" is either "R" for read-only or "W" for read-write access. Multiple entries must
+  ## be separated by whitespace.
   mountPvcs: ""
 
 analyzer:
+  ## @param analyzer.mountPvcs PVCs to mount into the analyzer worker pods. Each entry must be in the format
+  ## "pvcName->path,access", where "pvcName" is the name of the PVC to mount, "path" is the path inside the container
+  ## to mount the PVC to, and "access" is either "R" for read-only or "W" for read-write access. Multiple entries must
+  ## be separated by whitespace.
   mountPvcs: ""
 
 config:
+  ## @param config.mountPvcs PVCs to mount into the config worker pods. Each entry must be in the format
+  ## "pvcName->path,access", where "pvcName" is the name of the PVC to mount, "path" is the path inside the container
+  ## to mount the PVC to, and "access" is either "R" for read-only or "W" for read-write access. Multiple entries must
+  ## be separated by whitespace.
   mountPvcs: ""
 
 evaluator:
+  ## @param evaluator.mountPvcs PVCs to mount into the evaluator worker pods. Each entry must be in the format
+  ## "pvcName->path,access", where "pvcName" is the name of the PVC to mount, "path" is the path inside the container
+  ## to mount the PVC to, and "access" is either "R" for read-only or "W" for read-write access. Multiple entries must
+  ## be separated by whitespace.
   mountPvcs: ""
 
 reporter:
+  ## @param reporter.mountPvcs PVCs to mount into the reporter worker pods. Each entry must be in the format
+  ## "pvcName->path,access", where "pvcName" is the name of the PVC to mount, "path" is the path inside the container
+  ## to mount the PVC to, and "access" is either "R" for read-only or "W" for read-write access. Multiple entries must
+  ## be separated by whitespace.
   mountPvcs: ""
 
 scanner:
+  ## @param scanner.mountPvcs PVCs to mount into the scanner worker pods. Each entry must be in the format
+  ## "pvcName->path,access", where "pvcName" is the name of the PVC to mount, "path" is the path inside the container
+  ## to mount the PVC to, and "access" is either "R" for read-only or "W" for read-write access. Multiple entries must
+  ## be separated by whitespace.
   mountPvcs: ""
 
 tasks:
