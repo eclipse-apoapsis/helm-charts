@@ -258,7 +258,7 @@ spec:
             {{- end }}
             - name: EVALUATOR_USER_ID
               value: "{{ .Values.transport.kubernetes.userId }}"
-            # Analyzer worker config used by sender
+            # Evaluator worker config used by sender
             {{- if .Values.configFileProvider.gitConfig.enabled }}
             - name: EVALUATOR_CONFIG_FILE_PROVIDER
               value: git-config
@@ -303,7 +303,7 @@ spec:
             {{- end }}
             - name: REPORTER_USER_ID
               value: "{{ .Values.transport.kubernetes.userId }}"
-            # Analyzer worker config used by sender
+            # Reporter worker config used by sender
             {{- if .Values.configFileProvider.gitConfig.enabled }}
             - name: REPORTER_CONFIG_FILE_PROVIDER
               value: git-config
@@ -348,7 +348,7 @@ spec:
             {{- end }}
             - name: SCANNER_USER_ID
               value: "{{ .Values.transport.kubernetes.userId }}"
-            # Analyzer worker config used by sender
+            # Scanner worker config used by sender
             {{- if .Values.configFileProvider.gitConfig.enabled }}
             - name: SCANNER_CONFIG_FILE_PROVIDER
               value: git-config
