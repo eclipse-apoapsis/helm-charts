@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.13.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.12.0...ort-server-v0.13.0) (2026-04-13)
+
+
+### Features
+
+* Add support for mounting empty dirs into worker pods ([7aba205](https://github.com/eclipse-apoapsis/helm-charts/commit/7aba205453e59bec3d83d1b32b878cdef323aad4))
+* Add support for mounting secrets into worker pods ([a5252f9](https://github.com/eclipse-apoapsis/helm-charts/commit/a5252f99ae1841f2b49942b2c2d0fe7327af10b0))
+
+
+### Dependencies
+
+* update dependency eclipse-apoapsis/ort-server to v0.60.0 ([e0c4f98](https://github.com/eclipse-apoapsis/helm-charts/commit/e0c4f9866a296cf40c9382dc686f1fe91ec27fec))
+
+
+### Documentation
+
+* Document the `mountPvcs` options for workers ([d874c8b](https://github.com/eclipse-apoapsis/helm-charts/commit/d874c8bfca23118a2b9c4fca2cf4e23477385f96))
+
 ## [0.12.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.11.0...ort-server-v0.12.0) (2026-04-01)
 
 
