@@ -130,6 +130,8 @@ spec:
             - name: ADVISOR_CONFIG_GIT_URL
               value: {{ .Values.configFileProvider.gitConfig.repositoryUrl }}
             {{- end }}
+            - name: ADVISOR_MOUNT_EMPTY_DIRS
+              value: {{ .Values.advisor.mountEmptyDirs }}
             - name: ADVISOR_MOUNT_PVCS
               value: {{ .Values.advisor.mountPvcs }}
             - name: ADVISOR_MOUNT_SECRETS
@@ -175,6 +177,8 @@ spec:
             - name: ANALYZER_CONFIG_GIT_URL
               value: {{ .Values.configFileProvider.gitConfig.repositoryUrl }}
             {{- end }}
+            - name: ANALYZER_MOUNT_EMPTY_DIRS
+              value: {{ .Values.analyzer.mountEmptyDirs }}
             - name: ANALYZER_MOUNT_PVCS
               value: {{ .Values.analyzer.mountPvcs }}
             - name: ANALYZER_MOUNT_SECRETS
@@ -220,6 +224,8 @@ spec:
             - name: CONFIG_CONFIG_GIT_URL
               value: {{ .Values.configFileProvider.gitConfig.repositoryUrl }}
             {{- end }}
+            - name: CONFIG_MOUNT_EMPTY_DIRS
+              value: {{ .Values.config.mountEmptyDirs }}
             - name: CONFIG_MOUNT_PVCS
               value: {{ .Values.config.mountPvcs }}
             - name: CONFIG_MOUNT_SECRETS
@@ -265,6 +271,8 @@ spec:
             - name: EVALUATOR_CONFIG_GIT_URL
               value: {{ .Values.configFileProvider.gitConfig.repositoryUrl }}
             {{- end }}
+            - name: EVALUATOR_MOUNT_EMPTY_DIRS
+              value: {{ .Values.evaluator.mountEmptyDirs }}
             - name: EVALUATOR_MOUNT_PVCS
               value: {{ .Values.evaluator.mountPvcs }}
             - name: EVALUATOR_MOUNT_SECRETS
@@ -310,6 +318,8 @@ spec:
             - name: REPORTER_CONFIG_GIT_URL
               value: {{ .Values.configFileProvider.gitConfig.repositoryUrl }}
             {{- end }}
+            - name: REPORTER_MOUNT_EMPTY_DIRS
+              value: {{ .Values.reporter.mountEmptyDirs }}
             - name: REPORTER_MOUNT_PVCS
               value: {{ .Values.reporter.mountPvcs }}
             - name: REPORTER_MOUNT_SECRETS
@@ -355,6 +365,8 @@ spec:
             - name: SCANNER_CONFIG_GIT_URL
               value: {{ .Values.configFileProvider.gitConfig.repositoryUrl }}
             {{- end }}
+            - name: SCANNER_MOUNT_EMPTY_DIRS
+              value: {{ .Values.scanner.mountEmptyDirs }}
             - name: SCANNER_MOUNT_PVCS
               value: {{ .Values.scanner.mountPvcs }}
             - name: SCANNER_MOUNT_SECRETS
