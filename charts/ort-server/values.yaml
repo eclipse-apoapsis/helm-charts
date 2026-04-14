@@ -152,21 +152,45 @@ transport:
     ## @param transport.kubernetes.userId The user ID to run the worker containers as.
     userId: 1000
     advisor:
+      ## @param transport.kubernetes.advisor.cpuRequest CPU request for advisor worker pods. If not set, no CPU request is defined.
+      cpuRequest: ""
+      ## @param transport.kubernetes.advisor.cpuLimit CPU limit for advisor worker pods. If not set, no CPU limit is defined.
+      cpuLimit: ""
       memoryRequest: 1Gi
       memoryLimit: 1Gi
     analyzer:
+      ## @param transport.kubernetes.analyzer.cpuRequest CPU request for analyzer worker pods. If not set, no CPU request is defined.
+      cpuRequest: ""
+      ## @param transport.kubernetes.analyzer.cpuLimit CPU limit for analyzer worker pods. If not set, no CPU limit is defined.
+      cpuLimit: ""
       memoryRequest: 4Gi
       memoryLimit: 4Gi
     config:
+      ## @param transport.kubernetes.config.cpuRequest CPU request for config worker pods. If not set, no CPU request is defined.
+      cpuRequest: ""
+      ## @param transport.kubernetes.config.cpuLimit CPU limit for config worker pods. If not set, no CPU limit is defined.
+      cpuLimit: ""
       memoryRequest: 1Gi
       memoryLimit: 1Gi
     evaluator:
+      ## @param transport.kubernetes.evaluator.cpuRequest CPU request for evaluator worker pods. If not set, no CPU request is defined.
+      cpuRequest: ""
+      ## @param transport.kubernetes.evaluator.cpuLimit CPU limit for evaluator worker pods. If not set, no CPU limit is defined.
+      cpuLimit: ""
       memoryRequest: 4Gi
       memoryLimit: 4Gi
     reporter:
+      ## @param transport.kubernetes.reporter.cpuRequest CPU request for reporter worker pods. If not set, no CPU request is defined.
+      cpuRequest: ""
+      ## @param transport.kubernetes.reporter.cpuLimit CPU limit for reporter worker pods. If not set, no CPU limit is defined.
+      cpuLimit: ""
       memoryRequest: 4Gi
       memoryLimit: 4Gi
     scanner:
+      ## @param transport.kubernetes.scanner.cpuRequest CPU request for scanner worker pods. If not set, no CPU request is defined.
+      cpuRequest: ""
+      ## @param transport.kubernetes.scanner.cpuLimit CPU limit for scanner worker pods. If not set, no CPU limit is defined.
+      cpuLimit: ""
       memoryRequest: 8Gi
       memoryLimit: 8Gi
   rabbitmq:
