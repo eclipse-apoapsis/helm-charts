@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.14.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.13.0...ort-server-v0.14.0) (2026-04-14)
+
+
+### Features
+
+* Support setting CPU requests and limits for worker pods ([4733dbc](https://github.com/eclipse-apoapsis/helm-charts/commit/4733dbc86708766b14b79251a27ca32a146278f9))
+
 ## [0.13.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.12.0...ort-server-v0.13.0) (2026-04-13)
 
 
