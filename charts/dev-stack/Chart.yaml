@@ -7,7 +7,7 @@ dependencies:
     repository: "oci://registry-1.docker.io/cloudpirates"
     alias: dev-postgres
   - name: rabbitmq
-    version: 0.20.1
+    version: 0.20.2
     repository: "oci://registry-1.docker.io/cloudpirates"
     alias: dev-rabbitmq
   - name: keycloak
