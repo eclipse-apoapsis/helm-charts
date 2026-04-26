@@ -162,6 +162,18 @@ transport:
       memoryRequest: 1Gi
       ## @param transport.kubernetes.advisor.memoryLimit Memory limit for advisor worker pods. If not set, no memory limit is defined.
       memoryLimit: 1Gi
+      ## @param transport.kubernetes.advisor.mountEmptyDirs EmptyDir volumes to mount into the advisor worker pods. Each entry must be
+      ## in the format "name->path", where "name" is the name of the EmptyDir volume and "path" is the path inside the container to mount
+      ## the volume to. Multiple entries must be separated by whitespace.
+      mountEmptyDirs: ""
+      ## @param transport.kubernetes.advisor.mountPvcs PVCs to mount into the advisor worker pods. Each entry must be in the format
+      ## "pvcName->path,access", where "pvcName" is the name of the PVC to mount, "path" is the path inside the container to mount the PVC
+      ## to, and "access" is either "R" for read-only or "W" for read-write access. Multiple entries must be separated by whitespace.
+      mountPvcs: ""
+      ## @param transport.kubernetes.advisor.mountSecrets Secrets to mount into the advisor worker pods. Each entry must be in the
+      ## format "secret->path|subPath", where "secret" is the name of the Secret to mount, "path" is the path inside the container to mount
+      ## the Secret to, and "subPath" is an optional subPath of the Secret to mount.
+      mountSecrets: ""
     analyzer:
       ## @param transport.kubernetes.analyzer.cpuRequest CPU request for analyzer worker pods. If not set, no CPU request is defined.
       cpuRequest: ""
@@ -171,6 +183,18 @@ transport:
       memoryRequest: 4Gi
       ## @param transport.kubernetes.analyzer.memoryLimit Memory limit for analyzer worker pods. If not set, no memory limit is defined.
       memoryLimit: 4Gi
+      ## @param transport.kubernetes.analyzer.mountEmptyDirs EmptyDir volumes to mount into the analyzer worker pods. Each entry must be
+      ## in the format "name->path", where "name" is the name of the EmptyDir volume and "path" is the path inside the container to mount
+      ## the volume to. Multiple entries must be separated by whitespace.
+      mountEmptyDirs: ""
+      ## @param transport.kubernetes.analyzer.mountPvcs PVCs to mount into the analyzer worker pods. Each entry must be in the format
+      ## "pvcName->path,access", where "pvcName" is the name of the PVC to mount, "path" is the path inside the container to mount the PVC
+      ## to, and "access" is either "R" for read-only or "W" for read-write access. Multiple entries must be separated by whitespace.
+      mountPvcs: ""
+      ## @param transport.kubernetes.analyzer.mountSecrets Secrets to mount into the analyzer worker pods. Each entry must be in the
+      ## format "secret->path|subPath", where "secret" is the name of the Secret to mount, "path" is the path inside the container to mount
+      ## the Secret to, and "subPath" is an optional subPath of the Secret to mount.
+      mountSecrets: ""
     config:
       ## @param transport.kubernetes.config.cpuRequest CPU request for config worker pods. If not set, no CPU request is defined.
       cpuRequest: ""
@@ -180,6 +204,18 @@ transport:
       memoryRequest: 1Gi
       ## @param transport.kubernetes.config.memoryLimit Memory limit for config worker pods. If not set, no memory limit is defined.
       memoryLimit: 1Gi
+      ## @param transport.kubernetes.config.mountEmptyDirs EmptyDir volumes to mount into the config worker pods. Each entry must be
+      ## in the format "name->path", where "name" is the name of the EmptyDir volume and "path" is the path inside the container to mount
+      ## the volume to. Multiple entries must be separated by whitespace.
+      mountEmptyDirs: ""
+      ## @param transport.kubernetes.config.mountPvcs PVCs to mount into the config worker pods. Each entry must be in the format
+      ## "pvcName->path,access", where "pvcName" is the name of the PVC to mount, "path" is the path inside the container to mount the PVC
+      ## to, and "access" is either "R" for read-only or "W" for read-write access. Multiple entries must be separated by whitespace.
+      mountPvcs: ""
+      ## @param transport.kubernetes.config.mountSecrets Secrets to mount into the config worker pods. Each entry must be in the
+      ## format "secret->path|subPath", where "secret" is the name of the Secret to mount, "path" is the path inside the container to mount
+      ## the Secret to, and "subPath" is an optional subPath of the Secret to mount.
+      mountSecrets: ""
     evaluator:
       ## @param transport.kubernetes.evaluator.cpuRequest CPU request for evaluator worker pods. If not set, no CPU request is defined.
       cpuRequest: ""
@@ -189,6 +225,18 @@ transport:
       memoryRequest: 4Gi
       ## @param transport.kubernetes.evaluator.memoryLimit Memory limit for evaluator worker pods. If not set, no memory limit is defined.
       memoryLimit: 4Gi
+      ## @param transport.kubernetes.evaluator.mountEmptyDirs EmptyDir volumes to mount into the evaluator worker pods. Each entry must be
+      ## in the format "name->path", where "name" is the name of the EmptyDir volume and "path" is the path inside the container to mount
+      ## the volume to. Multiple entries must be separated by whitespace.
+      mountEmptyDirs: ""
+      ## @param transport.kubernetes.evaluator.mountPvcs PVCs to mount into the evaluator worker pods. Each entry must be in the format
+      ## "pvcName->path,access", where "pvcName" is the name of the PVC to mount, "path" is the path inside the container to mount the PVC
+      ## to, and "access" is either "R" for read-only or "W" for read-write access. Multiple entries must be separated by whitespace.
+      mountPvcs: ""
+      ## @param transport.kubernetes.evaluator.mountSecrets Secrets to mount into the evaluator worker pods. Each entry must be in the
+      ## format "secret->path|subPath", where "secret" is the name of the Secret to mount, "path" is the path inside the container to mount
+      ## the Secret to, and "subPath" is an optional subPath of the Secret to mount.
+      mountSecrets: ""
     reporter:
       ## @param transport.kubernetes.reporter.cpuRequest CPU request for reporter worker pods. If not set, no CPU request is defined.
       cpuRequest: ""
@@ -198,6 +246,18 @@ transport:
       memoryRequest: 4Gi
       ## @param transport.kubernetes.reporter.memoryLimit Memory limit for reporter worker pods. If not set, no memory limit is defined.
       memoryLimit: 4Gi
+      ## @param transport.kubernetes.reporter.mountEmptyDirs EmptyDir volumes to mount into the reporter worker pods. Each entry must be
+      ## in the format "name->path", where "name" is the name of the EmptyDir volume and "path" is the path inside the container to mount
+      ## the volume to. Multiple entries must be separated by whitespace.
+      mountEmptyDirs: ""
+      ## @param transport.kubernetes.reporter.mountPvcs PVCs to mount into the reporter worker pods. Each entry must be in the format
+      ## "pvcName->path,access", where "pvcName" is the name of the PVC to mount, "path" is the path inside the container to mount the PVC
+      ## to, and "access" is either "R" for read-only or "W" for read-write access. Multiple entries must be separated by whitespace.
+      mountPvcs: ""
+      ## @param transport.kubernetes.reporter.mountSecrets Secrets to mount into the reporter worker pods. Each entry must be in the
+      ## format "secret->path|subPath", where "secret" is the name of the Secret to mount, "path" is the path inside the container to mount
+      ## the Secret to, and "subPath" is an optional subPath of the Secret to mount.
+      mountSecrets: ""
     scanner:
       ## @param transport.kubernetes.scanner.cpuRequest CPU request for scanner worker pods. If not set, no CPU request is defined.
       cpuRequest: ""
@@ -207,6 +267,18 @@ transport:
       memoryRequest: 8Gi
       ## @param transport.kubernetes.scanner.memoryLimit Memory limit for scanner worker pods. If not set, no memory limit is defined.
       memoryLimit: 8Gi
+      ## @param transport.kubernetes.scanner.mountEmptyDirs EmptyDir volumes to mount into the scanner worker pods. Each entry must be
+      ## in the format "name->path", where "name" is the name of the EmptyDir volume and "path" is the path inside the container to mount
+      ## the volume to. Multiple entries must be separated by whitespace.
+      mountEmptyDirs: ""
+      ## @param transport.kubernetes.scanner.mountPvcs PVCs to mount into the scanner worker pods. Each entry must be in the format
+      ## "pvcName->path,access", where "pvcName" is the name of the PVC to mount, "path" is the path inside the container to mount the PVC
+      ## to, and "access" is either "R" for read-only or "W" for read-write access. Multiple entries must be separated by whitespace.
+      mountPvcs: ""
+      ## @param transport.kubernetes.scanner.mountSecrets Secrets to mount into the scanner worker pods. Each entry must be in the
+      ## format "secret->path|subPath", where "secret" is the name of the Secret to mount, "path" is the path inside the container to mount
+      ## the Secret to, and "subPath" is an optional subPath of the Secret to mount.
+      mountSecrets: ""
   rabbitmq:
     enabled: true
     serverUri: ""
@@ -282,96 +354,6 @@ orchestrator:
   extraEnv: []
   ## @param orchestrator.extraInitContainers Additional init containers for the orchestrator deployment
   extraInitContainers: []
-
-advisor:
-  ## @param advisor.mountEmptyDirs EmptyDir volumes to mount into the advisor worker pods. Each entry must be in the
-  ## format "name->path", where "name" is the name of the EmptyDir volume and "path" is the path inside the container to
-  ## mount the volume to. Multiple entries must be separated by whitespace.
-  mountEmptyDirs: ""
-  ## @param advisor.mountPvcs PVCs to mount into the advisor worker pods. Each entry must be in the format
-  ## "pvcName->path,access", where "pvcName" is the name of the PVC to mount, "path" is the path inside the container
-  ## to mount the PVC to, and "access" is either "R" for read-only or "W" for read-write access. Multiple entries must
-  ## be separated by whitespace.
-  mountPvcs: ""
-  ## @param advisor.mountSecrets Secrets to mount into the advisor worker pods. Each entry must be in the format
-  ## "secret->path|subPath", where "secret" is the name of the Secret to mount, "path" is the path inside the container
-  ## to mount the Secret to, and "subPath" is an optional subPath of the Secret to mount.
-  mountSecrets: ""
-
-analyzer:
-  ## @param analyzer.mountEmptyDirs EmptyDir volumes to mount into the analyzer worker pods. Each entry must be in the
-  ## format "name->path", where "name" is the name of the EmptyDir volume and "path" is the path inside the container to
-  ## mount the volume to. Multiple entries must be separated by whitespace.
-  mountEmptyDirs: ""
-  ## @param analyzer.mountPvcs PVCs to mount into the analyzer worker pods. Each entry must be in the format
-  ## "pvcName->path,access", where "pvcName" is the name of the PVC to mount, "path" is the path inside the container
-  ## to mount the PVC to, and "access" is either "R" for read-only or "W" for read-write access. Multiple entries must
-  ## be separated by whitespace.
-  mountPvcs: ""
-  ## @param analyzer.mountSecrets Secrets to mount into the analyzer worker pods. Each entry must be in the format
-  ## "secret->path|subPath", where "secret" is the name of the Secret to mount, "path" is the path inside the container
-  ## to mount the Secret to, and "subPath" is an optional subPath of the Secret to mount.
-  mountSecrets: ""
-
-config:
-  ## @param config.mountEmptyDirs EmptyDir volumes to mount into the config worker pods. Each entry must be in the
-  ## format "name->path", where "name" is the name of the EmptyDir volume and "path" is the path inside the container to
-  ## mount the volume to. Multiple entries must be separated by whitespace.
-  mountEmptyDirs: ""
-  ## @param config.mountPvcs PVCs to mount into the config worker pods. Each entry must be in the format
-  ## "pvcName->path,access", where "pvcName" is the name of the PVC to mount, "path" is the path inside the container
-  ## to mount the PVC to, and "access" is either "R" for read-only or "W" for read-write access. Multiple entries must
-  ## be separated by whitespace.
-  mountPvcs: ""
-  ## @param config.mountSecrets Secrets to mount into the config worker pods. Each entry must be in the format
-  ## "secret->path|subPath", where "secret" is the name of the Secret to mount, "path" is the path inside the container
-  ## to mount the Secret to, and "subPath" is an optional subPath of the Secret to mount.
-  mountSecrets: ""
-
-evaluator:
-  ## @param evaluator.mountEmptyDirs EmptyDir volumes to mount into the evaluator worker pods. Each entry must be in the
-  ## format "name->path", where "name" is the name of the EmptyDir volume and "path" is the path inside the container to
-  ## mount the volume to. Multiple entries must be separated by whitespace.
-  mountEmptyDirs: ""
-  ## @param evaluator.mountPvcs PVCs to mount into the evaluator worker pods. Each entry must be in the format
-  ## "pvcName->path,access", where "pvcName" is the name of the PVC to mount, "path" is the path inside the container
-  ## to mount the PVC to, and "access" is either "R" for read-only or "W" for read-write access. Multiple entries must
-  ## be separated by whitespace.
-  mountPvcs: ""
-  ## @param evaluator.mountSecrets Secrets to mount into the evaluator worker pods. Each entry must be in the format
-  ## "secret->path|subPath", where "secret" is the name of the Secret to mount, "path" is the path inside the container
-  ## to mount the Secret to, and "subPath" is an optional subPath of the Secret to mount.
-  mountSecrets: ""
-
-reporter:
-  ## @param reporter.mountEmptyDirs EmptyDir volumes to mount into the reporter worker pods. Each entry must be in the
-  ## format "name->path", where "name" is the name of the EmptyDir volume and "path" is the path inside the container to
-  ## mount the volume to. Multiple entries must be separated by whitespace.
-  mountEmptyDirs: ""
-  ## @param reporter.mountPvcs PVCs to mount into the reporter worker pods. Each entry must be in the format
-  ## "pvcName->path,access", where "pvcName" is the name of the PVC to mount, "path" is the path inside the container
-  ## to mount the PVC to, and "access" is either "R" for read-only or "W" for read-write access. Multiple entries must
-  ## be separated by whitespace.
-  mountPvcs: ""
-  ## @param reporter.mountSecrets Secrets to mount into the reporter worker pods. Each entry must be in the format
-  ## "secret->path|subPath", where "secret" is the name of the Secret to mount, "path" is the path inside the container
-  ## to mount the Secret to, and "subPath" is an optional subPath of the Secret to mount.
-  mountSecrets: ""
-
-scanner:
-  ## @param scanner.mountEmptyDirs EmptyDir volumes to mount into the scanner worker pods. Each entry must be in the
-  ## format "name->path", where "name" is the name of the EmptyDir volume and "path" is the path inside the container to
-  ## mount the volume to. Multiple entries must be separated by whitespace.
-  mountEmptyDirs: ""
-  ## @param scanner.mountPvcs PVCs to mount into the scanner worker pods. Each entry must be in the format
-  ## "pvcName->path,access", where "pvcName" is the name of the PVC to mount, "path" is the path inside the container
-  ## to mount the PVC to, and "access" is either "R" for read-only or "W" for read-write access. Multiple entries must
-  ## be separated by whitespace.
-  mountPvcs: ""
-  ## @param scanner.mountSecrets Secrets to mount into the scanner worker pods. Each entry must be in the format
-  ## "secret->path|subPath", where "secret" is the name of the Secret to mount, "path" is the path inside the container
-  ## to mount the Secret to, and "subPath" is an optional subPath of the Secret to mount.
-  mountSecrets: ""
 
 tasks:
   ## @param tasks.resources CPU and memory requests and limits for the task cron jobs
