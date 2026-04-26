@@ -73,6 +73,8 @@ secrets:
     prefix: secret
     ## @param secrets.vault.namespace The Vault namespace to use for storing secrets. This is only relevant if Vault namespaces are enabled in the Vault server.
     namespace: null
+    ## @param secrets.vault.timeoutSeconds Timeout for requests to the Vault server in seconds. If not set, the default HTTP client timeout is used.
+    timeoutSeconds: ""
 
 configSecrets:
   name: secret-file

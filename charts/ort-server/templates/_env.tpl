@@ -71,6 +71,10 @@
   value: {{ .Values.secrets.vault.prefix | quote }}
 - name: VAULT_NAMESPACE
   value: {{ .Values.secrets.vault.namespace | quote }}
+{{- if .Values.secrets.vault.timeoutSeconds }}
+- name: VAULT_HTTP_TIMEOUT_SEC
+  value: "{{ .Values.secrets.vault.timeoutSeconds }}"
+{{- end }}
 {{- end }}
 {{- end -}}
 
