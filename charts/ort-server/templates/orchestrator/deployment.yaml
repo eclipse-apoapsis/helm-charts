@@ -139,11 +139,11 @@ spec:
               value: {{ .Values.configFileProvider.gitConfig.repositoryUrl }}
             {{- end }}
             - name: ADVISOR_MOUNT_EMPTY_DIRS
-              value: {{ .Values.advisor.mountEmptyDirs }}
+              value: {{ .Values.transport.kubernetes.advisor.mountEmptyDirs }}
             - name: ADVISOR_MOUNT_PVCS
-              value: {{ .Values.advisor.mountPvcs }}
+              value: {{ .Values.transport.kubernetes.advisor.mountPvcs }}
             - name: ADVISOR_MOUNT_SECRETS
-              value: {{ .Values.advisor.mountSecrets }}
+              value: {{ .Values.transport.kubernetes.advisor.mountSecrets }}
             - name: ADVISOR_SECRET_PROVIDER
               value: {{ .Values.configSecrets.name }}
             - name: ADVISOR_SECRET_FILES
@@ -194,11 +194,11 @@ spec:
               value: {{ .Values.configFileProvider.gitConfig.repositoryUrl }}
             {{- end }}
             - name: ANALYZER_MOUNT_EMPTY_DIRS
-              value: {{ .Values.analyzer.mountEmptyDirs }}
+              value: {{ .Values.transport.kubernetes.analyzer.mountEmptyDirs }}
             - name: ANALYZER_MOUNT_PVCS
-              value: {{ .Values.analyzer.mountPvcs }}
+              value: {{ .Values.transport.kubernetes.analyzer.mountPvcs }}
             - name: ANALYZER_MOUNT_SECRETS
-              value: {{ .Values.analyzer.mountSecrets }}
+              value: {{ .Values.transport.kubernetes.analyzer.mountSecrets }}
             - name: ANALYZER_SECRET_PROVIDER
               value: {{ .Values.configSecrets.name }}
             - name: ANALYZER_SECRET_FILES
@@ -249,11 +249,11 @@ spec:
               value: {{ .Values.configFileProvider.gitConfig.repositoryUrl }}
             {{- end }}
             - name: CONFIG_MOUNT_EMPTY_DIRS
-              value: {{ .Values.config.mountEmptyDirs }}
+              value: {{ .Values.transport.kubernetes.config.mountEmptyDirs }}
             - name: CONFIG_MOUNT_PVCS
-              value: {{ .Values.config.mountPvcs }}
+              value: {{ .Values.transport.kubernetes.config.mountPvcs }}
             - name: CONFIG_MOUNT_SECRETS
-              value: {{ .Values.config.mountSecrets }}
+              value: {{ .Values.transport.kubernetes.config.mountSecrets }}
             - name: CONFIG_SECRET_PROVIDER
               value: {{ .Values.configSecrets.name }}
             - name: CONFIG_SECRET_FILES
@@ -304,11 +304,11 @@ spec:
               value: {{ .Values.configFileProvider.gitConfig.repositoryUrl }}
             {{- end }}
             - name: EVALUATOR_MOUNT_EMPTY_DIRS
-              value: {{ .Values.evaluator.mountEmptyDirs }}
+              value: {{ .Values.transport.kubernetes.evaluator.mountEmptyDirs }}
             - name: EVALUATOR_MOUNT_PVCS
-              value: {{ .Values.evaluator.mountPvcs }}
+              value: {{ .Values.transport.kubernetes.evaluator.mountPvcs }}
             - name: EVALUATOR_MOUNT_SECRETS
-              value: {{ .Values.evaluator.mountSecrets }}
+              value: {{ .Values.transport.kubernetes.evaluator.mountSecrets }}
             - name: EVALUATOR_SECRET_PROVIDER
               value: {{ .Values.configSecrets.name }}
             - name: EVALUATOR_SECRET_FILES
@@ -359,11 +359,11 @@ spec:
               value: {{ .Values.configFileProvider.gitConfig.repositoryUrl }}
             {{- end }}
             - name: REPORTER_MOUNT_EMPTY_DIRS
-              value: {{ .Values.reporter.mountEmptyDirs }}
+              value: {{ .Values.transport.kubernetes.reporter.mountEmptyDirs }}
             - name: REPORTER_MOUNT_PVCS
-              value: {{ .Values.reporter.mountPvcs }}
+              value: {{ .Values.transport.kubernetes.reporter.mountPvcs }}
             - name: REPORTER_MOUNT_SECRETS
-              value: {{ .Values.reporter.mountSecrets }}
+              value: {{ .Values.transport.kubernetes.reporter.mountSecrets }}
             - name: REPORTER_SECRET_PROVIDER
               value: {{ .Values.configSecrets.name }}
             - name: REPORTER_SECRET_FILES
@@ -414,11 +414,11 @@ spec:
               value: {{ .Values.configFileProvider.gitConfig.repositoryUrl }}
             {{- end }}
             - name: SCANNER_MOUNT_EMPTY_DIRS
-              value: {{ .Values.scanner.mountEmptyDirs }}
+              value: {{ .Values.transport.kubernetes.scanner.mountEmptyDirs }}
             - name: SCANNER_MOUNT_PVCS
-              value: {{ .Values.scanner.mountPvcs }}
+              value: {{ .Values.transport.kubernetes.scanner.mountPvcs }}
             - name: SCANNER_MOUNT_SECRETS
-              value: {{ .Values.scanner.mountSecrets }}
+              value: {{ .Values.transport.kubernetes.scanner.mountSecrets }}
             - name: SCANNER_SECRET_PROVIDER
               value: {{ .Values.configSecrets.name }}
             - name: SCANNER_SECRET_FILES
