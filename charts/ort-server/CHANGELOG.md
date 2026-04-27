@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.15.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.14.0...ort-server-v0.15.0) (2026-04-27)
+
+
+### Features
+
+* Add support for setting the Vault request timeout ([1e28b01](https://github.com/eclipse-apoapsis/helm-charts/commit/1e28b0167be0bf0bac7385f48a1aab17f1d3d360))
+
+
+### Dependencies
+
+* update dependency eclipse-apoapsis/ort-server to v0.60.1 ([a9d8fea](https://github.com/eclipse-apoapsis/helm-charts/commit/a9d8fea01240de8ca5f1afd4df6cd7ebe36d86c3))
+* update dependency eclipse-apoapsis/ort-server to v0.60.2 ([525d816](https://github.com/eclipse-apoapsis/helm-charts/commit/525d816e6342c43081911c90df839f07ae2d609e))
+* update dependency eclipse-apoapsis/ort-server to v0.61.0 ([8beea7d](https://github.com/eclipse-apoapsis/helm-charts/commit/8beea7d33e65f63d3045d9a679edc3ad607eae19))
+
+
+### Documentation
+
+* Add docs for the worker memory settings ([8592f93](https://github.com/eclipse-apoapsis/helm-charts/commit/8592f93e2549bf4245ef610ea97915f5e44341d7))
+
 ## [0.14.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.13.0...ort-server-v0.14.0) (2026-04-14)
 
 
