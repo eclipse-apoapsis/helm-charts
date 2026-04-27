@@ -1,14 +1,14 @@
 containerRegistry: ghcr.io/eclipse-apoapsis
-## @param imagePullSecret Name of the image pull secret to use for pulling the Docker images
+# -- Name of the image pull secret to use for pulling the Docker images
 imagePullSecret: null
 
-## @param nameOverride String to partially override ortserver.fullname
+# -- String to partially override ortserver.fullname
 nameOverride: ""
-## @param fullnameOverride String to fully override ortserver.fullname
+# -- String to fully override ortserver.fullname
 fullnameOverride: ""
-## @param commonLabels Map of labels to add to all deployed objects
+# -- Map of labels to add to all deployed objects
 commonLabels: {}
-## @param podLabels Map of labels to add to all pods
+# -- Map of labels to add to all pods
 podLabels: {}
 
 configFileProvider:
@@ -27,115 +27,115 @@ database:
 
 secrets:
   azureKeyVault:
-    ## @param secrets.azureKeyVault.enabled If enabled, user secrets are stored in Azure Key Vault.
+    # -- If enabled, user secrets are stored in Azure Key Vault.
     enabled: false
-    ## @param secrets.azureKeyVault.keyVaultName The name of the Azure Key Vault to use.
+    # -- The name of the Azure Key Vault to use.
     keyVaultName: ""
   database:
-    ## @param secrets.database.enabled If enabled, database credentials are stored in the database.
+    # -- If enabled, database credentials are stored in the database.
     enabled: false
-    ## @param secrets.database.masterPassword Master password for encrypting secrets stored in the database. Must be at least 16 characters long.
+    # -- Master password for encrypting secrets stored in the database. Must be at least 16 characters long.
     masterPassword: ""
-    ## @param secrets.database.salt Salt for encrypting secrets stored in the database. Must be a hex-encoded string of at least 32 hex characters.
+    # -- Salt for encrypting secrets stored in the database. Must be a hex-encoded string of at least 32 hex characters.
     salt: ""
-    ## @param secrets.database.keyVersion Version of the encryption key. Do not change, key rotation is not yet supported.
+    # -- Version of the encryption key. Do not change, key rotation is not yet supported.
     keyVersion: 1
   fileBased:
-    ## @param secrets.fileBased.enabled If enabled, user secrets are stored in a file. This should only be used for testing, not in production.
+    # -- If enabled, user secrets are stored in a file. This should only be used for testing, not in production.
     enabled: true
-    ## @param secrets.fileBased.path Path to the file where user secrets are stored.
+    # -- Path to the file where user secrets are stored.
     path: /mnt/secrets/secrets
   scaleway:
-    ## @param secrets.scaleway.enabled If enabled, user secrets are stored in Scaleway Secret Manager.
+    # -- If enabled, user secrets are stored in Scaleway Secret Manager.
     enabled: false
-    ## @param secrets.scaleway.serverUrl The URL of the Scaleway Secret Manager API.
+    # -- The URL of the Scaleway Secret Manager API.
     serverUrl: https://api.scaleway.com/
-    ## @param secrets.scaleway.apiVersion The API version of the Scaleway Secret Manager to use.
+    # -- The API version of the Scaleway Secret Manager to use.
     apiVersion: v1beta1
-    ## @param secrets.scaleway.region The region where the Scaleway Secret Manager is hosted.
+    # -- The region where the Scaleway Secret Manager is hosted.
     region: fr-par
-    ## @param secrets.scaleway.projectId The ID of the Scaleway project where secrets are stored.
+    # -- The ID of the Scaleway project where secrets are stored.
     projectId: ""
-    ## @param secrets.scaleway.secretKey The secret key for accessing the Scaleway Secret Manager.
+    # -- The secret key for accessing the Scaleway Secret Manager.
     secretKey: ""
   vault:
-    ## @param secrets.vault.enabled If enabled, user secrets are stored in HashiCorp Vault.
+    # -- If enabled, user secrets are stored in HashiCorp Vault.
     enabled: false
-    ## @param secrets.vault.uri The URI of the Vault server.
+    # -- The URI of the Vault server.
     uri: ""
-    ## @param secrets.vault.roleId The role ID assigned to this client application.
+    # -- The role ID assigned to this client application.
     roleId: ""
-    ## @param secrets.vault.secretId The secret ID assigned to this client application.
+    # -- The secret ID assigned to this client application.
     secretId: ""
-    ## @param secrets.vault.path The path in Vault where secrets are stored.
+    # -- The path in Vault where secrets are stored.
     rootPath: ""
-    ## @param secrets.vault.engineVersion The path prefix under which the secrets engine is located.
+    # -- The path prefix under which the secrets engine is located.
     prefix: secret
-    ## @param secrets.vault.namespace The Vault namespace to use for storing secrets. This is only relevant if Vault namespaces are enabled in the Vault server.
+    # -- The Vault namespace to use for storing secrets. This is only relevant if Vault namespaces are enabled in the Vault server.
     namespace: null
-    ## @param secrets.vault.timeoutSeconds Timeout for requests to the Vault server in seconds. If not set, the default HTTP client timeout is used.
+    # -- Timeout for requests to the Vault server in seconds. If not set, the default HTTP client timeout is used.
     timeoutSeconds: ""
 
 configSecrets:
   name: secret-file
   files: ""
-  ## @param configSecrets.allowSecretsFromConfig If enabled, secrets are read from environment variables, otherwise from the configured files.
+  # -- If enabled, secrets are read from environment variables, otherwise from the configured files.
   allowSecretsFromConfig: true
 
 storage:
   azureBlob:
-    ## @param storage.azureBlob.enabled If enabled, Azure Blob Storage is used for storing file archives, file lists, and reports.
+    # -- If enabled, Azure Blob Storage is used for storing file archives, file lists, and reports.
     enabled: false
-    ## @param storage.azureBlob.endpointUrl The endpoint URL of the Azure Blob Storage account. Mutually exclusive with accountName.
+    # -- The endpoint URL of the Azure Blob Storage account. Mutually exclusive with accountName.
     endpointUrl: ""
-    ## @param storage.azureBlob.accountName The name of the Azure Blob Storage account when using the default blob storage endpoint. Mutually exclusive with endpointUrl.
+    # -- The name of the Azure Blob Storage account when using the default blob storage endpoint. Mutually exclusive with endpointUrl.
     accountName: ""
     containers:
-      ## @param storage.azureBlob.containers.fileArchives The name of the Azure Blob Storage container to use for storing file archives.
+      # -- The name of the Azure Blob Storage container to use for storing file archives.
       fileArchives: file-archives
-      ## @param storage.azureBlob.containers.fileLists The name of the Azure Blob Storage container to use for storing file lists.
+      # -- The name of the Azure Blob Storage container to use for storing file lists.
       fileLists: file-lists
-      ## @param storage.azureBlob.containers.reports The name of the Azure Blob Storage container to use for storing reports.
+      # -- The name of the Azure Blob Storage container to use for storing reports.
       reports: reports
   database:
-    ## @param storage.database.enabled If enabled, the database is used for storing file archives, file lists, and reports. This is not recommended for production use.
+    # -- If enabled, the database is used for storing file archives, file lists, and reports. This is not recommended for production use.
     enabled: true
-    ## @param storage.database.inMemoryLimit The maximum of data to load into memory before buffering to disk.
+    # -- The maximum of data to load into memory before buffering to disk.
     inMemoryLimit: 1048576
     namespaces:
-      ## @param storage.database.namespaces.fileArchives The namespace to use for storing file archives in the database.
+      # -- The namespace to use for storing file archives in the database.
       fileArchives: fileArchives
-      ## @param storage.database.namespaces.fileLists The namespace to use for storing file lists in the database.
+      # -- The namespace to use for storing file lists in the database.
       fileLists: fileLists
-      ## @param storage.database.namespaces.reports The namespace to use for storing reports in the database.
+      # -- The namespace to use for storing reports in the database.
       reports: reports
   s3:
-    ## @param storage.s3.enabled If enabled, an S3-compatible object storage is used for storing file archives, file lists, and reports.
+    # -- If enabled, an S3-compatible object storage is used for storing file archives, file lists, and reports.
     enabled: false
-    ## @param storage.s3.endpointUrl The endpoint URL of the S3-compatible object storage.
+    # -- The endpoint URL of the S3-compatible object storage.
     endpointUrl: ""
-    ## @param storage.s3.accessKey The access key to use.
+    # -- The access key to use.
     accessKey: ""
-    ## @param storage.s3.secretKey The secret key to use.
+    # -- The secret key to use.
     secretKey: ""
-    ## @param storage.s3.region The optional region of the S3-compatible object storage.
+    # -- The optional region of the S3-compatible object storage.
     region: ""
     buckets:
-      ## @param storage.s3.buckets.fileArchives The name of the S3 bucket to use for storing file archives.
+      # -- The name of the S3 bucket to use for storing file archives.
       fileArchives: file-archives
-      ## @param storage.s3.buckets.fileLists The name of the S3 bucket to use for storing file lists.
+      # -- The name of the S3 bucket to use for storing file lists.
       fileLists: file-lists
-      ## @param storage.s3.buckets.reports The name of the S3 bucket to use for storing reports.
+      # -- The name of the S3 bucket to use for storing reports.
       reports: reports
     prefixes:
-      ## @param storage.s3.prefixes.fileArchives An optional prefix to use for storing file archives in the S3 bucket.
-      ## Required when sharing the bucket with file lists or reports to avoid name collisions.
+      # -- An optional prefix to use for storing file archives in the S3 bucket. Required when sharing the bucket with file lists or reports
+      # to avoid name collisions.
       fileArchives: ""
-      ## @param storage.s3.prefixes.fileLists An optional prefix to use for storing file lists in the S3 bucket.
-      ## Required when sharing the bucket with file archives or reports to avoid name collisions.
+      # -- An optional prefix to use for storing file lists in the S3 bucket. Required when sharing the bucket with file archives or reports
+      # to avoid name collisions.
       fileLists: ""
-      ## @param storage.s3.prefixes.reports An optional prefix to use for storing reports in the S3 bucket.
-      ## Required when sharing the bucket with file archives or file lists to avoid name collisions.
+      # -- An optional prefix to use for storing reports in the S3 bucket. Required when sharing the bucket with file archives or file lists
+      # to avoid name collisions.
       reports: ""
 
 transport:
@@ -151,133 +151,133 @@ transport:
     imagePullPolicy: Always
     backoffLimit: 0
     restartPolicy: Never
-    ## @param transport.kubernetes.userId The user ID to run the worker containers as.
+    # -- The user ID to run the worker containers as.
     userId: 1000
     advisor:
-      ## @param transport.kubernetes.advisor.cpuRequest CPU request for advisor worker pods. If not set, no CPU request is defined.
+      # -- CPU request for advisor worker pods. If not set, no CPU request is defined.
       cpuRequest: ""
-      ## @param transport.kubernetes.advisor.cpuLimit CPU limit for advisor worker pods. If not set, no CPU limit is defined.
+      # -- CPU limit for advisor worker pods. If not set, no CPU limit is defined.
       cpuLimit: ""
-      ## @param transport.kubernetes.advisor.memoryRequest Memory request for advisor worker pods. If not set, no memory request is defined.
+      # -- Memory request for advisor worker pods. If not set, no memory request is defined.
       memoryRequest: 1Gi
-      ## @param transport.kubernetes.advisor.memoryLimit Memory limit for advisor worker pods. If not set, no memory limit is defined.
+      # -- Memory limit for advisor worker pods. If not set, no memory limit is defined.
       memoryLimit: 1Gi
-      ## @param transport.kubernetes.advisor.mountEmptyDirs EmptyDir volumes to mount into the advisor worker pods. Each entry must be
-      ## in the format "name->path", where "name" is the name of the EmptyDir volume and "path" is the path inside the container to mount
-      ## the volume to. Multiple entries must be separated by whitespace.
+      # -- EmptyDir volumes to mount into the advisor worker pods. Each entry must be in the format "name->path", where "name" is the name
+      # of the EmptyDir volume and "path" is the path inside the container to mount the volume to. Multiple entries must be separated by
+      # whitespace.
       mountEmptyDirs: ""
-      ## @param transport.kubernetes.advisor.mountPvcs PVCs to mount into the advisor worker pods. Each entry must be in the format
-      ## "pvcName->path,access", where "pvcName" is the name of the PVC to mount, "path" is the path inside the container to mount the PVC
-      ## to, and "access" is either "R" for read-only or "W" for read-write access. Multiple entries must be separated by whitespace.
+      # -- PVCs to mount into the advisor worker pods. Each entry must be in the format "pvcName->path,access", where "pvcName" is the name
+      # of the PVC to mount, "path" is the path inside the container to mount the PVC to, and "access" is either "R" for read-only or "W"
+      # for read-write access. Multiple entries must be separated by whitespace.
       mountPvcs: ""
-      ## @param transport.kubernetes.advisor.mountSecrets Secrets to mount into the advisor worker pods. Each entry must be in the
-      ## format "secret->path|subPath", where "secret" is the name of the Secret to mount, "path" is the path inside the container to mount
-      ## the Secret to, and "subPath" is an optional subPath of the Secret to mount.
+      # -- Secrets to mount into the advisor worker pods. Each entry must be in the format "secret->path|subPath", where "secret" is the
+      # name of the Secret to mount, "path" is the path inside the container to mount the Secret to, and "subPath" is an optional subPath of
+      # the Secret to mount.
       mountSecrets: ""
     analyzer:
-      ## @param transport.kubernetes.analyzer.cpuRequest CPU request for analyzer worker pods. If not set, no CPU request is defined.
+      # -- CPU request for analyzer worker pods. If not set, no CPU request is defined.
       cpuRequest: ""
-      ## @param transport.kubernetes.analyzer.cpuLimit CPU limit for analyzer worker pods. If not set, no CPU limit is defined.
+      # -- CPU limit for analyzer worker pods. If not set, no CPU limit is defined.
       cpuLimit: ""
-      ## @param transport.kubernetes.analyzer.memoryRequest Memory request for analyzer worker pods. If not set, no memory request is defined.
+      # -- Memory request for analyzer worker pods. If not set, no memory request is defined.
       memoryRequest: 4Gi
-      ## @param transport.kubernetes.analyzer.memoryLimit Memory limit for analyzer worker pods. If not set, no memory limit is defined.
+      # -- Memory limit for analyzer worker pods. If not set, no memory limit is defined.
       memoryLimit: 4Gi
-      ## @param transport.kubernetes.analyzer.mountEmptyDirs EmptyDir volumes to mount into the analyzer worker pods. Each entry must be
-      ## in the format "name->path", where "name" is the name of the EmptyDir volume and "path" is the path inside the container to mount
-      ## the volume to. Multiple entries must be separated by whitespace.
+      # -- EmptyDir volumes to mount into the analyzer worker pods. Each entry must be in the format "name->path", where "name" is the name
+      # of the EmptyDir volume and "path" is the path inside the container to mount the volume to. Multiple entries must be separated by
+      # whitespace.
       mountEmptyDirs: ""
-      ## @param transport.kubernetes.analyzer.mountPvcs PVCs to mount into the analyzer worker pods. Each entry must be in the format
-      ## "pvcName->path,access", where "pvcName" is the name of the PVC to mount, "path" is the path inside the container to mount the PVC
-      ## to, and "access" is either "R" for read-only or "W" for read-write access. Multiple entries must be separated by whitespace.
+      # -- PVCs to mount into the analyzer worker pods. Each entry must be in the format "pvcName->path,access", where "pvcName" is the name
+      # of the PVC to mount, "path" is the path inside the container to mount the PVC to, and "access" is either "R" for read-only or "W"
+      # for read-write access. Multiple entries must be separated by whitespace.
       mountPvcs: ""
-      ## @param transport.kubernetes.analyzer.mountSecrets Secrets to mount into the analyzer worker pods. Each entry must be in the
-      ## format "secret->path|subPath", where "secret" is the name of the Secret to mount, "path" is the path inside the container to mount
-      ## the Secret to, and "subPath" is an optional subPath of the Secret to mount.
+      # -- Secrets to mount into the analyzer worker pods. Each entry must be in the format "secret->path|subPath", where "secret" is the
+      # name of the Secret to mount, "path" is the path inside the container to mount the Secret to, and "subPath" is an optional subPath of
+      # the Secret to mount.
       mountSecrets: ""
     config:
-      ## @param transport.kubernetes.config.cpuRequest CPU request for config worker pods. If not set, no CPU request is defined.
+      # -- CPU request for config worker pods. If not set, no CPU request is defined.
       cpuRequest: ""
-      ## @param transport.kubernetes.config.cpuLimit CPU limit for config worker pods. If not set, no CPU limit is defined.
+      # -- CPU limit for config worker pods. If not set, no CPU limit is defined.
       cpuLimit: ""
-      ## @param transport.kubernetes.config.memoryRequest Memory request for config worker pods. If not set, no memory request is defined.
+      # -- Memory request for config worker pods. If not set, no memory request is defined.
       memoryRequest: 1Gi
-      ## @param transport.kubernetes.config.memoryLimit Memory limit for config worker pods. If not set, no memory limit is defined.
+      # -- Memory limit for config worker pods. If not set, no memory limit is defined.
       memoryLimit: 1Gi
-      ## @param transport.kubernetes.config.mountEmptyDirs EmptyDir volumes to mount into the config worker pods. Each entry must be
-      ## in the format "name->path", where "name" is the name of the EmptyDir volume and "path" is the path inside the container to mount
-      ## the volume to. Multiple entries must be separated by whitespace.
+      # -- EmptyDir volumes to mount into the config worker pods. Each entry must be in the format "name->path", where "name" is the name of
+      # the EmptyDir volume and "path" is the path inside the container to mount the volume to. Multiple entries must be separated by
+      # whitespace.
       mountEmptyDirs: ""
-      ## @param transport.kubernetes.config.mountPvcs PVCs to mount into the config worker pods. Each entry must be in the format
-      ## "pvcName->path,access", where "pvcName" is the name of the PVC to mount, "path" is the path inside the container to mount the PVC
-      ## to, and "access" is either "R" for read-only or "W" for read-write access. Multiple entries must be separated by whitespace.
+      # -- PVCs to mount into the config worker pods. Each entry must be in the format "pvcName->path,access", where "pvcName" is the name
+      # of the PVC to mount, "path" is the path inside the container to mount the PVC to, and "access" is either "R" for read-only or "W"
+      # for read-write access. Multiple entries must be separated by whitespace.
       mountPvcs: ""
-      ## @param transport.kubernetes.config.mountSecrets Secrets to mount into the config worker pods. Each entry must be in the
-      ## format "secret->path|subPath", where "secret" is the name of the Secret to mount, "path" is the path inside the container to mount
-      ## the Secret to, and "subPath" is an optional subPath of the Secret to mount.
+      # -- Secrets to mount into the config worker pods. Each entry must be in the format "secret->path|subPath", where "secret" is the name
+      # of the Secret to mount, "path" is the path inside the container to mount the Secret to, and "subPath" is an optional subPath of the
+      # Secret to mount.
       mountSecrets: ""
     evaluator:
-      ## @param transport.kubernetes.evaluator.cpuRequest CPU request for evaluator worker pods. If not set, no CPU request is defined.
+      # -- CPU request for evaluator worker pods. If not set, no CPU request is defined.
       cpuRequest: ""
-      ## @param transport.kubernetes.evaluator.cpuLimit CPU limit for evaluator worker pods. If not set, no CPU limit is defined.
+      # -- CPU limit for evaluator worker pods. If not set, no CPU limit is defined.
       cpuLimit: ""
-      ## @param transport.kubernetes.evaluator.memoryRequest Memory request for evaluator worker pods. If not set, no memory request is defined.
+      # -- Memory request for evaluator worker pods. If not set, no memory request is defined.
       memoryRequest: 4Gi
-      ## @param transport.kubernetes.evaluator.memoryLimit Memory limit for evaluator worker pods. If not set, no memory limit is defined.
+      # -- Memory limit for evaluator worker pods. If not set, no memory limit is defined.
       memoryLimit: 4Gi
-      ## @param transport.kubernetes.evaluator.mountEmptyDirs EmptyDir volumes to mount into the evaluator worker pods. Each entry must be
-      ## in the format "name->path", where "name" is the name of the EmptyDir volume and "path" is the path inside the container to mount
-      ## the volume to. Multiple entries must be separated by whitespace.
+      # -- EmptyDir volumes to mount into the evaluator worker pods. Each entry must be in the format "name->path", where "name" is the name
+      # of the EmptyDir volume and "path" is the path inside the container to mount the volume to. Multiple entries must be separated by
+      # whitespace.
       mountEmptyDirs: ""
-      ## @param transport.kubernetes.evaluator.mountPvcs PVCs to mount into the evaluator worker pods. Each entry must be in the format
-      ## "pvcName->path,access", where "pvcName" is the name of the PVC to mount, "path" is the path inside the container to mount the PVC
-      ## to, and "access" is either "R" for read-only or "W" for read-write access. Multiple entries must be separated by whitespace.
+      # -- PVCs to mount into the evaluator worker pods. Each entry must be in the format "pvcName->path,access", where "pvcName" is the
+      # name of the PVC to mount, "path" is the path inside the container to mount the PVC to, and "access" is either "R" for read-only or
+      # "W" for read-write access. Multiple entries must be separated by whitespace.
       mountPvcs: ""
-      ## @param transport.kubernetes.evaluator.mountSecrets Secrets to mount into the evaluator worker pods. Each entry must be in the
-      ## format "secret->path|subPath", where "secret" is the name of the Secret to mount, "path" is the path inside the container to mount
-      ## the Secret to, and "subPath" is an optional subPath of the Secret to mount.
+      # -- Secrets to mount into the evaluator worker pods. Each entry must be in the format "secret->path|subPath", where "secret" is the
+      # name of the Secret to mount, "path" is the path inside the container to mount the Secret to, and "subPath" is an optional subPath of
+      # the Secret to mount.
       mountSecrets: ""
     reporter:
-      ## @param transport.kubernetes.reporter.cpuRequest CPU request for reporter worker pods. If not set, no CPU request is defined.
+      # -- CPU request for reporter worker pods. If not set, no CPU request is defined.
       cpuRequest: ""
-      ## @param transport.kubernetes.reporter.cpuLimit CPU limit for reporter worker pods. If not set, no CPU limit is defined.
+      # -- CPU limit for reporter worker pods. If not set, no CPU limit is defined.
       cpuLimit: ""
-      ## @param transport.kubernetes.reporter.memoryRequest Memory request for reporter worker pods. If not set, no memory request is defined.
+      # -- Memory request for reporter worker pods. If not set, no memory request is defined.
       memoryRequest: 4Gi
-      ## @param transport.kubernetes.reporter.memoryLimit Memory limit for reporter worker pods. If not set, no memory limit is defined.
+      # -- Memory limit for reporter worker pods. If not set, no memory limit is defined.
       memoryLimit: 4Gi
-      ## @param transport.kubernetes.reporter.mountEmptyDirs EmptyDir volumes to mount into the reporter worker pods. Each entry must be
-      ## in the format "name->path", where "name" is the name of the EmptyDir volume and "path" is the path inside the container to mount
-      ## the volume to. Multiple entries must be separated by whitespace.
+      # -- EmptyDir volumes to mount into the reporter worker pods. Each entry must be in the format "name->path", where "name" is the name
+      # of the EmptyDir volume and "path" is the path inside the container to mount the volume to. Multiple entries must be separated by
+      # whitespace.
       mountEmptyDirs: ""
-      ## @param transport.kubernetes.reporter.mountPvcs PVCs to mount into the reporter worker pods. Each entry must be in the format
-      ## "pvcName->path,access", where "pvcName" is the name of the PVC to mount, "path" is the path inside the container to mount the PVC
-      ## to, and "access" is either "R" for read-only or "W" for read-write access. Multiple entries must be separated by whitespace.
+      # -- PVCs to mount into the reporter worker pods. Each entry must be in the format "pvcName->path,access", where "pvcName" is the name
+      # of the PVC to mount, "path" is the path inside the container to mount the PVC to, and "access" is either "R" for read-only or "W"
+      # for read-write access. Multiple entries must be separated by whitespace.
       mountPvcs: ""
-      ## @param transport.kubernetes.reporter.mountSecrets Secrets to mount into the reporter worker pods. Each entry must be in the
-      ## format "secret->path|subPath", where "secret" is the name of the Secret to mount, "path" is the path inside the container to mount
-      ## the Secret to, and "subPath" is an optional subPath of the Secret to mount.
+      # -- Secrets to mount into the reporter worker pods. Each entry must be in the format "secret->path|subPath", where "secret" is the
+      # name of the Secret to mount, "path" is the path inside the container to mount the Secret to, and "subPath" is an optional subPath of
+      # the Secret to mount.
       mountSecrets: ""
     scanner:
-      ## @param transport.kubernetes.scanner.cpuRequest CPU request for scanner worker pods. If not set, no CPU request is defined.
+      # -- CPU request for scanner worker pods. If not set, no CPU request is defined.
       cpuRequest: ""
-      ## @param transport.kubernetes.scanner.cpuLimit CPU limit for scanner worker pods. If not set, no CPU limit is defined.
+      # -- CPU limit for scanner worker pods. If not set, no CPU limit is defined.
       cpuLimit: ""
-      ## @param transport.kubernetes.scanner.memoryRequest Memory request for scanner worker pods. If not set, no memory request is defined.
+      # -- Memory request for scanner worker pods. If not set, no memory request is defined.
       memoryRequest: 8Gi
-      ## @param transport.kubernetes.scanner.memoryLimit Memory limit for scanner worker pods. If not set, no memory limit is defined.
+      # -- Memory limit for scanner worker pods. If not set, no memory limit is defined.
       memoryLimit: 8Gi
-      ## @param transport.kubernetes.scanner.mountEmptyDirs EmptyDir volumes to mount into the scanner worker pods. Each entry must be
-      ## in the format "name->path", where "name" is the name of the EmptyDir volume and "path" is the path inside the container to mount
-      ## the volume to. Multiple entries must be separated by whitespace.
+      # -- EmptyDir volumes to mount into the scanner worker pods. Each entry must be in the format "name->path", where "name" is the name
+      # of the EmptyDir volume and "path" is the path inside the container to mount the volume to. Multiple entries must be separated by
+      # whitespace.
       mountEmptyDirs: ""
-      ## @param transport.kubernetes.scanner.mountPvcs PVCs to mount into the scanner worker pods. Each entry must be in the format
-      ## "pvcName->path,access", where "pvcName" is the name of the PVC to mount, "path" is the path inside the container to mount the PVC
-      ## to, and "access" is either "R" for read-only or "W" for read-write access. Multiple entries must be separated by whitespace.
+      # -- PVCs to mount into the scanner worker pods. Each entry must be in the format "pvcName->path,access", where "pvcName" is the name
+      # of the PVC to mount, "path" is the path inside the container to mount the PVC to, and "access" is either "R" for read-only or "W"
+      # for read-write access. Multiple entries must be separated by whitespace.
       mountPvcs: ""
-      ## @param transport.kubernetes.scanner.mountSecrets Secrets to mount into the scanner worker pods. Each entry must be in the
-      ## format "secret->path|subPath", where "secret" is the name of the Secret to mount, "path" is the path inside the container to mount
-      ## the Secret to, and "subPath" is an optional subPath of the Secret to mount.
+      # -- Secrets to mount into the scanner worker pods. Each entry must be in the format "secret->path|subPath", where "secret" is the
+      # name of the Secret to mount, "path" is the path inside the container to mount the Secret to, and "subPath" is an optional subPath of
+      # the Secret to mount.
       mountSecrets: ""
   rabbitmq:
     enabled: true
@@ -302,19 +302,19 @@ core:
     clientId: admin-cli
     subjectClientId: ort-server
   livenessProbe:
-    ## @param core.livenessProbe.enabled Enable livenessProbe for the core deployment
+    # -- Enable livenessProbe for the core deployment
     enabled: true
-    ## @param core.livenessProbe.initialDelaySeconds Initial delay before the liveness probe is initiated
+    # -- Initial delay before the liveness probe is initiated
     initialDelaySeconds: 60
-    ## @param core.livenessProbe.periodSeconds Period between liveness probe checks
+    # -- Period between liveness probe checks
     periodSeconds: 10
-    ## @param core.livenessProbe.timeoutSeconds Timeout for the liveness probe
+    # -- Timeout for the liveness probe
     timeoutSeconds: 5
-    ## @param core.livenessProbe.successThreshold Minimum consecutive successes for the liveness probe to be considered successful
+    # -- Minimum consecutive successes for the liveness probe to be considered successful
     successThreshold: 1
-    ## @param core.livenessProbe.failureThreshold Minimum consecutive failures for the liveness probe to be considered failed
+    # -- Minimum consecutive failures for the liveness probe to be considered failed
     failureThreshold: 6
-  ## @param core.resources CPU and memory requests and limits for the core deployment
+  # -- CPU and memory requests and limits for the core deployment
   resources:
     requests:
       cpu: 100m
@@ -323,22 +323,22 @@ core:
       cpu: 2
       memory: 2Gi
   certificates:
-    ## @param core.certificates.path Path to a directory containing PEM-encoded certificates to import into the Java
-    ## keystore at startup. Each file in the directory must contain one PEM-encoded certificate. When set, the container
-    ## command is overridden to run the import script before starting the application. Typical usage: mount a Kubernetes
-    ## Secret (one key per certificate) via extraVolumes and extraVolumeMounts, then set this to the mount path.
+    # -- Path to a directory containing PEM-encoded certificates to import into the Java keystore at startup. Each file in the directory
+    # must contain one PEM-encoded certificate. When set, the container command is overridden to run the import script before starting the
+    # application. Typical usage: mount a Kubernetes Secret (one key per certificate) via extraVolumes and extraVolumeMounts, then set this
+    # to the mount path.
     path: ""
-  ## @param core.extraVolumes Additional volumes for the core deployment
+  # -- Additional volumes for the core deployment
   extraVolumes: []
-  ## @param core.extraVolumeMounts Additional volume mounts for the core deployment
+  # -- Additional volume mounts for the core deployment
   extraVolumeMounts: []
-  ## @param core.extraEnv Additional environment variables for the core deployment
+  # -- Additional environment variables for the core deployment
   extraEnv: []
-  ## @param core.extraInitContainers Additional init containers for the core deployment
+  # -- Additional init containers for the core deployment
   extraInitContainers: []
 
 orchestrator:
-  ## @param orchestrator.resources CPU and memory requests and limits for the orchestrator deployment
+  # -- CPU and memory requests and limits for the orchestrator deployment
   resources:
     requests:
       cpu: 100m
@@ -346,17 +346,17 @@ orchestrator:
     limits:
       cpu: 1
       memory: 1Gi
-  ## @param orchestrator.extraVolumes Additional volumes for the orchestrator deployment
+  # -- Additional volumes for the orchestrator deployment
   extraVolumes: []
-  ## @param orchestrator.extraVolumeMounts Additional volume mounts for the orchestrator deployment
+  # -- Additional volume mounts for the orchestrator deployment
   extraVolumeMounts: []
-  ## @param orchestrator.extraEnv Additional environment variables for the orchestrator deployment
+  # -- Additional environment variables for the orchestrator deployment
   extraEnv: []
-  ## @param orchestrator.extraInitContainers Additional init containers for the orchestrator deployment
+  # -- Additional init containers for the orchestrator deployment
   extraInitContainers: []
 
 tasks:
-  ## @param tasks.resources CPU and memory requests and limits for the task cron jobs
+  # -- CPU and memory requests and limits for the task cron jobs
   resources:
     requests:
       cpu: 100m
@@ -365,18 +365,18 @@ tasks:
       cpu: 1
       memory: 1Gi
   certificates:
-    ## @param tasks.certificates.path Path to a directory containing PEM-encoded certificates to import into the Java
-    ## keystore at startup. Each file in the directory must contain one PEM-encoded certificate. When set, the container
-    ## command is overridden to run the import script before starting the application. Typical usage: mount a Kubernetes
-    ## Secret (one key per certificate) via extraVolumes and extraVolumeMounts, then set this to the mount path.
+    # -- Path to a directory containing PEM-encoded certificates to import into the Java keystore at startup. Each file in the directory
+    # must contain one PEM-encoded certificate. When set, the container command is overridden to run the import script before starting the
+    # application. Typical usage: mount a Kubernetes Secret (one key per certificate) via extraVolumes and extraVolumeMounts, then set this
+    # to the mount path.
     path: ""
-  ## @param tasks.extraVolumes Additional volumes for the task cron jobs
+  # -- Additional volumes for the task cron jobs
   extraVolumes: []
-  ## @param tasks.extraVolumeMounts Additional volume mounts for the task cron jobs
+  # -- Additional volume mounts for the task cron jobs
   extraVolumeMounts: []
-  ## @param tasks.extraEnv Additional environment variables for the task cron jobs
+  # -- Additional environment variables for the task cron jobs
   extraEnv: []
-  ## @param tasks.extraInitContainers Additional init containers for the task cron jobs
+  # -- Additional init containers for the task cron jobs
   extraInitContainers: []
   configs:
     - name: delete-old-ort-runs
@@ -421,7 +421,7 @@ ui:
   clientId: ""
   service:
     port: 8082
-  ## @param ui.resources CPU and memory requests and limits for the UI deployment
+  # -- CPU and memory requests and limits for the UI deployment
   resources:
     requests:
       cpu: 50m
@@ -429,9 +429,9 @@ ui:
     limits:
       cpu: 500m
       memory: 256Mi
-  ## @param ui.extraVolumes Additional volumes for the UI deployment
+  # -- Additional volumes for the UI deployment
   extraVolumes: []
-  ## @param ui.extraVolumeMounts Additional volume mounts for the UI deployment
+  # -- Additional volume mounts for the UI deployment
   extraVolumeMounts: []
 
 extraObjects: []
