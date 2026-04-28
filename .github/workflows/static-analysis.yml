@@ -20,6 +20,24 @@ jobs:
       uses: wagoid/commitlint-github-action@b948419dd99f3fd78a6548d48f94e3df7f6bf3ed # v6.2.1
       with:
         configFile: .commitlintrc.yml
+  helm-docs-validation:
+    runs-on: ubuntu-24.04
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+    - name: Install helm-docs
+      run: |
+        go install github.com/norwoodj/helm-docs/cmd/helm-docs@v1.14.2
+        echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
+
+    - name: Validate ort-server README is up to date
+      run: |
+        helm-docs --chart-to-generate charts/ort-server --sort-values-order=file
+        if ! git diff --exit-code charts/ort-server/README.md; then
+          echo "The Helm chart docs are not up-to-date. See README.md for how to update them."
+          exit 1
+        fi
   renovate-validation:
     runs-on: ubuntu-24.04
     steps:
