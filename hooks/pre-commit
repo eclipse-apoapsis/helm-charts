@@ -1,0 +1,6 @@
+#!/bin/sh
+set -e
+
+helm-docs --chart-to-generate charts/ort-server --sort-values-order=file
+
+git add charts/*/README.md
