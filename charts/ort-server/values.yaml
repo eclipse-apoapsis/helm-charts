@@ -151,14 +151,8 @@ storage:
 
 transport:
   queues:
-    advisor: advisor
-    analyzer: analyzer
-    core: core
-    evaluator: evaluator
     # -- Name of the queue used to send messages to the orchestrator deployment.
     orchestrator: orchestrator
-    reporter: reporter
-    scanner: scanner
   kubernetes:
     # -- The image pull policy to use for the worker pods. Must be one of "Always", "IfNotPresent", or "Never".
     imagePullPolicy: Always
@@ -322,7 +316,6 @@ core:
     jwtAudience: ort-server
     # -- The realm to use for token validation.
     jwtRealm: ort-server
-    jwtRoleCacheLifetime: 60
     # -- The URL of the Keycloak server's token endpoint for obtaining access tokens to call the Keycloak API.
     accessTokenUrl: https://keycloak.ortserver.org/realms/master/protocol/openid-connect/token
     # -- The URL of the Keycloak server's admin API endpoint.
@@ -333,7 +326,6 @@ core:
     apiSecret: ort-server
     # -- The client ID to use for authenticating to the Keycloak admin API.
     clientId: admin-cli
-    subjectClientId: ort-server
   livenessProbe:
     # -- Enable livenessProbe for the core deployment
     enabled: true

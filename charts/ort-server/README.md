@@ -74,13 +74,7 @@ A generic Helm chart for the ORT Server.
 | storage.s3.prefixes.fileArchives | string | `""` | An optional prefix to use for storing file archives in the S3 bucket. Required when sharing the bucket with file lists or reports to avoid name collisions. |
 | storage.s3.prefixes.fileLists | string | `""` | An optional prefix to use for storing file lists in the S3 bucket. Required when sharing the bucket with file archives or reports to avoid name collisions. |
 | storage.s3.prefixes.reports | string | `""` | An optional prefix to use for storing reports in the S3 bucket. Required when sharing the bucket with file archives or file lists to avoid name collisions. |
-| transport.queues.advisor | string | `"advisor"` |  |
-| transport.queues.analyzer | string | `"analyzer"` |  |
-| transport.queues.core | string | `"core"` |  |
-| transport.queues.evaluator | string | `"evaluator"` |  |
 | transport.queues.orchestrator | string | `"orchestrator"` | Name of the queue used to send messages to the orchestrator deployment. |
-| transport.queues.reporter | string | `"reporter"` |  |
-| transport.queues.scanner | string | `"scanner"` |  |
 | transport.kubernetes.imagePullPolicy | string | `"Always"` | The image pull policy to use for the worker pods. Must be one of "Always", "IfNotPresent", or "Never". |
 | transport.kubernetes.backoffLimit | int | `0` | The backoff limit for the worker pods. This is the number of retries before marking a job as failed. |
 | transport.kubernetes.restartPolicy | string | `"Never"` | The restart policy for the worker pods. Must be one of "Always", "OnFailure", or "Never". Should usually not be changed as failing worker jobs are handled by the orchestrator. |
@@ -137,13 +131,11 @@ A generic Helm chart for the ORT Server.
 | core.keycloak.jwtIssuer | string | `"https://keycloak.ortserver.org/realms/master"` | The expected issuer claim in the JWTs. |
 | core.keycloak.jwtAudience | string | `"ort-server"` | The expected audience claim in the JWTs. |
 | core.keycloak.jwtRealm | string | `"ort-server"` | The realm to use for token validation. |
-| core.keycloak.jwtRoleCacheLifetime | int | `60` |  |
 | core.keycloak.accessTokenUrl | string | `"https://keycloak.ortserver.org/realms/master/protocol/openid-connect/token"` | The URL of the Keycloak server's token endpoint for obtaining access tokens to call the Keycloak API. |
 | core.keycloak.apiUrl | string | `"https://keycloak.ortserver.org/admin/realms/master"` | The URL of the Keycloak server's admin API endpoint. |
 | core.keycloak.apiUser | string | `"ort-server"` | The username to use for authenticating to the Keycloak admin API. Set to an empty string when using the client credentials flow. |
 | core.keycloak.apiSecret | string | `"ort-server"` | The password to use for authenticating to the Keycloak admin API. |
 | core.keycloak.clientId | string | `"admin-cli"` | The client ID to use for authenticating to the Keycloak admin API. |
-| core.keycloak.subjectClientId | string | `"ort-server"` |  |
 | core.livenessProbe.enabled | bool | `true` | Enable livenessProbe for the core deployment |
 | core.livenessProbe.initialDelaySeconds | int | `60` | Initial delay before the liveness probe is initiated |
 | core.livenessProbe.periodSeconds | int | `10` | Period between liveness probe checks |
