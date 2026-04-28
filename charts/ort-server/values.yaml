@@ -13,16 +13,27 @@ podLabels: {}
 
 configFileProvider:
   gitConfig:
+    # -- If enabled, the Git configuration is provided via a Git repository.
     enabled: true
+    # -- The URL of the Git repository to use for providing the configuration. The repository must be publicly accessible or references to
+    # config secrets containing the credentials must be added to the URL, for example:
+    # https://usernameSecret:tokenSecret@example.com/repo.git
     repositoryUrl: https://github.com/mnonnenmacher/ort-server-config.git
 
 database:
+  # -- The database host to connect to.
   host: ort-server-db.postgres.database.azure.com
+  # -- The database port to connect to.
   port: 5432
+  # -- The name of the database to connect to.
   name: ort-server
+  # -- The database schema to use.
   schema: ort-server
+  # -- The username to use for connecting to the database.
   username: ort-server
+  # -- The password to use for connecting to the database.
   password: ort-server
+  # -- The SSL mode to use for connecting to the database. Must be one of "disable", "require", "verify-ca", or "verify-full".
   sslMode: require
 
 secrets:
@@ -144,12 +155,17 @@ transport:
     analyzer: analyzer
     core: core
     evaluator: evaluator
+    # -- Name of the queue used to send messages to the orchestrator deployment.
     orchestrator: orchestrator
     reporter: reporter
     scanner: scanner
   kubernetes:
+    # -- The image pull policy to use for the worker pods. Must be one of "Always", "IfNotPresent", or "Never".
     imagePullPolicy: Always
+    # -- The backoff limit for the worker pods. This is the number of retries before marking a job as failed.
     backoffLimit: 0
+    # -- The restart policy for the worker pods. Must be one of "Always", "OnFailure", or "Never". Should usually not be changed as failing
+    # worker jobs are handled by the orchestrator.
     restartPolicy: Never
     # -- The user ID to run the worker containers as.
     userId: 1000
@@ -280,25 +296,42 @@ transport:
       # the Secret to mount.
       mountSecrets: ""
   rabbitmq:
+    # -- If enabled, RabbitMQ is used as the message broker.
     enabled: true
+    # -- The URI of the RabbitMQ server to connect to when using RabbitMQ as the message broker. Must be in the format
+    # amqp://username:password@host:port/vhost.
     serverUri: ""
+    # -- The username to use for connecting to the RabbitMQ server.
     username: ""
+    # -- The password to use for connecting to the RabbitMQ server.
     password: ""
 
 core:
+  # -- Comma-separated list of hosts that are allowed for cross-origin request sharing (CORS) when accessing the API. This should usually
+  # include the host of the UI deployment.
   uiHosts: localhost:5173,localhost:8082
   service:
+    # -- The port to use for the core service (API).
     port: 8081
   keycloak:
+    # -- The URI of the Keycloak server's JWKS endpoint for validating JWTs.
     jwtUri: https://keycloak.ortserver.org/realms/master/protocol/openid-connect/certs
+    # -- The expected issuer claim in the JWTs.
     jwtIssuer: https://keycloak.ortserver.org/realms/master
+    # -- The expected audience claim in the JWTs.
     jwtAudience: ort-server
+    # -- The realm to use for token validation.
     jwtRealm: ort-server
     jwtRoleCacheLifetime: 60
+    # -- The URL of the Keycloak server's token endpoint for obtaining access tokens to call the Keycloak API.
     accessTokenUrl: https://keycloak.ortserver.org/realms/master/protocol/openid-connect/token
+    # -- The URL of the Keycloak server's admin API endpoint.
     apiUrl: https://keycloak.ortserver.org/admin/realms/master
+    # -- The username to use for authenticating to the Keycloak admin API. Set to an empty string when using the client credentials flow.
     apiUser: ort-server
+    # -- The password to use for authenticating to the Keycloak admin API.
     apiSecret: ort-server
+    # -- The client ID to use for authenticating to the Keycloak admin API.
     clientId: admin-cli
     subjectClientId: ort-server
   livenessProbe:

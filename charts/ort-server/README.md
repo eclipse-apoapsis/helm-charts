@@ -18,15 +18,15 @@ A generic Helm chart for the ORT Server.
 | fullnameOverride | string | `""` | String to fully override ortserver.fullname |
 | commonLabels | object | `{}` | Map of labels to add to all deployed objects |
 | podLabels | object | `{}` | Map of labels to add to all pods |
-| configFileProvider.gitConfig.enabled | bool | `true` |  |
-| configFileProvider.gitConfig.repositoryUrl | string | `"https://github.com/mnonnenmacher/ort-server-config.git"` |  |
-| database.host | string | `"ort-server-db.postgres.database.azure.com"` |  |
-| database.port | int | `5432` |  |
-| database.name | string | `"ort-server"` |  |
-| database.schema | string | `"ort-server"` |  |
-| database.username | string | `"ort-server"` |  |
-| database.password | string | `"ort-server"` |  |
-| database.sslMode | string | `"require"` |  |
+| configFileProvider.gitConfig.enabled | bool | `true` | If enabled, the Git configuration is provided via a Git repository. |
+| configFileProvider.gitConfig.repositoryUrl | string | `"https://github.com/mnonnenmacher/ort-server-config.git"` | The URL of the Git repository to use for providing the configuration. The repository must be publicly accessible or references to config secrets containing the credentials must be added to the URL, for example: https://usernameSecret:tokenSecret@example.com/repo.git |
+| database.host | string | `"ort-server-db.postgres.database.azure.com"` | The database host to connect to. |
+| database.port | int | `5432` | The database port to connect to. |
+| database.name | string | `"ort-server"` | The name of the database to connect to. |
+| database.schema | string | `"ort-server"` | The database schema to use. |
+| database.username | string | `"ort-server"` | The username to use for connecting to the database. |
+| database.password | string | `"ort-server"` | The password to use for connecting to the database. |
+| database.sslMode | string | `"require"` | The SSL mode to use for connecting to the database. Must be one of "disable", "require", "verify-ca", or "verify-full". |
 | secrets.azureKeyVault.enabled | bool | `false` | If enabled, user secrets are stored in Azure Key Vault. |
 | secrets.azureKeyVault.keyVaultName | string | `""` | The name of the Azure Key Vault to use. |
 | secrets.database.enabled | bool | `false` | If enabled, database credentials are stored in the database. |
@@ -78,12 +78,12 @@ A generic Helm chart for the ORT Server.
 | transport.queues.analyzer | string | `"analyzer"` |  |
 | transport.queues.core | string | `"core"` |  |
 | transport.queues.evaluator | string | `"evaluator"` |  |
-| transport.queues.orchestrator | string | `"orchestrator"` |  |
+| transport.queues.orchestrator | string | `"orchestrator"` | Name of the queue used to send messages to the orchestrator deployment. |
 | transport.queues.reporter | string | `"reporter"` |  |
 | transport.queues.scanner | string | `"scanner"` |  |
-| transport.kubernetes.imagePullPolicy | string | `"Always"` |  |
-| transport.kubernetes.backoffLimit | int | `0` |  |
-| transport.kubernetes.restartPolicy | string | `"Never"` |  |
+| transport.kubernetes.imagePullPolicy | string | `"Always"` | The image pull policy to use for the worker pods. Must be one of "Always", "IfNotPresent", or "Never". |
+| transport.kubernetes.backoffLimit | int | `0` | The backoff limit for the worker pods. This is the number of retries before marking a job as failed. |
+| transport.kubernetes.restartPolicy | string | `"Never"` | The restart policy for the worker pods. Must be one of "Always", "OnFailure", or "Never". Should usually not be changed as failing worker jobs are handled by the orchestrator. |
 | transport.kubernetes.userId | int | `1000` | The user ID to run the worker containers as. |
 | transport.kubernetes.advisor.cpuRequest | string | `""` | CPU request for advisor worker pods. If not set, no CPU request is defined. |
 | transport.kubernetes.advisor.cpuLimit | string | `""` | CPU limit for advisor worker pods. If not set, no CPU limit is defined. |
@@ -127,22 +127,22 @@ A generic Helm chart for the ORT Server.
 | transport.kubernetes.scanner.mountEmptyDirs | string | `""` | EmptyDir volumes to mount into the scanner worker pods. Each entry must be in the format "name->path", where "name" is the name of the EmptyDir volume and "path" is the path inside the container to mount the volume to. Multiple entries must be separated by whitespace. |
 | transport.kubernetes.scanner.mountPvcs | string | `""` | PVCs to mount into the scanner worker pods. Each entry must be in the format "pvcName->path,access", where "pvcName" is the name of the PVC to mount, "path" is the path inside the container to mount the PVC to, and "access" is either "R" for read-only or "W" for read-write access. Multiple entries must be separated by whitespace. |
 | transport.kubernetes.scanner.mountSecrets | string | `""` | Secrets to mount into the scanner worker pods. Each entry must be in the format "secret->path|subPath", where "secret" is the name of the Secret to mount, "path" is the path inside the container to mount the Secret to, and "subPath" is an optional subPath of the Secret to mount. |
-| transport.rabbitmq.enabled | bool | `true` |  |
-| transport.rabbitmq.serverUri | string | `""` |  |
-| transport.rabbitmq.username | string | `""` |  |
-| transport.rabbitmq.password | string | `""` |  |
-| core.uiHosts | string | `"localhost:5173,localhost:8082"` |  |
-| core.service.port | int | `8081` |  |
-| core.keycloak.jwtUri | string | `"https://keycloak.ortserver.org/realms/master/protocol/openid-connect/certs"` |  |
-| core.keycloak.jwtIssuer | string | `"https://keycloak.ortserver.org/realms/master"` |  |
-| core.keycloak.jwtAudience | string | `"ort-server"` |  |
-| core.keycloak.jwtRealm | string | `"ort-server"` |  |
+| transport.rabbitmq.enabled | bool | `true` | If enabled, RabbitMQ is used as the message broker. |
+| transport.rabbitmq.serverUri | string | `""` | The URI of the RabbitMQ server to connect to when using RabbitMQ as the message broker. Must be in the format amqp://username:password@host:port/vhost. |
+| transport.rabbitmq.username | string | `""` | The username to use for connecting to the RabbitMQ server. |
+| transport.rabbitmq.password | string | `""` | The password to use for connecting to the RabbitMQ server. |
+| core.uiHosts | string | `"localhost:5173,localhost:8082"` | Comma-separated list of hosts that are allowed for cross-origin request sharing (CORS) when accessing the API. This should usually include the host of the UI deployment. |
+| core.service.port | int | `8081` | The port to use for the core service (API). |
+| core.keycloak.jwtUri | string | `"https://keycloak.ortserver.org/realms/master/protocol/openid-connect/certs"` | The URI of the Keycloak server's JWKS endpoint for validating JWTs. |
+| core.keycloak.jwtIssuer | string | `"https://keycloak.ortserver.org/realms/master"` | The expected issuer claim in the JWTs. |
+| core.keycloak.jwtAudience | string | `"ort-server"` | The expected audience claim in the JWTs. |
+| core.keycloak.jwtRealm | string | `"ort-server"` | The realm to use for token validation. |
 | core.keycloak.jwtRoleCacheLifetime | int | `60` |  |
-| core.keycloak.accessTokenUrl | string | `"https://keycloak.ortserver.org/realms/master/protocol/openid-connect/token"` |  |
-| core.keycloak.apiUrl | string | `"https://keycloak.ortserver.org/admin/realms/master"` |  |
-| core.keycloak.apiUser | string | `"ort-server"` |  |
-| core.keycloak.apiSecret | string | `"ort-server"` |  |
-| core.keycloak.clientId | string | `"admin-cli"` |  |
+| core.keycloak.accessTokenUrl | string | `"https://keycloak.ortserver.org/realms/master/protocol/openid-connect/token"` | The URL of the Keycloak server's token endpoint for obtaining access tokens to call the Keycloak API. |
+| core.keycloak.apiUrl | string | `"https://keycloak.ortserver.org/admin/realms/master"` | The URL of the Keycloak server's admin API endpoint. |
+| core.keycloak.apiUser | string | `"ort-server"` | The username to use for authenticating to the Keycloak admin API. Set to an empty string when using the client credentials flow. |
+| core.keycloak.apiSecret | string | `"ort-server"` | The password to use for authenticating to the Keycloak admin API. |
+| core.keycloak.clientId | string | `"admin-cli"` | The client ID to use for authenticating to the Keycloak admin API. |
 | core.keycloak.subjectClientId | string | `"ort-server"` |  |
 | core.livenessProbe.enabled | bool | `true` | Enable livenessProbe for the core deployment |
 | core.livenessProbe.initialDelaySeconds | int | `60` | Initial delay before the liveness probe is initiated |
