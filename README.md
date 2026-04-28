@@ -12,3 +12,9 @@ To regenerate the chart `README.md` files manually, run:
 ```shell
 helm-docs --chart-to-generate charts/ort-server --sort-values-order=file
 ```
+
+To do this automatically on every commit, run this once after cloning:
+
+```shell
+git config core.hooksPath hooks
+```
