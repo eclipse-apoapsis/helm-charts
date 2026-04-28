@@ -1,6 +1,8 @@
 # ort-server
 
-![Version: 0.15.0](https://img.shields.io/badge/Version-0.15.0-informational?style=flat-square) <!-- x-release-please-version -->
+<!-- x-release-please-start-version -->
+![Version: 0.15.0](https://img.shields.io/badge/Version-0.15.0-informational?style=flat-square)
+<!-- x-release-please-end -->
 ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 ![AppVersion: 0.61.0](https://img.shields.io/badge/AppVersion-0.61.0-informational?style=flat-square)
 
