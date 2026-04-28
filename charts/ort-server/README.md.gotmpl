@@ -2,7 +2,7 @@
 {{ template "chart.deprecationWarning" . }}
 
 <!-- x-release-please-start-version -->
-![Version: {{ template "chart.version" . }}](https://img.shields.io/badge/Version-{{ template "chart.version" . }}-informational?style=flat-square)
+![Version: {{ template "chart.version" . }}][version-badge]
 <!-- x-release-please-end -->
 {{ template "chart.typeBadge" . }}
 {{ template "chart.appVersionBadge" . }}
@@ -18,3 +18,7 @@
 {{ template "chart.requirementsSection" . }}
 
 {{ template "chart.valuesSection" . }}
+
+<!-- x-release-please-start-version -->
+[version-badge]: https://img.shields.io/badge/Version-{{ template "chart.version" . }}-informational?style=flat-square
+<!-- x-release-please-end -->
