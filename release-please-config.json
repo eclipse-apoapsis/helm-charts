@@ -8,6 +8,12 @@
       "always-update": true,
       "bump-minor-pre-major": true,
       "pull-request-header": "Create a release for the ORT Server Helm chart",
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "README.md"
+        }
+      ],
       "changelog-sections": [
         { "type": "feat", "section": "Features" },
         { "type": "fix", "section": "Bug Fixes" },
