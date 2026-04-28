@@ -1,7 +1,7 @@
 # ort-server
 
 <!-- x-release-please-start-version -->
-![Version: 0.15.0](https://img.shields.io/badge/Version-0.15.0-informational?style=flat-square)
+![Version: 0.15.0][version-badge]
 <!-- x-release-please-end -->
 ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 ![AppVersion: 0.61.0](https://img.shields.io/badge/AppVersion-0.61.0-informational?style=flat-square)
@@ -196,3 +196,7 @@ A generic Helm chart for the ORT Server.
 | ui.extraVolumes | list | `[]` | Additional volumes for the UI deployment |
 | ui.extraVolumeMounts | list | `[]` | Additional volume mounts for the UI deployment |
 | extraObjects | list | `[]` |  |
+
+<!-- x-release-please-start-version -->
+[version-badge]: https://img.shields.io/badge/Version-0.15.0-informational?style=flat-square
+<!-- x-release-please-end -->
