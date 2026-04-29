@@ -198,5 +198,5 @@ A generic Helm chart for the ORT Server.
 | extraObjects | list | `[]` |  |
 
 <!-- x-release-please-start-version -->
-[version-badge]: https://img.shields.io/badge/Version-0.15.0-informational?style=flat-square
+[version-badge]: https://img.shields.io/badge/Version-0.15.0%2Dinformational?style=flat-square
 <!-- x-release-please-end -->
