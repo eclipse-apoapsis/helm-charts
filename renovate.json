@@ -10,6 +10,16 @@
       "matchStrings": ["appVersion:\\s*\"?(?<currentValue>[^\"\\s]+)\"?"],
       "depNameTemplate": "eclipse-apoapsis/ort-server",
       "datasourceTemplate": "github-releases"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": ["^charts/ort-server/README\\.md$"],
+      "matchStrings": [
+        "!\\[AppVersion: (?<currentValue>[^\\]]+)\\]",
+        "badge/AppVersion-(?<currentValue>[^-]+)-informational"
+      ],
+      "depNameTemplate": "eclipse-apoapsis/ort-server",
+      "datasourceTemplate": "github-releases"
     }
   ]
 }
