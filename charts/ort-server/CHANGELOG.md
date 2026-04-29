@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.15.1](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.15.0...ort-server-v0.15.1) (2026-04-29)
+
+
+### Bug Fixes
+
+* **release-please:** URL encode the dash after the version ([7483add](https://github.com/eclipse-apoapsis/helm-charts/commit/7483add30f237b9473cb47a754e355ca75c75881))
+
+
+### Dependencies
+
+* update dependency eclipse-apoapsis/ort-server to v0.63.0 ([061e5a2](https://github.com/eclipse-apoapsis/helm-charts/commit/061e5a2fc37eec641e6327e279a150fb749c6217))
+
+
+### Documentation
+
+* Add most of the missing docs for config options ([a622187](https://github.com/eclipse-apoapsis/helm-charts/commit/a6221878f1a5237f6581ae025ce429cf2d8dd3ff))
+* Generate docs for ort-server using helm-docs ([6e99115](https://github.com/eclipse-apoapsis/helm-charts/commit/6e9911553a2b53368f86ab3ef2dfe72669196ee7))
+* Show badges on a single line again ([5fe7044](https://github.com/eclipse-apoapsis/helm-charts/commit/5fe70448832dff64aa484c01d45da49308017c70))
+
 ## [0.15.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.14.0...ort-server-v0.15.0) (2026-04-27)
 
 
