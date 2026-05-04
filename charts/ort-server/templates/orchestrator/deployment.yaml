@@ -113,11 +113,11 @@ spec:
               value: {{ .Values.transport.kubernetes.restartPolicy }}
             {{- if .Values.transport.kubernetes.advisor.cpuRequest }}
             - name: ADVISOR_SENDER_TRANSPORT_CPU_REQUEST
-              value: {{ .Values.transport.kubernetes.advisor.cpuRequest }}
+              value: "{{ .Values.transport.kubernetes.advisor.cpuRequest }}"
             {{- end }}
             {{- if .Values.transport.kubernetes.advisor.cpuLimit }}
             - name: ADVISOR_SENDER_TRANSPORT_CPU_LIMIT
-              value: {{ .Values.transport.kubernetes.advisor.cpuLimit }}
+              value: "{{ .Values.transport.kubernetes.advisor.cpuLimit }}"
             {{- end }}
             - name: ADVISOR_SENDER_TRANSPORT_MEMORY_REQUEST
               value: {{ .Values.transport.kubernetes.advisor.memoryRequest }}
@@ -168,11 +168,11 @@ spec:
               value: {{ .Values.transport.kubernetes.restartPolicy }}
             {{- if .Values.transport.kubernetes.analyzer.cpuRequest }}
             - name: ANALYZER_SENDER_TRANSPORT_CPU_REQUEST
-              value: {{ .Values.transport.kubernetes.analyzer.cpuRequest }}
+              value: "{{ .Values.transport.kubernetes.analyzer.cpuRequest }}"
             {{- end }}
             {{- if .Values.transport.kubernetes.analyzer.cpuLimit }}
             - name: ANALYZER_SENDER_TRANSPORT_CPU_LIMIT
-              value: {{ .Values.transport.kubernetes.analyzer.cpuLimit }}
+              value: "{{ .Values.transport.kubernetes.analyzer.cpuLimit }}"
             {{- end }}
             - name: ANALYZER_SENDER_TRANSPORT_MEMORY_REQUEST
               value: {{ .Values.transport.kubernetes.analyzer.memoryRequest }}
@@ -223,11 +223,11 @@ spec:
               value: {{ .Values.transport.kubernetes.restartPolicy }}
             {{- if .Values.transport.kubernetes.config.cpuRequest }}
             - name: CONFIG_SENDER_TRANSPORT_CPU_REQUEST
-              value: {{ .Values.transport.kubernetes.config.cpuRequest }}
+              value: "{{ .Values.transport.kubernetes.config.cpuRequest }}"
             {{- end }}
             {{- if .Values.transport.kubernetes.config.cpuLimit }}
             - name: CONFIG_SENDER_TRANSPORT_CPU_LIMIT
-              value: {{ .Values.transport.kubernetes.config.cpuLimit }}
+              value: "{{ .Values.transport.kubernetes.config.cpuLimit }}"
             {{- end }}
             - name: CONFIG_SENDER_TRANSPORT_MEMORY_REQUEST
               value: {{ .Values.transport.kubernetes.config.memoryRequest }}
@@ -278,11 +278,11 @@ spec:
               value: {{ .Values.transport.kubernetes.restartPolicy }}
             {{- if .Values.transport.kubernetes.evaluator.cpuRequest }}
             - name: EVALUATOR_SENDER_TRANSPORT_CPU_REQUEST
-              value: {{ .Values.transport.kubernetes.evaluator.cpuRequest }}
+              value: "{{ .Values.transport.kubernetes.evaluator.cpuRequest }}"
             {{- end }}
             {{- if .Values.transport.kubernetes.evaluator.cpuLimit }}
             - name: EVALUATOR_SENDER_TRANSPORT_CPU_LIMIT
-              value: {{ .Values.transport.kubernetes.evaluator.cpuLimit }}
+              value: "{{ .Values.transport.kubernetes.evaluator.cpuLimit }}"
             {{- end }}
             - name: EVALUATOR_SENDER_TRANSPORT_MEMORY_REQUEST
               value: {{ .Values.transport.kubernetes.evaluator.memoryRequest }}
@@ -333,11 +333,11 @@ spec:
               value: {{ .Values.transport.kubernetes.restartPolicy }}
             {{- if .Values.transport.kubernetes.reporter.cpuRequest }}
             - name: REPORTER_SENDER_TRANSPORT_CPU_REQUEST
-              value: {{ .Values.transport.kubernetes.reporter.cpuRequest }}
+              value: "{{ .Values.transport.kubernetes.reporter.cpuRequest }}"
             {{- end }}
             {{- if .Values.transport.kubernetes.reporter.cpuLimit }}
             - name: REPORTER_SENDER_TRANSPORT_CPU_LIMIT
-              value: {{ .Values.transport.kubernetes.reporter.cpuLimit }}
+              value: "{{ .Values.transport.kubernetes.reporter.cpuLimit }}"
             {{- end }}
             - name: REPORTER_SENDER_TRANSPORT_MEMORY_REQUEST
               value: {{ .Values.transport.kubernetes.reporter.memoryRequest }}
@@ -388,11 +388,11 @@ spec:
               value: {{ .Values.transport.kubernetes.restartPolicy }}
             {{- if .Values.transport.kubernetes.scanner.cpuRequest }}
             - name: SCANNER_SENDER_TRANSPORT_CPU_REQUEST
-              value: {{ .Values.transport.kubernetes.scanner.cpuRequest }}
+              value: "{{ .Values.transport.kubernetes.scanner.cpuRequest }}"
             {{- end }}
             {{- if .Values.transport.kubernetes.scanner.cpuLimit }}
             - name: SCANNER_SENDER_TRANSPORT_CPU_LIMIT
-              value: {{ .Values.transport.kubernetes.scanner.cpuLimit }}
+              value: "{{ .Values.transport.kubernetes.scanner.cpuLimit }}"
             {{- end }}
             - name: SCANNER_SENDER_TRANSPORT_MEMORY_REQUEST
               value: {{ .Values.transport.kubernetes.scanner.memoryRequest }}
