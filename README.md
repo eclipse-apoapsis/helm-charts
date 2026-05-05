@@ -29,7 +29,7 @@ kind create cluster --config charts/dev-stack/kind-cluster.yaml
 
 ```shell
 helm dependency update charts/dev-stack
-helm install ort-server-dev charts/dev-stack
+helm install dev charts/dev-stack
 ```
 
 ## Contributing
