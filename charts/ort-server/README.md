@@ -1,6 +1,6 @@
 # ort-server
 
-![Version: 0.15.1][version-badge] <!-- x-release-please-version -->
+![Version: 0.16.0][version-badge] <!-- x-release-please-version -->
 ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 ![AppVersion: 0.64.0](https://img.shields.io/badge/AppVersion-0.64.0-informational?style=flat-square)
 
@@ -197,5 +197,5 @@ A generic Helm chart for the ORT Server.
 | extraObjects | list | `[]` |  |
 
 <!-- x-release-please-start-version -->
-[version-badge]: https://img.shields.io/badge/Version-0.15.1%2Dinformational?style=flat-square
+[version-badge]: https://img.shields.io/badge/Version-0.16.0%2Dinformational?style=flat-square
 <!-- x-release-please-end -->
