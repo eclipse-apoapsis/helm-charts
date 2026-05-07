@@ -131,6 +131,9 @@ storage:
     secretKey: ""
     # -- The optional region of the S3-compatible object storage.
     region: ""
+    # -- If true, the S3 client will add the bucket name to the path instead of using it as a subdomain. This is required for some S3
+    # compatible storages.
+    forcePathStyle: false
     buckets:
       # -- The name of the S3 bucket to use for storing file archives.
       fileArchives: file-archives
