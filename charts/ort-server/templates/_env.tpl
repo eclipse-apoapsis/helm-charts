@@ -122,6 +122,10 @@ properties have environment variable substitutions configured.
 - name: FILE_ARCHIVE_STORAGE_REGION
   value: {{ .Values.storage.s3.region | quote }}
 {{- end }}
+{{- if .Values.storage.s3.forcePathStyle }}
+- name: FILE_ARCHIVE_STORAGE_FORCE_PATH_STYLE
+  value: "{{ .Values.storage.s3.forcePathStyle }}"
+{{- end }}
 - name: FILE_ARCHIVE_STORAGE_BUCKET_NAME
   value: {{ .Values.storage.s3.buckets.fileArchives | quote }}
 {{- if .Values.storage.s3.prefixes.fileArchives }}
@@ -165,6 +169,10 @@ properties have environment variable substitutions configured.
 {{- if .Values.storage.s3.region }}
 - name: FILE_LIST_STORAGE_REGION
   value: {{ .Values.storage.s3.region | quote }}
+{{- end }}
+{{- if .Values.storage.s3.forcePathStyle }}
+- name: FILE_LIST_STORAGE_FORCE_PATH_STYLE
+  value: "{{ .Values.storage.s3.forcePathStyle }}"
 {{- end }}
 - name: FILE_LIST_STORAGE_BUCKET_NAME
   value: {{ .Values.storage.s3.buckets.fileLists | quote }}
@@ -215,6 +223,11 @@ properties have environment variable substitutions configured.
 {{- if .Values.storage.s3.prefixes.reports }}
 - name: REPORT_STORAGE_KEY_PREFIX
   value: {{ .Values.storage.s3.prefixes.reports | quote }}
+{{- end }}
+{{- if .Values.storage.s3.forcePathStyle }}
+- name: REPORT_STORAGE_FORCE_PATH_STYLE
+  value: "{{ .Values.storage.s3.forcePathStyle }}"
+{{- end }}
 {{- end }}
 {{- end }}
 {{- end -}}

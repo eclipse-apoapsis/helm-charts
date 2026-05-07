@@ -66,6 +66,7 @@ A generic Helm chart for the ORT Server.
 | storage.s3.accessKey | string | `""` | The access key to use. |
 | storage.s3.secretKey | string | `""` | The secret key to use. |
 | storage.s3.region | string | `""` | The optional region of the S3-compatible object storage. |
+| storage.s3.forcePathStyle | bool | `false` | If true, the S3 client will add the bucket name to the path instead of using it as a subdomain. This is required for some S3 compatible storages. |
 | storage.s3.buckets.fileArchives | string | `"file-archives"` | The name of the S3 bucket to use for storing file archives. |
 | storage.s3.buckets.fileLists | string | `"file-lists"` | The name of the S3 bucket to use for storing file lists. |
 | storage.s3.buckets.reports | string | `"reports"` | The name of the S3 bucket to use for storing reports. |
