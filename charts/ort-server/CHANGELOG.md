@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.16.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.15.1...ort-server-v0.16.0) (2026-05-07)
+
+
+### Features
+
+* Support the new `forcePathStyle` option for S3 ([c2f0cdd](https://github.com/eclipse-apoapsis/helm-charts/commit/c2f0cdd599b512c527dc429478136b16683d8315))
+
+
+### Bug Fixes
+
+* custom cpu request/limit for workers ([738bac2](https://github.com/eclipse-apoapsis/helm-charts/commit/738bac2c3c6cb6056003048eea22919843712a1f))
+
+
+### Dependencies
+
+* update dependency eclipse-apoapsis/ort-server to v0.64.0 ([d6580b0](https://github.com/eclipse-apoapsis/helm-charts/commit/d6580b05aa595fcf05fa1fe1a75a0b666837b350))
+
 ## [0.15.1](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.15.0...ort-server-v0.15.1) (2026-04-29)
 
 
