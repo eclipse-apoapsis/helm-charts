@@ -22,6 +22,13 @@ ort-server:
       apiSecret: ortserver-api-access
       clientId: api-access
       subjectClientId: ort-server
+    extraInitContainers:
+      - name: wait-for-keycloak
+        image: curlimages/curl:8.12.1
+        command:
+          - sh
+          - -c
+          - until curl -fsS http://dev-dev-keycloak:8080/realms/ort-server/.well-known/openid-configuration >/dev/null; do echo waiting for keycloak; sleep 2; done
     extraVolumes:
       - name: secrets
         persistentVolumeClaim:
