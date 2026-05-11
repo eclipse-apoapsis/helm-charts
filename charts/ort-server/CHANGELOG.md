@@ -1,12 +1,5 @@
 # Changelog
 
-## [0.16.1](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.16.0...ort-server-v0.16.1) (2026-05-11)
-
-
-### Bug Fixes
-
-* Remove an excess `end` ([2f0e884](https://github.com/eclipse-apoapsis/helm-charts/commit/2f0e8846620c6889436ffea35960a702389caaad))
-
 ## [0.16.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.15.1...ort-server-v0.16.0) (2026-05-07)
 
 
