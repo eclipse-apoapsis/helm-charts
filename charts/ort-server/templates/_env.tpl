@@ -229,5 +229,4 @@ properties have environment variable substitutions configured.
   value: "{{ .Values.storage.s3.forcePathStyle }}"
 {{- end }}
 {{- end }}
-{{- end }}
 {{- end -}}
