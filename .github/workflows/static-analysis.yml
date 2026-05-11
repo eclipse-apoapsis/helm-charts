@@ -38,6 +38,19 @@ jobs:
           echo "The Helm chart docs are not up-to-date. See README.md for how to update them."
           exit 1
         fi
+  helm-lint:
+    runs-on: ubuntu-24.04
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+    - name: Setup Helm
+      uses: azure/setup-helm@v5.0.0
+    - name: Lint dev-stack Helm Chart
+      run: |
+        helm dependency update charts/dev-stack
+        helm lint charts/dev-stack
+    - name: Lint ort-server Helm Chart
+      run: helm lint charts/ort-server
   renovate-validation:
     runs-on: ubuntu-24.04
     steps:
