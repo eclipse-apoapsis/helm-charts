@@ -7,6 +7,10 @@ metadata:
     {{- include "ortserver.labels" . | nindent 4 }}
 spec:
   replicas: 1
+  {{- with .Values.orchestrator.strategy }}
+  strategy:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
   selector:
     matchLabels:
       {{- include "ortserver.selectorLabels" . | nindent 6 }}
