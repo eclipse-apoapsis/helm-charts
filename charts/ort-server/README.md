@@ -124,6 +124,7 @@ A generic Helm chart for the ORT Server.
 | transport.rabbitmq.serverUri | string | `""` | The URI of the RabbitMQ server to connect to when using RabbitMQ as the message broker. Must be in the format amqp://username:password@host:port/vhost. |
 | transport.rabbitmq.username | string | `""` | The username to use for connecting to the RabbitMQ server. |
 | transport.rabbitmq.password | string | `""` | The password to use for connecting to the RabbitMQ server. |
+| core.strategy | object | `{"type":"RollingUpdate"}` | Deployment strategy for the core component |
 | core.uiHosts | string | `"localhost:5173,localhost:8082"` | Comma-separated list of hosts that are allowed for cross-origin request sharing (CORS) when accessing the API. This should usually include the host of the UI deployment. |
 | core.service.port | int | `8081` | The port to use for the core service (API). |
 | core.keycloak.jwtUri | string | `"https://keycloak.ortserver.org/realms/master/protocol/openid-connect/certs"` | The URI of the Keycloak server's JWKS endpoint for validating JWTs. |
@@ -148,6 +149,7 @@ A generic Helm chart for the ORT Server.
 | core.extraVolumeMounts | list | `[]` | Additional volume mounts for the core deployment |
 | core.extraEnv | list | `[]` | Additional environment variables for the core deployment |
 | core.extraInitContainers | list | `[]` | Additional init containers for the core deployment |
+| orchestrator.strategy | object | `{"type":"RollingUpdate"}` | Deployment strategy for the orchestrator component |
 | orchestrator.resources | object | `{"limits":{"cpu":1,"memory":"1Gi"},"requests":{"cpu":"100m","memory":"256Mi"}}` | CPU and memory requests and limits for the orchestrator deployment |
 | orchestrator.extraVolumes | list | `[]` | Additional volumes for the orchestrator deployment |
 | orchestrator.extraVolumeMounts | list | `[]` | Additional volume mounts for the orchestrator deployment |
@@ -187,6 +189,7 @@ A generic Helm chart for the ORT Server.
 | tasks.configs[4].name | string | `"kubernetes-lost-jobs-finder"` |  |
 | tasks.configs[4].schedule | string | `"*/2 * * * *"` |  |
 | tasks.configs[4].lostJobsMinAge | int | `30` |  |
+| ui.strategy | object | `{"type":"RollingUpdate"}` | Deployment strategy for the UI component |
 | ui.url | string | `""` |  |
 | ui.apiUrl | string | `""` |  |
 | ui.authority | string | `""` |  |

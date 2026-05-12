@@ -304,6 +304,9 @@ transport:
     password: ""
 
 core:
+  # -- Deployment strategy for the core component
+  strategy:
+    type: RollingUpdate
   # -- Comma-separated list of hosts that are allowed for cross-origin request sharing (CORS) when accessing the API. This should usually
   # include the host of the UI deployment.
   uiHosts: localhost:5173,localhost:8082
@@ -368,6 +371,9 @@ core:
   extraInitContainers: []
 
 orchestrator:
+  # -- Deployment strategy for the orchestrator component
+  strategy:
+    type: RollingUpdate
   # -- CPU and memory requests and limits for the orchestrator deployment
   resources:
     requests:
@@ -445,6 +451,9 @@ tasks:
       lostJobsMinAge: 30
 
 ui:
+  # -- Deployment strategy for the UI component
+  strategy:
+    type: RollingUpdate
   url: ""
   apiUrl: ""
   authority: ""
