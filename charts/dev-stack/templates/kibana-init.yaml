@@ -1,0 +1,102 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: dev-kibana-init
+  namespace: "{{ .Release.Namespace }}"
+  annotations:
+    "helm.sh/hook": post-install,post-upgrade
+    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
+spec:
+  template:
+    metadata:
+      name: dev-kibana-init
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: init-kibana
+          image: curlimages/curl:8.14.1
+          env:
+            - name: ELASTICSEARCH_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: dev-elasticsearch-es-elastic-user
+                  key: elastic
+          command:
+            - sh
+            - -ec
+            - |
+              kibana_url='http://dev-kibana-kb-http:5601'
+              auth_header="elastic:${ELASTICSEARCH_PASSWORD}"
+              data_view_id='ort-server-logs'
+              status_file="$(mktemp)"
+
+              wait_attempts=180
+              attempt=1
+              while [ "${attempt}" -le "${wait_attempts}" ]; do
+                status_code="$(curl --silent --show-error \
+                  --output "${status_file}" \
+                  --write-out '%{http_code}' \
+                  -u "${auth_header}" \
+                  "${kibana_url}/api/status" || true)"
+                status_body="$(tr -d '\n[:space:]' < "${status_file}")"
+
+                if [ "${status_code}" = "200" ] && echo "${status_body}" | grep -Eq '"overall":\{[^}]*"level":"available"'; then
+                  break
+                fi
+
+                attempt=$((attempt + 1))
+                sleep 5
+              done
+              rm -f "${status_file}"
+
+              if [ "${status_code}" != "200" ]; then
+                echo "Warning: Kibana did not become ready for data-view bootstrap, skipping." >&2
+                exit 0
+              elif ! echo "${status_body}" | grep -Eq '"overall":\{[^}]*"level":"available"'; then
+                echo "Warning: Kibana status API did not report overall availability in time, skipping." >&2
+                exit 0
+              fi
+
+              data_view_status="$(curl --silent --show-error \
+                --output /dev/null \
+                --write-out '%{http_code}' \
+                -u "${auth_header}" \
+                "${kibana_url}/api/data_views/data_view/${data_view_id}" || true)"
+
+              if [ "${data_view_status}" = "404" ]; then
+                curl --silent --show-error \
+                  -u "${auth_header}" \
+                  -X POST "${kibana_url}/api/data_views/data_view" \
+                  -H 'kbn-xsrf: true' \
+                  -H 'Content-Type: application/json' \
+                  -d '{"data_view":{"id":"ort-server-logs","name":"ORT Server Logs","title":"ort-server-logs-*","timeFieldName":"time","allowNoIndex":true}}' \
+                  >/dev/null || {
+                  echo "Warning: Failed to create Kibana data view, skipping." >&2
+                  exit 0
+                }
+              elif [ "${data_view_status}" = "200" ]; then
+                curl --silent --show-error \
+                  -u "${auth_header}" \
+                  -X POST "${kibana_url}/api/data_views/data_view/${data_view_id}" \
+                  -H 'kbn-xsrf: true' \
+                  -H 'Content-Type: application/json' \
+                  -d '{"data_view":{"name":"ORT Server Logs","title":"ort-server-logs-*","timeFieldName":"time","allowNoIndex":true}}' \
+                  >/dev/null || {
+                  echo "Warning: Failed to update Kibana data view, skipping." >&2
+                  exit 0
+                }
+              else
+                echo "Warning: Unexpected response while checking Kibana data view: ${data_view_status}" >&2
+                exit 0
+              fi
+
+              curl --silent --show-error \
+                -u "${auth_header}" \
+                -X POST "${kibana_url}/api/data_views/default" \
+                -H 'kbn-xsrf: true' \
+                -H 'Content-Type: application/json' \
+                -d '{"data_view_id":"ort-server-logs","force":true}' \
+                >/dev/null || {
+                echo "Warning: Failed to set the default Kibana data view, skipping." >&2
+                exit 0
+              }
