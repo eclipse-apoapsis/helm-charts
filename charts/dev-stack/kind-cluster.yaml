@@ -24,3 +24,11 @@ nodes:
       - containerPort: 31437
         hostPort: 8082
         protocol: TCP
+      # Elasticsearch
+      - containerPort: 31438
+        hostPort: 9200
+        protocol: TCP
+      # Kibana
+      - containerPort: 31439
+        hostPort: 5601
+        protocol: TCP

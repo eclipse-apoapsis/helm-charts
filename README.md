@@ -17,7 +17,7 @@ Chart releases are available via:
 ## ORT Server Dev Stack
 
 A Helm chart for spinning up a local ORT Server environment on [kind](https://kind.sigs.k8s.io/) (Kubernetes in Docker).
-It bundles ORT Server together with dependencies like PostgreSQL, RabbitMQ, and Keycloak.
+It bundles ORT Server together with dependencies like PostgreSQL, RabbitMQ, Keycloak, and an ECK-managed Elasticsearch, Kibana, and Logstash stack.
 
 **1. Create the kind cluster** using the provided configuration:
 
@@ -25,11 +25,22 @@ It bundles ORT Server together with dependencies like PostgreSQL, RabbitMQ, and 
 kind create cluster --config charts/dev-stack/kind-cluster.yaml
 ```
 
-**2. Install the chart:**
+**2. Install the Elastic Cloud on Kubernetes operator and CRDs:**
+
+```shell
+helm repo add elastic https://helm.elastic.co
+helm repo update
+helm install elastic-operator elastic/eck-operator -n elastic-system --create-namespace
+kubectl wait --for=condition=established crd/elasticsearches.elasticsearch.k8s.elastic.co --timeout=120s
+kubectl wait --for=condition=established crd/kibanas.kibana.k8s.elastic.co --timeout=120s
+kubectl wait --for=condition=established crd/logstashes.logstash.k8s.elastic.co --timeout=120s
+```
+
+**3. Install the chart:**
 
 ```shell
 helm dependency update charts/dev-stack
-helm install dev charts/dev-stack
+helm install dev charts/dev-stack --timeout 20m
 ```
 
 ## Contributing
