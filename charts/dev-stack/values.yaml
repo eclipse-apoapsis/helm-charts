@@ -13,6 +13,9 @@ ort-server:
       username: ortserver
       password: ortpassword
   core:
+    podSecurityContext:
+      supplementalGroups:
+        - 0
     keycloak:
       jwtUri: http://dev-dev-keycloak:8080/realms/ort-server/protocol/openid-connect/certs
       jwtIssuer: http://localhost:8080/realms/ort-server
@@ -33,9 +36,37 @@ ort-server:
       - name: secrets
         persistentVolumeClaim:
           claimName: secrets-pvc
+      - name: elasticsearch-certs
+        secret:
+          secretName: dev-elasticsearch-es-http-certs-public
     extraVolumeMounts:
       - name: secrets
         mountPath: /mnt/secrets
+      - name: elasticsearch-certs
+        mountPath: /mnt/elasticsearch-certs
+        readOnly: true
+    certificates:
+      path: /mnt/elasticsearch-certs/
+    extraEnv:
+      - name: LOG_FILE_PROVIDER_NAME
+        value: elasticsearch
+      - name: ELASTICSEARCH_SERVER_URL
+        value: https://dev-elasticsearch-es-http:9200
+      - name: ELASTICSEARCH_INDEX
+        value: ort-server-logs-*
+      - name: ELASTICSEARCH_NAMESPACE
+        valueFrom:
+          fieldRef:
+            fieldPath: metadata.namespace
+      - name: ELASTICSEARCH_PAGE_SIZE
+        value: "1000"
+      - name: ELASTICSEARCH_USERNAME
+        value: elastic
+      - name: ELASTICSEARCH_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: dev-elasticsearch-es-elastic-user
+            key: elastic
   advisor:
     mountPvcs: secrets-pvc->/mnt/secrets,r
   analyzer:
@@ -146,6 +177,263 @@ dev-postgres:
             port: 5432
             targetPort: 5432
             nodePort: 31432
+
+dev-eck-elasticsearch:
+  fullnameOverride: dev-elasticsearch
+  version: 9.3.4
+  http:
+    service:
+      spec:
+        type: NodePort
+        ports:
+          - name: https
+            port: 9200
+            targetPort: 9200
+            protocol: TCP
+            nodePort: 31438
+    tls:
+      selfSignedCertificate:
+        subjectAltNames:
+          - dns: localhost
+          - ip: 127.0.0.1
+  nodeSets:
+    - name: default
+      count: 1
+      config:
+        node.store.allow_mmap: false
+      podTemplate:
+        spec:
+          volumes:
+            - name: elasticsearch-data
+              emptyDir: {}
+          containers:
+            - name: elasticsearch
+              env:
+                - name: ES_JAVA_OPTS
+                  value: -Xms512m -Xmx512m
+              resources:
+                limits:
+                  memory: 2Gi
+                requests:
+                  memory: 2Gi
+
+dev-eck-kibana:
+  fullnameOverride: dev-kibana
+  version: 9.3.4
+  elasticsearchRef:
+    name: dev-elasticsearch
+  config:
+    server.publicBaseUrl: http://localhost:5601
+  http:
+    service:
+      spec:
+        type: NodePort
+        ports:
+          - name: http
+            port: 5601
+            targetPort: 5601
+            protocol: TCP
+            nodePort: 31439
+    tls:
+      selfSignedCertificate:
+        disabled: true
+
+dev-eck-logstash:
+  fullnameOverride: dev-logstash
+  version: 9.3.4
+  count: 1
+  config:
+    api.http.host: "0.0.0.0"
+    pipeline.workers: 2
+  elasticsearchRefs:
+    - name: dev-elasticsearch
+      clusterName: ort
+  pipelines:
+    - pipeline.id: main
+      config.string: |
+        input {
+          file {
+            path => "/var/log/containers/*.log"
+            start_position => "beginning"
+            mode => "tail"
+            sincedb_path => "/usr/share/logstash/data/.sincedb"
+            # Keep the file path in the legacy top-level [path] field; the pipeline's early filters depend on it.
+            ecs_compatibility => disabled
+          }
+        }
+
+        filter {
+          if ![path] and [log][file][path] {
+            mutate {
+              add_field => { "path" => "%{[log][file][path]}" }
+            }
+          }
+
+          if "_${POD_NAMESPACE}_" not in [path] {
+            drop {}
+          }
+
+          grok {
+            match => {
+              "path" => "/var/log/containers/%{DATA:kubernetes_pod}_%{DATA:path_namespace}_%{GREEDYDATA:kubernetes_container}-%{BASE16NUM:container_id}\\.log"
+            }
+            tag_on_failure => []
+          }
+
+          mutate {
+            add_field => { "namespace" => "${POD_NAMESPACE}" }
+          }
+
+          grok {
+            match => {
+              "message" => "^%{TIMESTAMP_ISO8601:cri_time} %{WORD:stream} %{WORD:log_tag} %{GREEDYDATA:log_message}$"
+            }
+            tag_on_failure => ["_ort_cri_parse_failure"]
+          }
+
+          if ![log_message] {
+            drop {}
+          }
+
+          kv {
+            source => "log_message"
+            field_split => " "
+            value_split => "="
+            include_keys => ["component", "ortRunId", "level", "time"]
+          }
+
+          if ![component] and "dev-ort-server-kubernetes-long-running-jobs-finder-task-" in [path] {
+            mutate {
+              add_field => { "component" => "kubernetes-long-running-jobs-finder" }
+            }
+          }
+
+          if ![component] and "dev-ort-server-kubernetes-lost-jobs-finder-task-" in [path] {
+            mutate {
+              add_field => { "component" => "kubernetes-lost-jobs-finder" }
+            }
+          }
+
+          if ![component] and "dev-ort-server-kubernetes-reaper-task-" in [path] {
+            mutate {
+              add_field => { "component" => "kubernetes-reaper" }
+            }
+          }
+
+          if ![component] and "dev-ort-server-delete-old-ort-runs-task-" in [path] {
+            mutate {
+              add_field => { "component" => "deleteOldOrtRunsTask" }
+            }
+          }
+
+          if ![component] and "dev-ort-server-delete-orphaned-entities-task-" in [path] {
+            mutate {
+              add_field => { "component" => "deleteOrphanedEntitiesTask" }
+            }
+          }
+
+          if ![component] and [kubernetes_container] {
+            mutate {
+              add_field => { "component" => "%{kubernetes_container}" }
+            }
+            mutate {
+              gsub => [
+                "component", "^dev-ort-server-", "",
+                "component", "-task$", ""
+              ]
+            }
+          }
+
+          if ![level] {
+            if [stream] == "stderr" {
+              mutate {
+                add_field => { "level" => "ERROR" }
+              }
+            } else {
+              mutate {
+                add_field => { "level" => "INFO" }
+              }
+            }
+          }
+
+          if ![time] {
+            mutate {
+              add_field => { "time" => "%{cri_time}" }
+            }
+          }
+
+          if ![component] or ![level] or ![time] {
+            drop {}
+          }
+
+          mutate {
+            replace => { "message" => "%{log_message}" }
+          }
+
+          fingerprint {
+            source => ["path", "cri_time", "log_message"]
+            target => "sortId"
+            method => "SHA256"
+          }
+        }
+
+        output {
+          elasticsearch {
+            hosts => [ "${ORT_ES_HOSTS}" ]
+            user => "${ORT_ES_WRITE_USER}"
+            password => "${ORT_ES_WRITE_PASSWORD}"
+            ssl_certificate_authorities => "${ORT_ES_SSL_CERTIFICATE_AUTHORITY}"
+            index => "ort-server-logs-%{[namespace]}"
+            document_id => "%{[sortId]}"
+            ilm_enabled => false
+            manage_template => false
+          }
+        }
+  podTemplate:
+    spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        supplementalGroups:
+          - 0
+      volumes:
+        - name: container-logs
+          hostPath:
+            path: /var/log/containers
+            type: Directory
+        - name: pod-logs
+          hostPath:
+            path: /var/log/pods
+            type: Directory
+      containers:
+        - name: logstash
+          env:
+            - name: LS_JAVA_OPTS
+              value: -Xms512m -Xmx512m
+            - name: ORT_ES_WRITE_USER
+              value: elastic
+            - name: ORT_ES_WRITE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: dev-elasticsearch-es-elastic-user
+                  key: elastic
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+          volumeMounts:
+            - name: container-logs
+              mountPath: /var/log/containers
+              readOnly: true
+            - name: pod-logs
+              mountPath: /var/log/pods
+              readOnly: true
+          resources:
+            limits:
+              memory: 1Gi
+            requests:
+              memory: 1Gi
 
 dev-rabbitmq:
   persistence:
