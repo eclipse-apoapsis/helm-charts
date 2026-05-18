@@ -350,6 +350,8 @@ core:
     limits:
       cpu: 2
       memory: 2Gi
+  # -- Pod security context for the core deployment
+  podSecurityContext: {}
   certificates:
     # -- Path to a directory containing PEM-encoded certificates to import into the Java keystore at startup. Each file in the directory
     # must contain one PEM-encoded certificate. When set, the container command is overridden to run the import script before starting the
