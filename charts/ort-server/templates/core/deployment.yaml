@@ -21,6 +21,10 @@ spec:
         app.kubernetes.io/component: core
     spec:
       serviceAccountName: {{ include "ortserver.fullname" . }}-core-sa
+      {{- with .Values.core.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       volumes:
         {{- if .Values.core.extraVolumes }}
         {{- toYaml .Values.core.extraVolumes | nindent 8 }}
