@@ -1,0 +1,147 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dev-elasticsearch-index-template
+  namespace: "{{ .Release.Namespace }}"
+data:
+  index-template.json: |
+    {
+      "index_patterns": [
+        "ort-server-logs-*"
+      ],
+      "template": {
+        "mappings": {
+          "properties": {
+            "namespace": {
+              "type": "keyword"
+            },
+            "component": {
+              "type": "keyword"
+            },
+            "ortRunId": {
+              "type": "keyword",
+              "fields": {
+                "numeric": {
+                  "type": "long"
+                }
+              }
+            },
+            "level": {
+              "type": "keyword"
+            },
+            "time": {
+              "type": "date",
+              "format": "strict_date_optional_time||epoch_millis||yyyy-MM-dd'T'HH:mm:ss.SSS"
+            },
+            "sortId": {
+              "type": "keyword"
+            },
+            "message": {
+              "type": "text",
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 8191
+                }
+              }
+            },
+            "@timestamp": {
+              "type": "date"
+            }
+          }
+        }
+      }
+    }
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: dev-elasticsearch-init
+  namespace: "{{ .Release.Namespace }}"
+  annotations:
+    "helm.sh/hook": post-install,post-upgrade
+    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
+spec:
+  template:
+    metadata:
+      name: dev-elasticsearch-init
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: init-elasticsearch
+          image: curlimages/curl:8.14.1
+          env:
+            - name: ELASTICSEARCH_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: dev-elasticsearch-es-elastic-user
+                  key: elastic
+            - name: KIBANA_USER_PASSWORD
+              value: ortpassword
+          command:
+            - sh
+            - -ec
+            - |
+              index_name='ort-server-logs-{{ .Release.Namespace | quote | trimAll "\"" }}'
+              
+              until curl --fail --silent --show-error \
+                --cacert /mnt/elasticsearch-certs/tls.crt \
+                -u "elastic:${ELASTICSEARCH_PASSWORD}" \
+                https://dev-elasticsearch-es-http:9200 >/dev/null; do
+                sleep 2
+              done
+
+              curl --fail --silent --show-error \
+                -X PUT \
+                --cacert /mnt/elasticsearch-certs/tls.crt \
+                -u "elastic:${ELASTICSEARCH_PASSWORD}" \
+                -H 'Content-Type: application/json' \
+                --data-binary @/scripts/index-template.json \
+                https://dev-elasticsearch-es-http:9200/_index_template/ort-server-logs
+
+              status_code="$(curl --silent --show-error \
+                --output /dev/null \
+                --write-out '%{http_code}' \
+                --cacert /mnt/elasticsearch-certs/tls.crt \
+                -u "elastic:${ELASTICSEARCH_PASSWORD}" \
+                https://dev-elasticsearch-es-http:9200/${index_name})"
+
+              if [ "${status_code}" = "404" ]; then
+                curl --fail --silent --show-error \
+                  -X PUT \
+                  --cacert /mnt/elasticsearch-certs/tls.crt \
+                  -u "elastic:${ELASTICSEARCH_PASSWORD}" \
+                  -H 'Content-Type: application/json' \
+                  https://dev-elasticsearch-es-http:9200/${index_name}
+              elif [ "${status_code}" != "200" ]; then
+                echo "Unexpected status when checking index ${index_name}: ${status_code}" >&2
+                exit 1
+              fi
+
+              curl --fail --silent --show-error \
+                -X PUT \
+                --cacert /mnt/elasticsearch-certs/tls.crt \
+                -u "elastic:${ELASTICSEARCH_PASSWORD}" \
+                -H 'Content-Type: application/json' \
+                --data-binary @- \
+                https://dev-elasticsearch-es-http:9200/_security/user/ortserver <<EOF
+              {
+                "password": "${KIBANA_USER_PASSWORD}",
+                "roles": ["editor"],
+                "full_name": "ORT Server Kibana User"
+              }
+              EOF
+          volumeMounts:
+            - name: index-template
+              mountPath: /scripts/index-template.json
+              subPath: index-template.json
+            - name: elasticsearch-certs
+              mountPath: /mnt/elasticsearch-certs
+              readOnly: true
+      volumes:
+        - name: index-template
+          configMap:
+            name: dev-elasticsearch-index-template
+        - name: elasticsearch-certs
+          secret:
+            secretName: dev-elasticsearch-es-http-certs-public
