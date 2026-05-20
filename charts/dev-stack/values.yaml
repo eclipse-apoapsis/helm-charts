@@ -27,7 +27,7 @@ ort-server:
       subjectClientId: ort-server
     extraInitContainers:
       - name: wait-for-keycloak
-        image: curlimages/curl:8.12.1
+        image: curlimages/curl:8.20.0
         command:
           - sh
           - -c
