@@ -78,6 +78,28 @@
 {{- end }}
 {{- end -}}
 
+{{/* Environment variables to configure the logFile. */}}
+{{- define "ortserver.env.logFileService" -}}
+{{- if .Values.logFileService.enabled }}
+- name: LOG_FILE_PROVIDER_NAME
+  value: {{ .Values.logFileService.name | quote }}
+- name: LOKI_SERVER_URL
+  value: {{ .Values.logFileService.lokiServerUrl | quote }}
+- name: LOKI_NAMESPACE
+  value: {{ .Values.logFileService.lokiNamespace | quote }}
+- name: LOKI_QUERY_LIMIT
+  value: {{ .Values.logFileService.lokiQueryLimit | quote }}
+- name: LOKI_USERNAME
+  value: {{ .Values.logFileService.lokiUsername | quote }}
+- name: LOKI_PASSWORD
+  value: {{ .Values.logFileService.lokiPassword | quote }}
+- name: LOKI_TENANT_ID
+  value: {{ .Values.logFileService.lokiTenantId | quote }}
+- name: LOKI_TIMEOUT_SEC
+  value: {{ .Values.logFileService.lokiTimeoutSec | quote }}
+{{- end }}
+{{- end -}}
+
 {{/*
 Allow setting all typesafe config properties with environment variables. This is required because not all config
 properties have environment variable substitutions configured.
