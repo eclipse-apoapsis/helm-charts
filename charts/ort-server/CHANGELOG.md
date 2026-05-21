@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.17.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.16.2...ort-server-v0.17.0) (2026-05-21)
+
+
+### Features
+
+* add deployment strategy ([a82f8c3](https://github.com/eclipse-apoapsis/helm-charts/commit/a82f8c35d9fd50629991cee524bd94efa5a30fce))
+* **ort-server:** Support pod security context overrides for core ([eb57feb](https://github.com/eclipse-apoapsis/helm-charts/commit/eb57febb149f887ad5eeb2681d8e0bb87eeaea51))
+
+
+### Bug Fixes
+
+* Add missing permissions to tasks service account ([37b795f](https://github.com/eclipse-apoapsis/helm-charts/commit/37b795f8695d42cc558f1af78e863d128cbb66e5))
+
+
+### Dependencies
+
+* update dependency eclipse-apoapsis/ort-server to v0.67.0 ([0a7a3a3](https://github.com/eclipse-apoapsis/helm-charts/commit/0a7a3a3465e8fe247fddcb4f81fd7adbd3113f2c))
+* update dependency eclipse-apoapsis/ort-server to v0.67.1 ([631a4a4](https://github.com/eclipse-apoapsis/helm-charts/commit/631a4a40bf17b39257a805d67878ae0db5c06ea9))
+
 ## [0.16.2](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.16.1...ort-server-v0.16.2) (2026-05-14)
 
 
