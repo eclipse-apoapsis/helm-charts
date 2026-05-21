@@ -7,6 +7,14 @@ metadata:
     {{- include "ortserver.labels" . | nindent 4 }}
 rules:
   - apiGroups:
+      - ""
+    resources:
+      - pods
+    verbs:
+      - delete
+      - get
+      - list
+  - apiGroups:
       - batch
     resources:
       - jobs
