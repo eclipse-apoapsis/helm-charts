@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.18.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.17.0...ort-server-v0.18.0) (2026-05-26)
+
+
+### Features
+
+* add logFileService - loki integration ([4cf450e](https://github.com/eclipse-apoapsis/helm-charts/commit/4cf450e882f28d9a24348752ea025a26d6c0b0f2))
+
+
+### Dependencies
+
+* update dependency eclipse-apoapsis/ort-server to v0.68.0 ([4d4a730](https://github.com/eclipse-apoapsis/helm-charts/commit/4d4a7305f3f017e486f9646ad6f32cfca711f97e))
+
 ## [0.17.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.16.2...ort-server-v0.17.0) (2026-05-21)
 
 
