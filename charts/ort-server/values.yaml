@@ -37,8 +37,6 @@ logFileService:
   lokiPassword: ""
   # -- Optional tenant ID to use when Loki is running in multi-tenancy mode. Adds the X-Scope-OrgID header to all requests.
   lokiTenantId: ""
-  # -- Timeout in seconds for HTTP requests to the Loki API. Defaults to 30 seconds if not set.
-  lokiTimeoutSec: ""
 
 database:
   # -- The database host to connect to.
@@ -104,8 +102,6 @@ secrets:
     prefix: secret
     # -- The Vault namespace to use for storing secrets. This is only relevant if Vault namespaces are enabled in the Vault server.
     namespace: null
-    # -- Timeout for requests to the Vault server in seconds. If not set, the default HTTP client timeout is used.
-    timeoutSeconds: ""
 
 configSecrets:
   name: secret-file

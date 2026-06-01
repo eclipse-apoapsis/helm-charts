@@ -26,7 +26,6 @@ A generic Helm chart for the ORT Server.
 | logFileService.lokiUsername | string | `""` | Optional username for Basic Auth authentication against the Loki API (via reverse proxy). |
 | logFileService.lokiPassword | string | `""` | Optional password for Basic Auth authentication. If both username and password are set, an Authorization header is added to all Loki requests. |
 | logFileService.lokiTenantId | string | `""` | Optional tenant ID to use when Loki is running in multi-tenancy mode. Adds the X-Scope-OrgID header to all requests. |
-| logFileService.lokiTimeoutSec | string | `""` | Timeout in seconds for HTTP requests to the Loki API. Defaults to 30 seconds if not set. |
 | database.host | string | `"ort-server-db.postgres.database.azure.com"` | The database host to connect to. |
 | database.port | int | `5432` | The database port to connect to. |
 | database.name | string | `"ort-server"` | The name of the database to connect to. |
@@ -55,7 +54,6 @@ A generic Helm chart for the ORT Server.
 | secrets.vault.rootPath | string | `""` | The path in Vault where secrets are stored. |
 | secrets.vault.prefix | string | `"secret"` | The path prefix under which the secrets engine is located. |
 | secrets.vault.namespace | string | `nil` | The Vault namespace to use for storing secrets. This is only relevant if Vault namespaces are enabled in the Vault server. |
-| secrets.vault.timeoutSeconds | string | `""` | Timeout for requests to the Vault server in seconds. If not set, the default HTTP client timeout is used. |
 | configSecrets.name | string | `"secret-file"` |  |
 | configSecrets.files | string | `""` |  |
 | configSecrets.allowSecretsFromConfig | bool | `true` | If enabled, secrets are read from environment variables, otherwise from the configured files. |
