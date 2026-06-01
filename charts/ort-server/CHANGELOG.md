@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.19.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.18.2...ort-server-v0.19.0) (2026-06-01)
+
+
+### Features
+
+* Add support for the Elasticsearch log file service ([05feae4](https://github.com/eclipse-apoapsis/helm-charts/commit/05feae42213cfeeb7badad1dbb439d42ca9adeed))
+
 ## [0.18.2](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.18.1...ort-server-v0.18.2) (2026-05-29)
 
 
