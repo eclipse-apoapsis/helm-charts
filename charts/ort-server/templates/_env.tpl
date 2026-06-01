@@ -71,10 +71,6 @@
   value: {{ .Values.secrets.vault.prefix | quote }}
 - name: VAULT_NAMESPACE
   value: {{ .Values.secrets.vault.namespace | quote }}
-{{- if .Values.secrets.vault.timeoutSeconds }}
-- name: VAULT_HTTP_TIMEOUT_SEC
-  value: "{{ .Values.secrets.vault.timeoutSeconds }}"
-{{- end }}
 {{- end }}
 {{- end -}}
 
@@ -95,8 +91,6 @@
   value: {{ .Values.logFileService.lokiPassword | quote }}
 - name: LOKI_TENANT_ID
   value: {{ .Values.logFileService.lokiTenantId | quote }}
-- name: LOKI_TIMEOUT_SEC
-  value: {{ .Values.logFileService.lokiTimeoutSec | quote }}
 {{- end }}
 {{- end -}}
 
