@@ -21,6 +21,23 @@ configFileProvider:
     repositoryUrl: https://github.com/mnonnenmacher/ort-server-config.git
 
 logFileService:
+  elasticsearch:
+    # -- If enabled, a log file service is configured to retrieve worker logs from Elasticsearch.
+    enabled: false
+    # -- The base URL of the Elasticsearch HTTP API.
+    serverUrl: ""
+    # -- The Elasticsearch index to query for log entries.
+    index: ""
+    # -- The Kubernetes namespace in which the worker pods are running. Used by Elasticsearch to filter log queries.
+    namespace: ""
+    # -- Number of log entries to retrieve per Elasticsearch API call.
+    pageSize: ""
+    # -- Optional username for Basic Auth authentication against the Elasticsearch API.
+    username: ""
+    # -- Optional password for Basic Auth authentication against the Elasticsearch API.
+    password: ""
+    # -- Optional API key for authentication against the Elasticsearch API.
+    apiKey: ""
   loki:
     # -- If enabled, a log file service is configured to retrieve worker logs from Grafana Loki.
     enabled: false
