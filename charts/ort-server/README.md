@@ -18,14 +18,14 @@ A generic Helm chart for the ORT Server.
 | podLabels | object | `{}` | Map of labels to add to all pods |
 | configFileProvider.gitConfig.enabled | bool | `true` | If enabled, the Git configuration is provided via a Git repository. |
 | configFileProvider.gitConfig.repositoryUrl | string | `"https://github.com/mnonnenmacher/ort-server-config.git"` | The URL of the Git repository to use for providing the configuration. The repository must be publicly accessible or references to config secrets containing the credentials must be added to the URL, for example: https://usernameSecret:tokenSecret@example.com/repo.git |
-| logFileService.enabled | bool | `false` | If enabled, a log file service is configured to retrieve worker logs from Grafana Loki. |
-| logFileService.name | string | `"loki"` | The name of the log file provider to use. Currently only "loki" is supported. |
-| logFileService.lokiServerUrl | string | `""` | The base URL of the Loki HTTP API. The path for the endpoint (including /loki/api/v1) is appended automatically. |
-| logFileService.lokiNamespace | string | `""` | The Kubernetes namespace in which the worker pods are running. Used by Loki to filter log queries. |
-| logFileService.lokiQueryLimit | string | `""` | Maximum number of log lines to retrieve per Loki API call. If more logs are available, the provider sends additional requests. Defaults to 1000 if not set. |
-| logFileService.lokiUsername | string | `""` | Optional username for Basic Auth authentication against the Loki API (via reverse proxy). |
-| logFileService.lokiPassword | string | `""` | Optional password for Basic Auth authentication. If both username and password are set, an Authorization header is added to all Loki requests. |
-| logFileService.lokiTenantId | string | `""` | Optional tenant ID to use when Loki is running in multi-tenancy mode. Adds the X-Scope-OrgID header to all requests. |
+| logFileService.loki.enabled | bool | `false` | If enabled, a log file service is configured to retrieve worker logs from Grafana Loki. |
+| logFileService.loki.name | string | `"loki"` | The name of the log file provider to use. Currently only "loki" is supported. |
+| logFileService.loki.serverUrl | string | `""` | The base URL of the Loki HTTP API. The path for the endpoint (including /loki/api/v1) is appended automatically. |
+| logFileService.loki.namespace | string | `""` | The Kubernetes namespace in which the worker pods are running. Used by Loki to filter log queries. |
+| logFileService.loki.queryLimit | string | `""` | Maximum number of log lines to retrieve per Loki API call. If more logs are available, the provider sends additional requests. Defaults to 1000 if not set. |
+| logFileService.loki.username | string | `""` | Optional username for Basic Auth authentication against the Loki API (via reverse proxy). |
+| logFileService.loki.password | string | `""` | Optional password for Basic Auth authentication. If both username and password are set, an Authorization header is added to all Loki requests. |
+| logFileService.loki.tenantId | string | `""` | Optional tenant ID to use when Loki is running in multi-tenancy mode. Adds the X-Scope-OrgID header to all requests. |
 | database.host | string | `"ort-server-db.postgres.database.azure.com"` | The database host to connect to. |
 | database.port | int | `5432` | The database port to connect to. |
 | database.name | string | `"ort-server"` | The name of the database to connect to. |

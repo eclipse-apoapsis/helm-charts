@@ -21,22 +21,23 @@ configFileProvider:
     repositoryUrl: https://github.com/mnonnenmacher/ort-server-config.git
 
 logFileService:
-  # -- If enabled, a log file service is configured to retrieve worker logs from Grafana Loki.
-  enabled: false
-  # -- The name of the log file provider to use. Currently only "loki" is supported.
-  name: "loki"
-  # -- The base URL of the Loki HTTP API. The path for the endpoint (including /loki/api/v1) is appended automatically.
-  lokiServerUrl: ""
-  # -- The Kubernetes namespace in which the worker pods are running. Used by Loki to filter log queries.
-  lokiNamespace: ""
-  # -- Maximum number of log lines to retrieve per Loki API call. If more logs are available, the provider sends additional requests. Defaults to 1000 if not set.
-  lokiQueryLimit: ""
-  # -- Optional username for Basic Auth authentication against the Loki API (via reverse proxy).
-  lokiUsername: ""
-  # -- Optional password for Basic Auth authentication. If both username and password are set, an Authorization header is added to all Loki requests.
-  lokiPassword: ""
-  # -- Optional tenant ID to use when Loki is running in multi-tenancy mode. Adds the X-Scope-OrgID header to all requests.
-  lokiTenantId: ""
+  loki:
+    # -- If enabled, a log file service is configured to retrieve worker logs from Grafana Loki.
+    enabled: false
+    # -- The name of the log file provider to use. Currently only "loki" is supported.
+    name: "loki"
+    # -- The base URL of the Loki HTTP API. The path for the endpoint (including /loki/api/v1) is appended automatically.
+    serverUrl: ""
+    # -- The Kubernetes namespace in which the worker pods are running. Used by Loki to filter log queries.
+    namespace: ""
+    # -- Maximum number of log lines to retrieve per Loki API call. If more logs are available, the provider sends additional requests. Defaults to 1000 if not set.
+    queryLimit: ""
+    # -- Optional username for Basic Auth authentication against the Loki API (via reverse proxy).
+    username: ""
+    # -- Optional password for Basic Auth authentication. If both username and password are set, an Authorization header is added to all Loki requests.
+    password: ""
+    # -- Optional tenant ID to use when Loki is running in multi-tenancy mode. Adds the X-Scope-OrgID header to all requests.
+    tenantId: ""
 
 database:
   # -- The database host to connect to.
