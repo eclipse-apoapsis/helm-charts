@@ -18,6 +18,14 @@ A generic Helm chart for the ORT Server.
 | podLabels | object | `{}` | Map of labels to add to all pods |
 | configFileProvider.gitConfig.enabled | bool | `true` | If enabled, the Git configuration is provided via a Git repository. |
 | configFileProvider.gitConfig.repositoryUrl | string | `"https://github.com/mnonnenmacher/ort-server-config.git"` | The URL of the Git repository to use for providing the configuration. The repository must be publicly accessible or references to config secrets containing the credentials must be added to the URL, for example: https://usernameSecret:tokenSecret@example.com/repo.git |
+| logFileService.elasticsearch.enabled | bool | `false` | If enabled, a log file service is configured to retrieve worker logs from Elasticsearch. |
+| logFileService.elasticsearch.serverUrl | string | `""` | The base URL of the Elasticsearch HTTP API. |
+| logFileService.elasticsearch.index | string | `""` | The Elasticsearch index to query for log entries. |
+| logFileService.elasticsearch.namespace | string | `""` | The Kubernetes namespace in which the worker pods are running. Used by Elasticsearch to filter log queries. |
+| logFileService.elasticsearch.pageSize | string | `""` | Number of log entries to retrieve per Elasticsearch API call. |
+| logFileService.elasticsearch.username | string | `""` | Optional username for Basic Auth authentication against the Elasticsearch API. |
+| logFileService.elasticsearch.password | string | `""` | Optional password for Basic Auth authentication against the Elasticsearch API. |
+| logFileService.elasticsearch.apiKey | string | `""` | Optional API key for authentication against the Elasticsearch API. |
 | logFileService.loki.enabled | bool | `false` | If enabled, a log file service is configured to retrieve worker logs from Grafana Loki. |
 | logFileService.loki.name | string | `"loki"` | The name of the log file provider to use. Currently only "loki" is supported. |
 | logFileService.loki.serverUrl | string | `""` | The base URL of the Loki HTTP API. The path for the endpoint (including /loki/api/v1) is appended automatically. |

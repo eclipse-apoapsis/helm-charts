@@ -76,7 +76,24 @@
 
 {{/* Environment variables to configure the logFile. */}}
 {{- define "ortserver.env.logFileService" -}}
-{{- if .Values.logFileService.loki.enabled }}
+{{- if .Values.logFileService.elasticsearch.enabled }}
+- name: LOG_FILE_PROVIDER_NAME
+  value: "elasticsearch"
+- name: ELASTICSEARCH_SERVER_URL
+  value: {{ .Values.logFileService.elasticsearch.serverUrl | quote }}
+- name: ELASTICSEARCH_INDEX
+  value: {{ .Values.logFileService.elasticsearch.index | quote }}
+- name: ELASTICSEARCH_NAMESPACE
+  value: {{ .Values.logFileService.elasticsearch.namespace | quote }}
+- name: ELASTICSEARCH_PAGE_SIZE
+  value: {{ .Values.logFileService.elasticsearch.pageSize | quote }}
+- name: ELASTICSEARCH_USERNAME
+  value: {{ .Values.logFileService.elasticsearch.username | quote }}
+- name: ELASTICSEARCH_PASSWORD
+  value: {{ .Values.logFileService.elasticsearch.password | quote }}
+- name: ELASTICSEARCH_API_KEY
+  value: {{ .Values.logFileService.elasticsearch.apiKey | quote }}
+{{- else if .Values.logFileService.loki.enabled }}
 - name: LOG_FILE_PROVIDER_NAME
   value: {{ .Values.logFileService.loki.name | quote }}
 - name: LOKI_SERVER_URL
