@@ -71,10 +71,10 @@ spec:
             {{- include "ortserver.env.adminSecrets" . | nindent 12 }}
             {{- include "ortserver.env.database" . | nindent 12 }}
             {{- include "ortserver.env.fileListStorage" . | nindent 12 }}
+            {{- include "ortserver.env.logFileService" . | nindent 12 }}
             {{- include "ortserver.env.reportStorage" . | nindent 12 }}
             {{- include "ortserver.env.typesafeConfigOverride" . | nindent 12 }}
             {{- include "ortserver.env.userSecrets" . | nindent 12 }}
-            {{- include "ortserver.env.logFileService" . | nindent 12 }}
 
             # Config secrets
             - name: CORE_SECRET_PROVIDER
