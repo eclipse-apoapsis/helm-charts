@@ -40,7 +40,7 @@ kubectl wait --for=condition=established crd/logstashes.logstash.k8s.elastic.co 
 
 ```shell
 helm dependency update charts/dev-stack
-helm install dev charts/dev-stack --timeout 20m
+helm upgrade --install dev charts/dev-stack --timeout 20m --force-conflicts
 ```
 
 ## Contributing
