@@ -76,21 +76,21 @@
 
 {{/* Environment variables to configure the logFile. */}}
 {{- define "ortserver.env.logFileService" -}}
-{{- if .Values.logFileService.enabled }}
+{{- if .Values.logFileService.loki.enabled }}
 - name: LOG_FILE_PROVIDER_NAME
-  value: {{ .Values.logFileService.name | quote }}
+  value: {{ .Values.logFileService.loki.name | quote }}
 - name: LOKI_SERVER_URL
-  value: {{ .Values.logFileService.lokiServerUrl | quote }}
+  value: {{ .Values.logFileService.loki.serverUrl | quote }}
 - name: LOKI_NAMESPACE
-  value: {{ .Values.logFileService.lokiNamespace | quote }}
+  value: {{ .Values.logFileService.loki.namespace | quote }}
 - name: LOKI_QUERY_LIMIT
-  value: {{ .Values.logFileService.lokiQueryLimit | quote }}
+  value: {{ .Values.logFileService.loki.queryLimit | quote }}
 - name: LOKI_USERNAME
-  value: {{ .Values.logFileService.lokiUsername | quote }}
+  value: {{ .Values.logFileService.loki.username | quote }}
 - name: LOKI_PASSWORD
-  value: {{ .Values.logFileService.lokiPassword | quote }}
+  value: {{ .Values.logFileService.loki.password | quote }}
 - name: LOKI_TENANT_ID
-  value: {{ .Values.logFileService.lokiTenantId | quote }}
+  value: {{ .Values.logFileService.loki.tenantId | quote }}
 {{- end }}
 {{- end -}}
 
