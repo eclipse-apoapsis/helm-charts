@@ -2,7 +2,7 @@
 
 ![Version: 0.19.1][version-badge] <!-- x-release-please-version -->
 ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
-![AppVersion: 0.71.0](https://img.shields.io/badge/AppVersion-0.71.0-informational?style=flat-square)
+![AppVersion: 0.72.0](https://img.shields.io/badge/AppVersion-0.72.0-informational?style=flat-square)
 
 A generic Helm chart for the ORT Server.
 
