@@ -69,7 +69,7 @@ spec:
                   -X POST "${kibana_url}/api/data_views/data_view" \
                   -H 'kbn-xsrf: true' \
                   -H 'Content-Type: application/json' \
-                  -d '{"data_view":{"id":"ort-server-logs","name":"ORT Server Logs","title":"ort-server-logs-*","timeFieldName":"time","allowNoIndex":true}}' \
+                  -d '{"data_view":{"id":"ort-server-logs","name":"ORT Server Logs","title":"ort-server-logs-*","timeFieldName":"timestamp","allowNoIndex":true}}' \
                   >/dev/null || {
                   echo "Warning: Failed to create Kibana data view, skipping." >&2
                   exit 0
@@ -80,7 +80,7 @@ spec:
                   -X POST "${kibana_url}/api/data_views/data_view/${data_view_id}" \
                   -H 'kbn-xsrf: true' \
                   -H 'Content-Type: application/json' \
-                  -d '{"data_view":{"name":"ORT Server Logs","title":"ort-server-logs-*","timeFieldName":"time","allowNoIndex":true}}' \
+                  -d '{"data_view":{"name":"ORT Server Logs","title":"ort-server-logs-*","timeFieldName":"timestamp","allowNoIndex":true}}' \
                   >/dev/null || {
                   echo "Warning: Failed to update Kibana data view, skipping." >&2
                   exit 0

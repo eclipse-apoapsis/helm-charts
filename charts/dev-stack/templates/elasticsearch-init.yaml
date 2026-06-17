@@ -15,38 +15,9 @@ data:
             "namespace": {
               "type": "keyword"
             },
-            "component": {
-              "type": "keyword"
-            },
-            "ortRunId": {
-              "type": "keyword",
-              "fields": {
-                "numeric": {
-                  "type": "long"
-                }
-              }
-            },
-            "level": {
-              "type": "keyword"
-            },
-            "time": {
+            "timestamp": {
               "type": "date",
-              "format": "strict_date_optional_time||epoch_millis||yyyy-MM-dd'T'HH:mm:ss.SSS"
-            },
-            "sortId": {
-              "type": "keyword"
-            },
-            "message": {
-              "type": "text",
-              "fields": {
-                "keyword": {
-                  "type": "keyword",
-                  "ignore_above": 8191
-                }
-              }
-            },
-            "@timestamp": {
-              "type": "date"
+              "format": "strict_date_optional_time||epoch_millis"
             }
           }
         }
@@ -83,7 +54,7 @@ spec:
             - -ec
             - |
               index_name='ort-server-logs-{{ .Release.Namespace | quote | trimAll "\"" }}'
-              
+
               until curl --fail --silent --show-error \
                 --cacert /mnt/elasticsearch-certs/tls.crt \
                 -u "elastic:${ELASTICSEARCH_PASSWORD}" \
