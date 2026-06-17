@@ -50,6 +50,8 @@ ort-server:
     certificates:
       path: /mnt/elasticsearch-certs/
     extraEnv:
+      - name: LOG_FORMAT
+        value: json
       - name: LOG_FILE_PROVIDER_NAME
         value: elasticsearch
       - name: ELASTICSEARCH_SERVER_URL
@@ -69,6 +71,14 @@ ort-server:
           secretKeyRef:
             name: dev-elasticsearch-es-elastic-user
             key: elastic
+  orchestrator:
+    extraEnv:
+      - name: LOG_FORMAT
+        value: json
+  tasks:
+    extraEnv:
+      - name: LOG_FORMAT
+        value: json
   advisor:
     mountPvcs: secrets-pvc->/mnt/secrets,r
   analyzer:
@@ -297,44 +307,50 @@ dev-eck-logstash:
             drop {}
           }
 
-          kv {
-            source => "log_message"
-            field_split => " "
-            value_split => "="
-            include_keys => ["component", "ortRunId", "level", "time"]
+          # Default the message to the original unparsed log line. This ensures all logs have a [message] field.
+          mutate {
+            replace => { "message" => "%{log_message}" }
           }
 
-          if ![component] and "dev-ort-server-kubernetes-long-running-jobs-finder-task-" in [path] {
+          # Parse ORT Server's structured JSON logs.
+          if [log_message] =~ /^\s*\{/ {
+            json {
+              source => "log_message"
+              skip_on_invalid_json => true
+            }
+          }
+
+          if ![component] and ![mdc][component] and "dev-ort-server-kubernetes-long-running-jobs-finder-task-" in [path] {
             mutate {
               add_field => { "component" => "kubernetes-long-running-jobs-finder" }
             }
           }
 
-          if ![component] and "dev-ort-server-kubernetes-lost-jobs-finder-task-" in [path] {
+          if ![component] and ![mdc][component] and "dev-ort-server-kubernetes-lost-jobs-finder-task-" in [path] {
             mutate {
               add_field => { "component" => "kubernetes-lost-jobs-finder" }
             }
           }
 
-          if ![component] and "dev-ort-server-kubernetes-reaper-task-" in [path] {
+          if ![component] and ![mdc][component] and "dev-ort-server-kubernetes-reaper-task-" in [path] {
             mutate {
               add_field => { "component" => "kubernetes-reaper" }
             }
           }
 
-          if ![component] and "dev-ort-server-delete-old-ort-runs-task-" in [path] {
+          if ![component] and ![mdc][component] and "dev-ort-server-delete-old-ort-runs-task-" in [path] {
             mutate {
               add_field => { "component" => "deleteOldOrtRunsTask" }
             }
           }
 
-          if ![component] and "dev-ort-server-delete-orphaned-entities-task-" in [path] {
+          if ![component] and ![mdc][component] and "dev-ort-server-delete-orphaned-entities-task-" in [path] {
             mutate {
               add_field => { "component" => "deleteOrphanedEntitiesTask" }
             }
           }
 
-          if ![component] and [kubernetes_container] {
+          if ![component] and ![mdc][component] and [kubernetes_container] {
             mutate {
               add_field => { "component" => "%{kubernetes_container}" }
             }
@@ -358,24 +374,26 @@ dev-eck-logstash:
             }
           }
 
-          if ![time] {
+          # Plain-text logs have no structured timestamp.
+          # Fall back to the CRI time so they still carry a sortable [timestamp] field for Kibana.
+          if ![timestamp] {
             mutate {
-              add_field => { "time" => "%{cri_time}" }
+              add_field => { "timestamp" => "%{cri_time}" }
             }
           }
 
-          if ![component] or ![level] or ![time] {
+          if (![component] and ![mdc][component]) or ![level] {
             drop {}
-          }
-
-          mutate {
-            replace => { "message" => "%{log_message}" }
           }
 
           fingerprint {
             source => ["path", "cri_time", "log_message"]
             target => "sortId"
             method => "SHA256"
+          }
+
+          mutate {
+            remove_field => ["log_message"]
           }
         }
 
