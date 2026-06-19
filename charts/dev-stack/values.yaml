@@ -7,6 +7,8 @@ ort-server:
     password: ortpassword
     sslMode: disable
   transport:
+    kubernetes:
+      imagePullPolicy: IfNotPresent
     rabbitmq:
       enabled: true
       serverUri: amqp://dev-dev-rabbitmq:5672
