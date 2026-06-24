@@ -87,9 +87,9 @@ Image pull secret
 If imagePullSecret is defined in the values, render the imagePullSecrets section.
 */}}
 {{- define "ortserver.imagePullSecret" -}}
-{{- if .Values.imagePullSecret }}
+{{- with .Values.imagePullSecret }}
 imagePullSecrets:
-  - name: {{ .Values.imagePullSecret | quote }}
+  - name: {{ . | quote }}
 {{- end }}
 {{- end }}
 

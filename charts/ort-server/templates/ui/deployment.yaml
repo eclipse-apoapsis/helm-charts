@@ -26,8 +26,8 @@ spec:
     spec:
       serviceAccountName: {{ include "ortserver.fullname" . }}-ui-sa
       volumes:
-        {{- if .Values.ui.extraVolumes }}
-        {{- toYaml .Values.ui.extraVolumes | nindent 8 }}
+        {{- with .Values.ui.extraVolumes }}
+        {{- toYaml . | nindent 8 }}
         {{- end }}
       {{- include "ortserver.imagePullSecret" . | nindent 6 }}
       containers:
@@ -40,8 +40,8 @@ spec:
           ports:
             - containerPort: 8080
           volumeMounts:
-            {{- if .Values.ui.extraVolumeMounts }}
-            {{- toYaml .Values.ui.extraVolumeMounts | nindent 12 }}
+            {{- with .Values.ui.extraVolumeMounts }}
+            {{- toYaml . | nindent 12 }}
             {{- end }}
           env:
             - name: UI_URL
