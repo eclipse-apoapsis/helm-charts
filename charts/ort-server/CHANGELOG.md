@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.20.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.19.7...ort-server-v0.20.0) (2026-06-24)
+
+
+### Features
+
+* Add missing database configuration options ([735a6bd](https://github.com/eclipse-apoapsis/helm-charts/commit/735a6bd6e360c0530e7f4c64d49ad5862f8317f4))
+* Add new options for Elasticsearch ([c7f5445](https://github.com/eclipse-apoapsis/helm-charts/commit/c7f5445b335843cbce14c763c8001a3e9f4ad45d))
+
+
+### Bug Fixes
+
+* Omit optional `logFileService` options if not set ([755b99c](https://github.com/eclipse-apoapsis/helm-charts/commit/755b99c8b95633f560677f89ec2e4f6dc11b6eca))
+
 ## [0.19.7](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.19.6...ort-server-v0.19.7) (2026-06-24)
 
 
