@@ -30,20 +30,20 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       volumes:
-        {{- if .Values.core.extraVolumes }}
-        {{- toYaml .Values.core.extraVolumes | nindent 8 }}
+        {{- with .Values.core.extraVolumes }}
+        {{- toYaml . | nindent 8 }}
         {{- end }}
       {{- include "ortserver.imagePullSecret" . | nindent 6 }}
-      {{- if .Values.core.extraInitContainers }}
+      {{- with .Values.core.extraInitContainers }}
       initContainers:
-        {{- toYaml .Values.core.extraInitContainers | nindent 8 }}
+        {{- toYaml . | nindent 8 }}
       {{- end }}
       containers:
         - name: {{ include "ortserver.fullname" . }}-core
           image: "{{ .Values.containerRegistry }}/ort-server-core:{{ .Chart.AppVersion }}"
-          {{- if .Values.core.certificates.path }}
+          {{- with .Values.core.certificates.path }}
           command: ["/bin/sh"]
-          args: ["-c", "/etc/scripts/import_certificates.sh {{ .Values.core.certificates.path }} && exec java -cp @/app/jib-classpath-file @/app/jib-main-class-file"]
+          args: ["-c", "/etc/scripts/import_certificates.sh {{ . }} && exec java -cp @/app/jib-classpath-file @/app/jib-main-class-file"]
           {{- end }}
           {{- with .Values.core.resources }}
           resources:
@@ -64,8 +64,8 @@ spec:
             failureThreshold: {{ .Values.core.livenessProbe.failureThreshold }}
           {{- end }}
           volumeMounts:
-            {{- if .Values.core.extraVolumeMounts }}
-            {{- toYaml .Values.core.extraVolumeMounts | nindent 12 }}
+            {{- with .Values.core.extraVolumeMounts }}
+            {{- toYaml . | nindent 12 }}
             {{- end }}
           env:
             {{- include "ortserver.env.adminSecrets" . | nindent 12 }}

@@ -141,13 +141,13 @@ properties have environment variable substitutions configured.
 {{- if .Values.storage.azureBlob.enabled }}
 - name: FILE_ARCHIVE_STORAGE_NAME
   value: azure-blob
-{{- if .Values.storage.azureBlob.endpointUrl }}
+{{- with .Values.storage.azureBlob.endpointUrl }}
 - name: FILE_ARCHIVE_STORAGE_ENDPOINT_URL
-  value: {{ .Values.storage.azureBlob.endpointUrl | quote }}
+  value: {{ . | quote }}
 {{- end }}
-{{- if .Values.storage.azureBlob.accountName }}
+{{- with .Values.storage.azureBlob.accountName }}
 - name: FILE_ARCHIVE_STORAGE_ACCOUNT_NAME
-  value: {{ .Values.storage.azureBlob.accountName | quote }}
+  value: {{ . | quote }}
 {{- end }}
 - name: FILE_ARCHIVE_STORAGE_CONTAINER_NAME
   value: {{ .Values.storage.azureBlob.containers.fileArchives | quote }}
@@ -167,19 +167,19 @@ properties have environment variable substitutions configured.
   value: {{ .Values.storage.s3.accessKey | quote }}
 - name: FILE_ARCHIVE_STORAGE_SECRET_KEY
   value: {{ .Values.storage.s3.secretKey | quote }}
-{{- if .Values.storage.s3.region }}
+{{- with .Values.storage.s3.region }}
 - name: FILE_ARCHIVE_STORAGE_REGION
-  value: {{ .Values.storage.s3.region | quote }}
+  value: {{ . | quote }}
 {{- end }}
-{{- if .Values.storage.s3.forcePathStyle }}
+{{- with .Values.storage.s3.forcePathStyle }}
 - name: FILE_ARCHIVE_STORAGE_FORCE_PATH_STYLE
-  value: "{{ .Values.storage.s3.forcePathStyle }}"
+  value: "{{ . }}"
 {{- end }}
 - name: FILE_ARCHIVE_STORAGE_BUCKET_NAME
   value: {{ .Values.storage.s3.buckets.fileArchives | quote }}
-{{- if .Values.storage.s3.prefixes.fileArchives }}
+{{- with .Values.storage.s3.prefixes.fileArchives }}
 - name: FILE_ARCHIVE_STORAGE_KEY_PREFIX
-  value: {{ .Values.storage.s3.prefixes.fileArchives | quote }}
+  value: {{ . | quote }}
 {{- end }}
 {{- end }}
 {{- end -}}
@@ -189,13 +189,13 @@ properties have environment variable substitutions configured.
 {{- if .Values.storage.azureBlob.enabled }}
 - name: FILE_LIST_STORAGE_NAME
   value: azure-blob
-{{- if .Values.storage.azureBlob.endpointUrl }}
+{{- with .Values.storage.azureBlob.endpointUrl }}
 - name: FILE_LIST_STORAGE_ENDPOINT_URL
-  value: {{ .Values.storage.azureBlob.endpointUrl | quote }}
+  value: {{ . | quote }}
 {{- end }}
-{{- if .Values.storage.azureBlob.accountName }}
+{{- with .Values.storage.azureBlob.accountName }}
 - name: FILE_LIST_STORAGE_ACCOUNT_NAME
-  value: {{ .Values.storage.azureBlob.accountName | quote }}
+  value: {{ . | quote }}
 {{- end }}
 - name: FILE_LIST_STORAGE_CONTAINER_NAME
   value: {{ .Values.storage.azureBlob.containers.fileLists | quote }}
@@ -215,19 +215,19 @@ properties have environment variable substitutions configured.
   value: {{ .Values.storage.s3.accessKey | quote }}
 - name: FILE_LIST_STORAGE_SECRET_KEY
   value: {{ .Values.storage.s3.secretKey | quote }}
-{{- if .Values.storage.s3.region }}
+{{- with .Values.storage.s3.region }}
 - name: FILE_LIST_STORAGE_REGION
-  value: {{ .Values.storage.s3.region | quote }}
+  value: {{ . | quote }}
 {{- end }}
-{{- if .Values.storage.s3.forcePathStyle }}
+{{- with .Values.storage.s3.forcePathStyle }}
 - name: FILE_LIST_STORAGE_FORCE_PATH_STYLE
-  value: "{{ .Values.storage.s3.forcePathStyle }}"
+  value: "{{ . }}"
 {{- end }}
 - name: FILE_LIST_STORAGE_BUCKET_NAME
   value: {{ .Values.storage.s3.buckets.fileLists | quote }}
-{{- if .Values.storage.s3.prefixes.fileLists }}
+{{- with .Values.storage.s3.prefixes.fileLists }}
 - name: FILE_LIST_STORAGE_KEY_PREFIX
-  value: {{ .Values.storage.s3.prefixes.fileLists | quote }}
+  value: {{ . | quote }}
 {{- end }}
 {{- end }}
 {{- end -}}
@@ -237,13 +237,13 @@ properties have environment variable substitutions configured.
 {{- if .Values.storage.azureBlob.enabled }}
 - name: REPORT_STORAGE_NAME
   value: azure-blob
-{{- if .Values.storage.azureBlob.endpointUrl }}
+{{- with .Values.storage.azureBlob.endpointUrl }}
 - name: REPORT_STORAGE_ENDPOINT_URL
-  value: {{ .Values.storage.azureBlob.endpointUrl | quote }}
+  value: {{ . | quote }}
 {{- end }}
-{{- if .Values.storage.azureBlob.accountName }}
+{{- with .Values.storage.azureBlob.accountName }}
 - name: REPORT_STORAGE_ACCOUNT_NAME
-  value: {{ .Values.storage.azureBlob.accountName | quote }}
+  value: {{ . | quote }}
 {{- end }}
 - name: REPORT_STORAGE_CONTAINER_NAME
   value: {{ .Values.storage.azureBlob.containers.reports | quote }}
@@ -263,19 +263,19 @@ properties have environment variable substitutions configured.
   value: {{ .Values.storage.s3.accessKey | quote }}
 - name: REPORT_STORAGE_SECRET_KEY
   value: {{ .Values.storage.s3.secretKey | quote }}
-{{- if .Values.storage.s3.region }}
+{{- with .Values.storage.s3.region }}
 - name: REPORT_STORAGE_REGION
-  value: {{ .Values.storage.s3.region | quote }}
+  value: {{ . | quote }}
 {{- end }}
 - name: REPORT_STORAGE_BUCKET_NAME
   value: {{ .Values.storage.s3.buckets.reports | quote }}
-{{- if .Values.storage.s3.prefixes.reports }}
+{{- with .Values.storage.s3.prefixes.reports }}
 - name: REPORT_STORAGE_KEY_PREFIX
-  value: {{ .Values.storage.s3.prefixes.reports | quote }}
+  value: {{ . | quote }}
 {{- end }}
-{{- if .Values.storage.s3.forcePathStyle }}
+{{- with .Values.storage.s3.forcePathStyle }}
 - name: REPORT_STORAGE_FORCE_PATH_STYLE
-  value: "{{ .Values.storage.s3.forcePathStyle }}"
+  value: "{{ . }}"
 {{- end }}
 {{- end }}
 {{- end -}}
