@@ -42,7 +42,17 @@ A generic Helm chart for the ORT Server.
 | database.schema | string | `"ort-server"` | The database schema to use. |
 | database.username | string | `"ort-server"` | The username to use for connecting to the database. |
 | database.password | string | `"ort-server"` | The password to use for connecting to the database. |
+| database.connectionTimeout | string | `""` | Optional maximum time in milliseconds to wait for a connection from the pool. If not set, the server default is used. |
+| database.idleTimeout | string | `""` | Optional maximum time in milliseconds that a connection is allowed to sit idle in the pool. If not set, the server default is used. |
+| database.keepaliveTime | string | `""` | Optional interval in milliseconds in which connections are tested for aliveness. If not set, the server default is used. |
+| database.maxLifetime | string | `""` | Optional maximum lifetime in milliseconds of a connection in the pool. If not set, the server default is used. |
+| database.maximumPoolSize | string | `""` | Optional maximum size that the connection pool is allowed to reach. If not set, the server default is used. |
+| database.minimumIdle | string | `""` | Optional minimum number of idle connections that the pool tries to maintain. If not set, the server default is used. |
 | database.sslMode | string | `"require"` | The SSL mode to use for connecting to the database. Must be one of "disable", "require", "verify-ca", or "verify-full". |
+| database.sslCert | string | `""` | Optional path to the client SSL certificate to use for connecting to the database. |
+| database.sslKey | string | `""` | Optional path to the client SSL key to use for connecting to the database. |
+| database.sslRootCert | string | `""` | Optional path to the root SSL certificate to use for connecting to the database. |
+| database.initSqlStatement | string | `""` | Optional SQL statement that is executed when a new connection is created. |
 | secrets.azureKeyVault.enabled | bool | `false` | If enabled, user secrets are stored in Azure Key Vault. |
 | secrets.azureKeyVault.keyVaultName | string | `""` | The name of the Azure Key Vault to use. |
 | secrets.database.enabled | bool | `false` | If enabled, database credentials are stored in the database. |
