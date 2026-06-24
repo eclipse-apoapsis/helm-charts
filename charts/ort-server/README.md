@@ -22,7 +22,7 @@ A generic Helm chart for the ORT Server.
 | logFileService.elasticsearch.serverUrl | string | `""` | The base URL of the Elasticsearch HTTP API. |
 | logFileService.elasticsearch.index | string | `""` | The Elasticsearch index to query for log entries. |
 | logFileService.elasticsearch.namespace | string | `""` | The Kubernetes namespace in which the worker pods are running. Used by Elasticsearch to filter log queries. |
-| logFileService.elasticsearch.pageSize | string | `""` | Number of log entries to retrieve per Elasticsearch API call. |
+| logFileService.elasticsearch.pageSize | string | `""` | Optional number of log entries to retrieve per Elasticsearch API call. If not set, the server default is used. |
 | logFileService.elasticsearch.username | string | `""` | Optional username for Basic Auth authentication against the Elasticsearch API. |
 | logFileService.elasticsearch.password | string | `""` | Optional password for Basic Auth authentication against the Elasticsearch API. |
 | logFileService.elasticsearch.apiKey | string | `""` | Optional API key for authentication against the Elasticsearch API. |
@@ -30,7 +30,7 @@ A generic Helm chart for the ORT Server.
 | logFileService.loki.name | string | `"loki"` | The name of the log file provider to use. Currently only "loki" is supported. |
 | logFileService.loki.serverUrl | string | `""` | The base URL of the Loki HTTP API. The path for the endpoint (including /loki/api/v1) is appended automatically. |
 | logFileService.loki.namespace | string | `""` | The Kubernetes namespace in which the worker pods are running. Used by Loki to filter log queries. |
-| logFileService.loki.queryLimit | string | `""` | Maximum number of log lines to retrieve per Loki API call. If more logs are available, the provider sends additional requests. Defaults to 1000 if not set. |
+| logFileService.loki.queryLimit | string | `""` | Optional maximum number of log lines to retrieve per Loki API call. If more logs are available, the provider sends additional requests. |
 | logFileService.loki.username | string | `""` | Optional username for Basic Auth authentication against the Loki API (via reverse proxy). |
 | logFileService.loki.password | string | `""` | Optional password for Basic Auth authentication. If both username and password are set, an Authorization header is added to all Loki requests. |
 | logFileService.loki.tenantId | string | `""` | Optional tenant ID to use when Loki is running in multi-tenancy mode. Adds the X-Scope-OrgID header to all requests. |

@@ -30,7 +30,7 @@ logFileService:
     index: ""
     # -- The Kubernetes namespace in which the worker pods are running. Used by Elasticsearch to filter log queries.
     namespace: ""
-    # -- Number of log entries to retrieve per Elasticsearch API call.
+    # -- Optional number of log entries to retrieve per Elasticsearch API call. If not set, the server default is used.
     pageSize: ""
     # -- Optional username for Basic Auth authentication against the Elasticsearch API.
     username: ""
@@ -47,11 +47,13 @@ logFileService:
     serverUrl: ""
     # -- The Kubernetes namespace in which the worker pods are running. Used by Loki to filter log queries.
     namespace: ""
-    # -- Maximum number of log lines to retrieve per Loki API call. If more logs are available, the provider sends additional requests. Defaults to 1000 if not set.
+    # -- Optional maximum number of log lines to retrieve per Loki API call. If more logs are available, the provider sends additional
+    # requests.
     queryLimit: ""
     # -- Optional username for Basic Auth authentication against the Loki API (via reverse proxy).
     username: ""
-    # -- Optional password for Basic Auth authentication. If both username and password are set, an Authorization header is added to all Loki requests.
+    # -- Optional password for Basic Auth authentication. If both username and password are set, an Authorization header is added to all
+    # Loki requests.
     password: ""
     # -- Optional tenant ID to use when Loki is running in multi-tenancy mode. Adds the X-Scope-OrgID header to all requests.
     tenantId: ""

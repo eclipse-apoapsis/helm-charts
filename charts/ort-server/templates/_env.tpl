@@ -85,14 +85,22 @@
   value: {{ .Values.logFileService.elasticsearch.index | quote }}
 - name: ELASTICSEARCH_NAMESPACE
   value: {{ .Values.logFileService.elasticsearch.namespace | quote }}
+{{- with .Values.logFileService.elasticsearch.pageSize }}
 - name: ELASTICSEARCH_PAGE_SIZE
-  value: {{ .Values.logFileService.elasticsearch.pageSize | quote }}
+  value: {{ . | quote }}
+{{- end }}
+{{- with .Values.logFileService.elasticsearch.username }}
 - name: ELASTICSEARCH_USERNAME
-  value: {{ .Values.logFileService.elasticsearch.username | quote }}
+  value: {{ . | quote }}
+{{- end }}
+{{- with .Values.logFileService.elasticsearch.password }}
 - name: ELASTICSEARCH_PASSWORD
-  value: {{ .Values.logFileService.elasticsearch.password | quote }}
+  value: {{ . | quote }}
+{{- end }}
+{{- with .Values.logFileService.elasticsearch.apiKey }}
 - name: ELASTICSEARCH_API_KEY
-  value: {{ .Values.logFileService.elasticsearch.apiKey | quote }}
+  value: {{ . | quote }}
+{{- end }}
 {{- else if .Values.logFileService.loki.enabled }}
 - name: LOG_FILE_PROVIDER_NAME
   value: {{ .Values.logFileService.loki.name | quote }}
@@ -100,14 +108,22 @@
   value: {{ .Values.logFileService.loki.serverUrl | quote }}
 - name: LOKI_NAMESPACE
   value: {{ .Values.logFileService.loki.namespace | quote }}
+{{- with .Values.logFileService.loki.queryLimit }}
 - name: LOKI_QUERY_LIMIT
-  value: {{ .Values.logFileService.loki.queryLimit | quote }}
+  value: {{ . | quote }}
+{{- end }}
+{{- with .Values.logFileService.loki.username }}
 - name: LOKI_USERNAME
-  value: {{ .Values.logFileService.loki.username | quote }}
+  value: {{ . | quote }}
+{{- end }}
+{{- with .Values.logFileService.loki.password }}
 - name: LOKI_PASSWORD
-  value: {{ .Values.logFileService.loki.password | quote }}
+  value: {{ . | quote }}
+{{- end }}
+{{- with .Values.logFileService.loki.tenantId }}
 - name: LOKI_TENANT_ID
-  value: {{ .Values.logFileService.loki.tenantId | quote }}
+  value: {{ . | quote }}
+{{- end }}
 {{- end }}
 {{- end -}}
 
