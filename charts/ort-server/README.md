@@ -22,6 +22,8 @@ A generic Helm chart for the ORT Server.
 | logFileService.elasticsearch.serverUrl | string | `""` | The base URL of the Elasticsearch HTTP API. |
 | logFileService.elasticsearch.index | string | `""` | The Elasticsearch index to query for log entries. |
 | logFileService.elasticsearch.namespace | string | `""` | The Kubernetes namespace in which the worker pods are running. Used by Elasticsearch to filter log queries. |
+| logFileService.elasticsearch.namespaceField | string | `""` | Optional field name in the Elasticsearch index that contains the Kubernetes namespace of the worker pods. If not set, the default field name is used. |
+| logFileService.elasticsearch.fieldPrefix | string | `""` | Optional prefix to use for the field names extracted from the ORT Server logs, in case they are namespaced in the Elasticsearch index. This does not affec the namespaceField option. If not set, no prefix is used. |
 | logFileService.elasticsearch.pageSize | string | `""` | Optional number of log entries to retrieve per Elasticsearch API call. If not set, the server default is used. |
 | logFileService.elasticsearch.username | string | `""` | Optional username for Basic Auth authentication against the Elasticsearch API. |
 | logFileService.elasticsearch.password | string | `""` | Optional password for Basic Auth authentication against the Elasticsearch API. |

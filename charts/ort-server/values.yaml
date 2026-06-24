@@ -30,6 +30,12 @@ logFileService:
     index: ""
     # -- The Kubernetes namespace in which the worker pods are running. Used by Elasticsearch to filter log queries.
     namespace: ""
+    # -- Optional field name in the Elasticsearch index that contains the Kubernetes namespace of the worker pods. If not set, the default
+    # field name is used.
+    namespaceField: ""
+    # -- Optional prefix to use for the field names extracted from the ORT Server logs, in case they are namespaced in the Elasticsearch
+    # index. This does not affec the namespaceField option. If not set, no prefix is used.
+    fieldPrefix: ""
     # -- Optional number of log entries to retrieve per Elasticsearch API call. If not set, the server default is used.
     pageSize: ""
     # -- Optional username for Basic Auth authentication against the Elasticsearch API.
