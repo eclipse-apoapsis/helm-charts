@@ -85,6 +85,14 @@
   value: {{ .Values.logFileService.elasticsearch.index | quote }}
 - name: ELASTICSEARCH_NAMESPACE
   value: {{ .Values.logFileService.elasticsearch.namespace | quote }}
+{{- with .Values.logFileService.elasticsearch.namespaceField }}
+- name: ELASTICSEARCH_NAMESPACE_FIELD
+  value: {{ . | quote }}
+{{- end }}
+{{- with .Values.logFileService.elasticsearch.fieldPrefix }}
+- name: ELASTICSEARCH_FIELD_PREFIX
+  value: {{ . | quote }}
+{{- end }}
 {{- with .Values.logFileService.elasticsearch.pageSize }}
 - name: ELASTICSEARCH_PAGE_SIZE
   value: {{ . | quote }}
