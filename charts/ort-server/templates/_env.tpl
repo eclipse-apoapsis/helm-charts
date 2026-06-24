@@ -12,8 +12,48 @@
   value: {{ .Values.database.username | quote }}
 - name: DB_PASSWORD
   value: {{ .Values.database.password | quote }}
+{{- with .Values.database.connectionTimeout }}
+- name: DB_CONNECTION_TIMEOUT
+  value: {{ . | quote }}
+{{- end }}
+{{- with .Values.database.idleTimeout }}
+- name: DB_IDLE_TIMEOUT
+  value: {{ . | quote }}
+{{- end }}
+{{- with .Values.database.keepaliveTime }}
+- name: DB_KEEPALIVE_TIME
+  value: {{ . | quote }}
+{{- end }}
+{{- with .Values.database.maxLifetime }}
+- name: DB_MAX_LIFETIME
+  value: {{ . | quote }}
+{{- end }}
+{{- with .Values.database.maximumPoolSize }}
+- name: DB_MAXIMUM_POOL_SIZE
+  value: {{ . | quote }}
+{{- end }}
+{{- with .Values.database.minimumIdle }}
+- name: DB_MINIMUM_IDLE
+  value: {{ . | quote }}
+{{- end }}
 - name: DB_SSL_MODE
   value: {{ .Values.database.sslMode | quote }}
+{{- with .Values.database.sslCert }}
+- name: DB_SSL_CERT
+  value: {{ . | quote }}
+{{- end }}
+{{- with .Values.database.sslKey }}
+- name: DB_SSL_KEY
+  value: {{ . | quote }}
+{{- end }}
+{{- with .Values.database.sslRootCert }}
+- name: DB_SSL_ROOT_CERT
+  value: {{ . | quote }}
+{{- end }}
+{{- with .Values.database.initSqlStatement }}
+- name: DB_INIT_SQL_STATEMENT
+  value: {{ . | quote }}
+{{- end }}
 {{- end -}}
 
 {{/* Environment variables to configure the provider for admin secrets. */}}

@@ -77,8 +77,28 @@ database:
   username: ort-server
   # -- The password to use for connecting to the database.
   password: ort-server
+  # -- Optional maximum time in milliseconds to wait for a connection from the pool. If not set, the server default is used.
+  connectionTimeout: ""
+  # -- Optional maximum time in milliseconds that a connection is allowed to sit idle in the pool. If not set, the server default is used.
+  idleTimeout: ""
+  # -- Optional interval in milliseconds in which connections are tested for aliveness. If not set, the server default is used.
+  keepaliveTime: ""
+  # -- Optional maximum lifetime in milliseconds of a connection in the pool. If not set, the server default is used.
+  maxLifetime: ""
+  # -- Optional maximum size that the connection pool is allowed to reach. If not set, the server default is used.
+  maximumPoolSize: ""
+  # -- Optional minimum number of idle connections that the pool tries to maintain. If not set, the server default is used.
+  minimumIdle: ""
   # -- The SSL mode to use for connecting to the database. Must be one of "disable", "require", "verify-ca", or "verify-full".
   sslMode: require
+  # -- Optional path to the client SSL certificate to use for connecting to the database.
+  sslCert: ""
+  # -- Optional path to the client SSL key to use for connecting to the database.
+  sslKey: ""
+  # -- Optional path to the root SSL certificate to use for connecting to the database.
+  sslRootCert: ""
+  # -- Optional SQL statement that is executed when a new connection is created.
+  initSqlStatement: ""
 
 secrets:
   azureKeyVault:
