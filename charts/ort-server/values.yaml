@@ -543,6 +543,32 @@ ui:
     limits:
       cpu: 500m
       memory: 256Mi
+  livenessProbe:
+    # -- Enable livenessProbe for the UI deployment
+    enabled: true
+    # -- Initial delay before the liveness probe is initiated
+    initialDelaySeconds: 15
+    # -- Period between liveness probe checks
+    periodSeconds: 10
+    # -- Timeout for the liveness probe
+    timeoutSeconds: 5
+    # -- Minimum consecutive successes for the liveness probe to be considered successful
+    successThreshold: 1
+    # -- Minimum consecutive failures for the liveness probe to be considered failed
+    failureThreshold: 6
+  readinessProbe:
+    # -- Enable readinessProbe for the UI deployment
+    enabled: true
+    # -- Initial delay before the readiness probe is initiated
+    initialDelaySeconds: 15
+    # -- Period between readiness probe checks
+    periodSeconds: 10
+    # -- Timeout for the readiness probe
+    timeoutSeconds: 5
+    # -- Minimum consecutive successes for the readiness probe to be considered successful
+    successThreshold: 1
+    # -- Minimum consecutive failures for the readiness probe to be considered failed
+    failureThreshold: 6
   # -- Additional volumes for the UI deployment
   extraVolumes: []
   # -- Additional volume mounts for the UI deployment
