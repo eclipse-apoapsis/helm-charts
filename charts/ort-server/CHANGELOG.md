@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.21.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.20.2...ort-server-v0.21.0) (2026-07-13)
+
+
+### Features
+
+* Add liveness and readiness probes for orchestrator deployment ([c7017b7](https://github.com/eclipse-apoapsis/helm-charts/commit/c7017b772708b587673b606d252ccd2edc77602d))
+* Add liveness and readiness probes for UI deployment ([58c1999](https://github.com/eclipse-apoapsis/helm-charts/commit/58c19999161f0ae242e8f6900eb4ac2536be721b))
+* Add readiness probe for core deployment ([48aa8d3](https://github.com/eclipse-apoapsis/helm-charts/commit/48aa8d3fe570dc9869606b9f01ccff188aac86ec))
+
 ## [0.20.2](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.20.1...ort-server-v0.20.2) (2026-07-10)
 
 
