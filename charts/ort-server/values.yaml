@@ -457,6 +457,32 @@ orchestrator:
     limits:
       cpu: 1
       memory: 1Gi
+  livenessProbe:
+    # -- Enable livenessProbe for the orchestrator deployment
+    enabled: true
+    # -- Initial delay before the liveness probe is initiated
+    initialDelaySeconds: 30
+    # -- Period between liveness probe checks
+    periodSeconds: 10
+    # -- Timeout for the liveness probe
+    timeoutSeconds: 5
+    # -- Minimum consecutive successes for the liveness probe to be considered successful
+    successThreshold: 1
+    # -- Minimum consecutive failures for the liveness probe to be considered failed
+    failureThreshold: 3
+  readinessProbe:
+    # -- Enable readinessProbe for the orchestrator deployment
+    enabled: false
+    # -- Initial delay before the readiness probe is initiated
+    initialDelaySeconds: 30
+    # -- Period between readiness probe checks
+    periodSeconds: 10
+    # -- Timeout for the readiness probe
+    timeoutSeconds: 5
+    # -- Minimum consecutive successes for the readiness probe to be considered successful
+    successThreshold: 1
+    # -- Minimum consecutive failures for the readiness probe to be considered failed
+    failureThreshold: 3
   # -- Additional volumes for the orchestrator deployment
   extraVolumes: []
   # -- Additional volume mounts for the orchestrator deployment

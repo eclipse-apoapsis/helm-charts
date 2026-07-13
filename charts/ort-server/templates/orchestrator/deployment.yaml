@@ -41,6 +41,32 @@ spec:
           resources:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+          {{- if .Values.orchestrator.livenessProbe.enabled }}
+          livenessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - "jcmd 1 VM.version"
+            initialDelaySeconds: {{ .Values.orchestrator.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.orchestrator.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.orchestrator.livenessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.orchestrator.livenessProbe.successThreshold }}
+            failureThreshold: {{ .Values.orchestrator.livenessProbe.failureThreshold }}
+          {{- end }}
+          {{- if .Values.orchestrator.readinessProbe.enabled }}
+          readinessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - "jcmd 1 VM.version"
+            initialDelaySeconds: {{ .Values.orchestrator.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.orchestrator.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.orchestrator.readinessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.orchestrator.readinessProbe.successThreshold }}
+            failureThreshold: {{ .Values.orchestrator.readinessProbe.failureThreshold }}
+          {{- end }}
           volumeMounts:
             {{- with .Values.orchestrator.extraVolumeMounts }}
             {{- toYaml . | nindent 12 }}
