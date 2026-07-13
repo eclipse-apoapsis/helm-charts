@@ -169,6 +169,12 @@ A generic Helm chart for the ORT Server.
 | core.livenessProbe.timeoutSeconds | int | `5` | Timeout for the liveness probe |
 | core.livenessProbe.successThreshold | int | `1` | Minimum consecutive successes for the liveness probe to be considered successful |
 | core.livenessProbe.failureThreshold | int | `6` | Minimum consecutive failures for the liveness probe to be considered failed |
+| core.readinessProbe.enabled | bool | `false` | Enable readinessProbe for the core deployment |
+| core.readinessProbe.initialDelaySeconds | int | `60` | Initial delay before the readiness probe is initiated |
+| core.readinessProbe.periodSeconds | int | `10` | Period between readiness probe checks |
+| core.readinessProbe.timeoutSeconds | int | `5` | Timeout for the readiness probe |
+| core.readinessProbe.successThreshold | int | `1` | Minimum consecutive successes for the readiness probe to be considered successful |
+| core.readinessProbe.failureThreshold | int | `6` | Minimum consecutive failures for the readiness probe to be considered failed |
 | core.resources | object | `{"limits":{"cpu":2,"memory":"2Gi"},"requests":{"cpu":"100m","memory":"512Mi"}}` | CPU and memory requests and limits for the core deployment |
 | core.podSecurityContext | object | `{}` | Pod security context for the core deployment |
 | core.certificates.path | string | `""` | Path to a directory containing PEM-encoded certificates to import into the Java keystore at startup. Each file in the directory must contain one PEM-encoded certificate. When set, the container command is overridden to run the import script before starting the application. Typical usage: mount a Kubernetes Secret (one key per certificate) via extraVolumes and extraVolumeMounts, then set this to the mount path. |

@@ -407,6 +407,19 @@ core:
     successThreshold: 1
     # -- Minimum consecutive failures for the liveness probe to be considered failed
     failureThreshold: 6
+  readinessProbe:
+    # -- Enable readinessProbe for the core deployment
+    enabled: false
+    # -- Initial delay before the readiness probe is initiated
+    initialDelaySeconds: 60
+    # -- Period between readiness probe checks
+    periodSeconds: 10
+    # -- Timeout for the readiness probe
+    timeoutSeconds: 5
+    # -- Minimum consecutive successes for the readiness probe to be considered successful
+    successThreshold: 1
+    # -- Minimum consecutive failures for the readiness probe to be considered failed
+    failureThreshold: 6
   # -- CPU and memory requests and limits for the core deployment
   resources:
     requests:
