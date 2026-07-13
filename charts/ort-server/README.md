@@ -184,6 +184,18 @@ A generic Helm chart for the ORT Server.
 | core.extraInitContainers | list | `[]` | Additional init containers for the core deployment |
 | orchestrator.strategy | object | `{"type":"RollingUpdate"}` | Deployment strategy for the orchestrator component |
 | orchestrator.resources | object | `{"limits":{"cpu":1,"memory":"1Gi"},"requests":{"cpu":"100m","memory":"256Mi"}}` | CPU and memory requests and limits for the orchestrator deployment |
+| orchestrator.livenessProbe.enabled | bool | `true` | Enable livenessProbe for the orchestrator deployment |
+| orchestrator.livenessProbe.initialDelaySeconds | int | `30` | Initial delay before the liveness probe is initiated |
+| orchestrator.livenessProbe.periodSeconds | int | `10` | Period between liveness probe checks |
+| orchestrator.livenessProbe.timeoutSeconds | int | `5` | Timeout for the liveness probe |
+| orchestrator.livenessProbe.successThreshold | int | `1` | Minimum consecutive successes for the liveness probe to be considered successful |
+| orchestrator.livenessProbe.failureThreshold | int | `3` | Minimum consecutive failures for the liveness probe to be considered failed |
+| orchestrator.readinessProbe.enabled | bool | `false` | Enable readinessProbe for the orchestrator deployment |
+| orchestrator.readinessProbe.initialDelaySeconds | int | `30` | Initial delay before the readiness probe is initiated |
+| orchestrator.readinessProbe.periodSeconds | int | `10` | Period between readiness probe checks |
+| orchestrator.readinessProbe.timeoutSeconds | int | `5` | Timeout for the readiness probe |
+| orchestrator.readinessProbe.successThreshold | int | `1` | Minimum consecutive successes for the readiness probe to be considered successful |
+| orchestrator.readinessProbe.failureThreshold | int | `3` | Minimum consecutive failures for the readiness probe to be considered failed |
 | orchestrator.extraVolumes | list | `[]` | Additional volumes for the orchestrator deployment |
 | orchestrator.extraVolumeMounts | list | `[]` | Additional volume mounts for the orchestrator deployment |
 | orchestrator.extraEnv | list | `[]` | Additional environment variables for the orchestrator deployment |
