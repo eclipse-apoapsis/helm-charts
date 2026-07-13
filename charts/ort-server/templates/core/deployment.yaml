@@ -63,6 +63,18 @@ spec:
             successThreshold: {{ .Values.core.livenessProbe.successThreshold }}
             failureThreshold: {{ .Values.core.livenessProbe.failureThreshold }}
           {{- end }}
+          {{- if .Values.core.readinessProbe.enabled }}
+          readinessProbe:
+            httpGet:
+              path: /api/v1/liveness
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: {{ .Values.core.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.core.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.core.readinessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.core.readinessProbe.successThreshold }}
+            failureThreshold: {{ .Values.core.readinessProbe.failureThreshold }}
+          {{- end }}
           volumeMounts:
             {{- with .Values.core.extraVolumeMounts }}
             {{- toYaml . | nindent 12 }}
