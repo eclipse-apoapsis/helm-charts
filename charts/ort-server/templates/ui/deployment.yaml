@@ -39,6 +39,28 @@ spec:
           {{- end }}
           ports:
             - containerPort: 8080
+          {{- if .Values.ui.livenessProbe.enabled }}
+          livenessProbe:
+            httpGet:
+              path: /index.html
+              port: 8080
+            initialDelaySeconds: {{ .Values.ui.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.ui.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.ui.livenessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.ui.livenessProbe.successThreshold }}
+            failureThreshold: {{ .Values.ui.livenessProbe.failureThreshold }}
+          {{- end }}
+          {{- if .Values.ui.readinessProbe.enabled }}
+          readinessProbe:
+            httpGet:
+              path: /index.html
+              port: 8080
+            initialDelaySeconds: {{ .Values.ui.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.ui.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.ui.readinessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.ui.readinessProbe.successThreshold }}
+            failureThreshold: {{ .Values.ui.readinessProbe.failureThreshold }}
+          {{- end }}
           volumeMounts:
             {{- with .Values.ui.extraVolumeMounts }}
             {{- toYaml . | nindent 12 }}

@@ -229,6 +229,18 @@ A generic Helm chart for the ORT Server.
 | ui.clientId | string | `""` |  |
 | ui.service.port | int | `8082` |  |
 | ui.resources | object | `{"limits":{"cpu":"500m","memory":"256Mi"},"requests":{"cpu":"50m","memory":"64Mi"}}` | CPU and memory requests and limits for the UI deployment |
+| ui.livenessProbe.enabled | bool | `true` | Enable livenessProbe for the UI deployment |
+| ui.livenessProbe.initialDelaySeconds | int | `15` | Initial delay before the liveness probe is initiated |
+| ui.livenessProbe.periodSeconds | int | `10` | Period between liveness probe checks |
+| ui.livenessProbe.timeoutSeconds | int | `5` | Timeout for the liveness probe |
+| ui.livenessProbe.successThreshold | int | `1` | Minimum consecutive successes for the liveness probe to be considered successful |
+| ui.livenessProbe.failureThreshold | int | `6` | Minimum consecutive failures for the liveness probe to be considered failed |
+| ui.readinessProbe.enabled | bool | `true` | Enable readinessProbe for the UI deployment |
+| ui.readinessProbe.initialDelaySeconds | int | `15` | Initial delay before the readiness probe is initiated |
+| ui.readinessProbe.periodSeconds | int | `10` | Period between readiness probe checks |
+| ui.readinessProbe.timeoutSeconds | int | `5` | Timeout for the readiness probe |
+| ui.readinessProbe.successThreshold | int | `1` | Minimum consecutive successes for the readiness probe to be considered successful |
+| ui.readinessProbe.failureThreshold | int | `6` | Minimum consecutive failures for the readiness probe to be considered failed |
 | ui.extraVolumes | list | `[]` | Additional volumes for the UI deployment |
 | ui.extraVolumeMounts | list | `[]` | Additional volume mounts for the UI deployment |
 | extraObjects | list | `[]` |  |
