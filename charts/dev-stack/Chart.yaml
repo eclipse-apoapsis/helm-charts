@@ -3,7 +3,7 @@ name: dev-stack
 version: 0.1.0
 dependencies:
   - name: postgres
-    version: 0.19.9
+    version: 0.19.10
     repository: "oci://registry-1.docker.io/cloudpirates"
     alias: dev-postgres
   - name: eck-elasticsearch
