@@ -75,8 +75,13 @@ database:
   schema: ort-server
   # -- The username to use for connecting to the database.
   username: ort-server
-  # -- The password to use for connecting to the database.
+  # -- The password to use for connecting to the database. Ignored if `existingSecret` is set.
   password: ort-server
+  # -- Name of an existing secret to use for the database password, instead of setting it in plain text via `password`.
+  existingSecret: ""
+  secretKeys:
+    # -- Name of the key in the existing secret that contains the database password.
+    passwordKey: "database-password"
   # -- Optional maximum time in milliseconds to wait for a connection from the pool. If not set, the server default is used.
   connectionTimeout: ""
   # -- Optional maximum time in milliseconds that a connection is allowed to sit idle in the pool. If not set, the server default is used.
@@ -109,10 +114,17 @@ secrets:
   database:
     # -- If enabled, database credentials are stored in the database.
     enabled: false
-    # -- Master password for encrypting secrets stored in the database. Must be at least 16 characters long.
+    # -- Master password for encrypting secrets stored in the database. Must be at least 16 characters long. Ignored if `existingSecret` is set.
     masterPassword: ""
-    # -- Salt for encrypting secrets stored in the database. Must be a hex-encoded string of at least 32 hex characters.
+    # -- Salt for encrypting secrets stored in the database. Must be a hex-encoded string of at least 32 hex characters. Ignored if `existingSecret` is set.
     salt: ""
+    # -- Name of an existing secret to use for the master password and salt, instead of setting them in plain text via `masterPassword`/`salt`.
+    existingSecret: ""
+    secretKeys:
+      # -- Name of the key in the existing secret that contains the master password.
+      masterPasswordKey: "master-password"
+      # -- Name of the key in the existing secret that contains the salt.
+      saltKey: "salt"
     # -- Version of the encryption key. Do not change, key rotation is not yet supported.
     keyVersion: 1
   fileBased:
@@ -362,8 +374,13 @@ transport:
     serverUri: ""
     # -- The username to use for connecting to the RabbitMQ server.
     username: ""
-    # -- The password to use for connecting to the RabbitMQ server.
+    # -- The password to use for connecting to the RabbitMQ server. Ignored if `existingSecret` is set.
     password: ""
+    # -- Name of an existing secret to use for the RabbitMQ password, instead of setting it in plain text via `password`.
+    existingSecret: ""
+    secretKeys:
+      # -- Name of the key in the existing secret that contains the RabbitMQ password.
+      passwordKey: "rabbitmq-password"
 
 core:
   # -- Deployment strategy for the core component
@@ -390,8 +407,13 @@ core:
     apiUrl: https://keycloak.ortserver.org/admin/realms/master
     # -- The username to use for authenticating to the Keycloak admin API. Set to an empty string when using the client credentials flow.
     apiUser: ort-server
-    # -- The password to use for authenticating to the Keycloak admin API.
+    # -- The password to use for authenticating to the Keycloak admin API. Ignored if `existingSecret` is set.
     apiSecret: ort-server
+    # -- Name of an existing secret to use for the Keycloak admin API password, instead of setting it in plain text via `apiSecret`.
+    existingSecret: ""
+    secretKeys:
+      # -- Name of the key in the existing secret that contains the Keycloak admin API password.
+      apiSecretKey: "keycloak-api-secret"
     # -- The client ID to use for authenticating to the Keycloak admin API.
     clientId: admin-cli
   livenessProbe:

@@ -11,7 +11,14 @@
 - name: DB_USERNAME
   value: {{ .Values.database.username | quote }}
 - name: DB_PASSWORD
+{{- if .Values.database.existingSecret }}
+  valueFrom:
+    secretKeyRef:
+      name: {{ .Values.database.existingSecret }}
+      key: {{ .Values.database.secretKeys.passwordKey }}
+{{- else }}
   value: {{ .Values.database.password | quote }}
+{{- end }}
 {{- with .Values.database.connectionTimeout }}
 - name: DB_CONNECTION_TIMEOUT
   value: {{ . | quote }}
@@ -56,6 +63,23 @@
 {{- end }}
 {{- end -}}
 
+{{/*
+Environment variable entry for a RabbitMQ password (used for CONFIG_FORCE_* overrides). Expects a dict with:
+  - root: the root template context (.)
+  - envName: the name of the environment variable to set
+*/}}
+{{- define "ortserver.env.rabbitmqPassword" -}}
+- name: {{ .envName }}
+{{- if .root.Values.transport.rabbitmq.existingSecret }}
+  valueFrom:
+    secretKeyRef:
+      name: {{ .root.Values.transport.rabbitmq.existingSecret }}
+      key: {{ .root.Values.transport.rabbitmq.secretKeys.passwordKey }}
+{{- else }}
+  value: {{ .root.Values.transport.rabbitmq.password | quote }}
+{{- end }}
+{{- end -}}
+
 {{/* Environment variables to configure the provider for admin secrets. */}}
 {{- define "ortserver.env.adminSecrets" -}}
 - name: ALLOW_SECRETS_FROM_CONFIG
@@ -73,9 +97,23 @@
 - name: SECRETS_PROVIDER_NAME
   value: database
 - name: DATABASE_SECRETS_MASTER_PASSWORD
+{{- if .Values.secrets.database.existingSecret }}
+  valueFrom:
+    secretKeyRef:
+      name: {{ .Values.secrets.database.existingSecret }}
+      key: {{ .Values.secrets.database.secretKeys.masterPasswordKey }}
+{{- else }}
   value: {{ .Values.secrets.database.masterPassword | quote }}
+{{- end }}
 - name: DATABASE_SECRETS_SALT
+{{- if .Values.secrets.database.existingSecret }}
+  valueFrom:
+    secretKeyRef:
+      name: {{ .Values.secrets.database.existingSecret }}
+      key: {{ .Values.secrets.database.secretKeys.saltKey }}
+{{- else }}
   value: {{ .Values.secrets.database.salt | quote }}
+{{- end }}
 - name: DATABASE_SECRETS_KEY_VERSION
   value: "{{ .Values.secrets.database.keyVersion }}"
 {{- else if .Values.secrets.fileBased.enabled }}
