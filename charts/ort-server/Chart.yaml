@@ -2,5 +2,5 @@ apiVersion: v2
 name: ort-server
 description: A generic Helm chart for the ORT Server.
 type: application
-version: 0.21.2
+version: 0.21.3
 appVersion: "0.82.1"

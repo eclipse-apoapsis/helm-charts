@@ -1,6 +1,6 @@
 # ort-server
 
-![Version: 0.21.2][version-badge] <!-- x-release-please-version -->
+![Version: 0.21.3][version-badge] <!-- x-release-please-version -->
 ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 ![AppVersion: 0.82.1](https://img.shields.io/badge/AppVersion-0.82.1-informational?style=flat-square)
 
@@ -41,7 +41,9 @@ A generic Helm chart for the ORT Server.
 | database.name | string | `"ort-server"` | The name of the database to connect to. |
 | database.schema | string | `"ort-server"` | The database schema to use. |
 | database.username | string | `"ort-server"` | The username to use for connecting to the database. |
-| database.password | string | `"ort-server"` | The password to use for connecting to the database. |
+| database.password | string | `"ort-server"` | The password to use for connecting to the database. Ignored if `existingSecret` is set. |
+| database.existingSecret | string | `""` | Name of an existing secret to use for the database password, instead of setting it in plain text via `password`. |
+| database.secretKeys.passwordKey | string | `"database-password"` | Name of the key in the existing secret that contains the database password. |
 | database.connectionTimeout | string | `""` | Optional maximum time in milliseconds to wait for a connection from the pool. If not set, the server default is used. |
 | database.idleTimeout | string | `""` | Optional maximum time in milliseconds that a connection is allowed to sit idle in the pool. If not set, the server default is used. |
 | database.keepaliveTime | string | `""` | Optional interval in milliseconds in which connections are tested for aliveness. If not set, the server default is used. |
@@ -56,8 +58,11 @@ A generic Helm chart for the ORT Server.
 | secrets.azureKeyVault.enabled | bool | `false` | If enabled, user secrets are stored in Azure Key Vault. |
 | secrets.azureKeyVault.keyVaultName | string | `""` | The name of the Azure Key Vault to use. |
 | secrets.database.enabled | bool | `false` | If enabled, database credentials are stored in the database. |
-| secrets.database.masterPassword | string | `""` | Master password for encrypting secrets stored in the database. Must be at least 16 characters long. |
-| secrets.database.salt | string | `""` | Salt for encrypting secrets stored in the database. Must be a hex-encoded string of at least 32 hex characters. |
+| secrets.database.masterPassword | string | `""` | Master password for encrypting secrets stored in the database. Must be at least 16 characters long. Ignored if `existingSecret` is set. |
+| secrets.database.salt | string | `""` | Salt for encrypting secrets stored in the database. Must be a hex-encoded string of at least 32 hex characters. Ignored if `existingSecret` is set. |
+| secrets.database.existingSecret | string | `""` | Name of an existing secret to use for the master password and salt, instead of setting them in plain text via `masterPassword`/`salt`. |
+| secrets.database.secretKeys.masterPasswordKey | string | `"master-password"` | Name of the key in the existing secret that contains the master password. |
+| secrets.database.secretKeys.saltKey | string | `"salt"` | Name of the key in the existing secret that contains the salt. |
 | secrets.database.keyVersion | int | `1` | Version of the encryption key. Do not change, key rotation is not yet supported. |
 | secrets.fileBased.enabled | bool | `true` | If enabled, user secrets are stored in a file. This should only be used for testing, not in production. |
 | secrets.fileBased.path | string | `"/mnt/secrets/secrets"` | Path to the file where user secrets are stored. |
@@ -150,7 +155,9 @@ A generic Helm chart for the ORT Server.
 | transport.rabbitmq.enabled | bool | `true` | If enabled, RabbitMQ is used as the message broker. |
 | transport.rabbitmq.serverUri | string | `""` | The URI of the RabbitMQ server to connect to when using RabbitMQ as the message broker. Must be in the format amqp://username:password@host:port/vhost. |
 | transport.rabbitmq.username | string | `""` | The username to use for connecting to the RabbitMQ server. |
-| transport.rabbitmq.password | string | `""` | The password to use for connecting to the RabbitMQ server. |
+| transport.rabbitmq.password | string | `""` | The password to use for connecting to the RabbitMQ server. Ignored if `existingSecret` is set. |
+| transport.rabbitmq.existingSecret | string | `""` | Name of an existing secret to use for the RabbitMQ password, instead of setting it in plain text via `password`. |
+| transport.rabbitmq.secretKeys.passwordKey | string | `"rabbitmq-password"` | Name of the key in the existing secret that contains the RabbitMQ password. |
 | core.strategy | object | `{"type":"RollingUpdate"}` | Deployment strategy for the core component |
 | core.uiHosts | string | `"localhost:5173,localhost:8082"` | Comma-separated list of hosts that are allowed for cross-origin request sharing (CORS) when accessing the API. This should usually include the host of the UI deployment. |
 | core.service.port | int | `8081` | The port to use for the core service (API). |
@@ -161,7 +168,9 @@ A generic Helm chart for the ORT Server.
 | core.keycloak.accessTokenUrl | string | `"https://keycloak.ortserver.org/realms/master/protocol/openid-connect/token"` | The URL of the Keycloak server's token endpoint for obtaining access tokens to call the Keycloak API. |
 | core.keycloak.apiUrl | string | `"https://keycloak.ortserver.org/admin/realms/master"` | The URL of the Keycloak server's admin API endpoint. |
 | core.keycloak.apiUser | string | `"ort-server"` | The username to use for authenticating to the Keycloak admin API. Set to an empty string when using the client credentials flow. |
-| core.keycloak.apiSecret | string | `"ort-server"` | The password to use for authenticating to the Keycloak admin API. |
+| core.keycloak.apiSecret | string | `"ort-server"` | The password to use for authenticating to the Keycloak admin API. Ignored if `existingSecret` is set. |
+| core.keycloak.existingSecret | string | `""` | Name of an existing secret to use for the Keycloak admin API password, instead of setting it in plain text via `apiSecret`. |
+| core.keycloak.secretKeys.apiSecretKey | string | `"keycloak-api-secret"` | Name of the key in the existing secret that contains the Keycloak admin API password. |
 | core.keycloak.clientId | string | `"admin-cli"` | The client ID to use for authenticating to the Keycloak admin API. |
 | core.livenessProbe.enabled | bool | `true` | Enable livenessProbe for the core deployment |
 | core.livenessProbe.initialDelaySeconds | int | `60` | Initial delay before the liveness probe is initiated |
@@ -258,5 +267,5 @@ A generic Helm chart for the ORT Server.
 | extraObjects | list | `[]` |  |
 
 <!-- x-release-please-start-version -->
-[version-badge]: https://img.shields.io/badge/Version-0.21.2%2Dinformational?style=flat-square
+[version-badge]: https://img.shields.io/badge/Version-0.21.3%2Dinformational?style=flat-square
 <!-- x-release-please-end -->
