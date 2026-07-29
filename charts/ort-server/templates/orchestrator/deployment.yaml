@@ -97,8 +97,7 @@ spec:
             # The RabbitMQ transport does not use the default properties for the credentials.
             - name: CONFIG_FORCE_orchestrator_receiver_rabbitMqUser
               value: {{ .Values.transport.rabbitmq.username }}
-            - name: CONFIG_FORCE_orchestrator_receiver_rabbitMqPassword
-              value: {{ .Values.transport.rabbitmq.password }}
+            {{- include "ortserver.env.rabbitmqPassword" (dict "root" $ "envName" "CONFIG_FORCE_orchestrator_receiver_rabbitMqPassword") | nindent 12 }}
             # - name: ORCHESTRATOR_RECEIVER_TRANSPORT_USERNAME
             #   value: {{ .Values.transport.rabbitmq.username }}
             # - name: ORCHESTRATOR_RECEIVER_TRANSPORT_PASSWORD
@@ -116,8 +115,7 @@ spec:
             # The RabbitMQ transport does not use the default properties for the credentials.
             - name: CONFIG_FORCE_orchestrator_sender_rabbitMqUser
               value: {{ .Values.transport.rabbitmq.username }}
-            - name: CONFIG_FORCE_orchestrator_sender_rabbitMqPassword
-              value: {{ .Values.transport.rabbitmq.password }}
+            {{- include "ortserver.env.rabbitmqPassword" (dict "root" $ "envName" "CONFIG_FORCE_orchestrator_sender_rabbitMqPassword") | nindent 12 }}
             # - name: ORCHESTRATOR_SENDER_TRANSPORT_USERNAME
             #   value: {{ .Values.transport.rabbitmq.username }}
             # - name: ORCHESTRATOR_SENDER_TRANSPORT_PASSWORD
