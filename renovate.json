@@ -21,5 +21,11 @@
       "depNameTemplate": "eclipse-apoapsis/ort-server",
       "datasourceTemplate": "github-releases"
     }
+  ],
+  "packageRules": [
+    {
+      "matchPackageNames": ["eck-elasticsearch", "eck-kibana", "eck-logstash"],
+      "groupName": "elasticsearch-stack"
+    }
   ]
 }
