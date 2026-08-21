@@ -23,7 +23,7 @@ dependencies:
     repository: "oci://registry-1.docker.io/cloudpirates"
     alias: dev-rabbitmq
   - name: keycloak
-    version: 0.21.30
+    version: 0.21.31
     repository: "oci://registry-1.docker.io/cloudpirates"
     alias: dev-keycloak
   - name: ort-server
