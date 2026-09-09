@@ -375,6 +375,13 @@ core:
   service:
     # -- The port to use for the core service (API).
     port: 8081
+  cli:
+    # -- The Keycloak base URL the ORT Server CLI should use for authentication.
+    keycloakBaseUrl: ""
+    # -- The Keycloak realm the ORT Server CLI should use for authentication.
+    keycloakRealm: ""
+    # -- The Keycloak client ID the ORT Server CLI should use for authentication.
+    keycloakClientId: ""
   keycloak:
     # -- The URI of the Keycloak server's JWKS endpoint for validating JWTs.
     jwtUri: https://keycloak.ortserver.org/realms/master/protocol/openid-connect/certs

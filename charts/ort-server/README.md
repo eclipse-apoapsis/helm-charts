@@ -154,6 +154,9 @@ A generic Helm chart for the ORT Server.
 | core.strategy | object | `{"type":"RollingUpdate"}` | Deployment strategy for the core component |
 | core.uiHosts | string | `"localhost:5173,localhost:8082"` | Comma-separated list of hosts that are allowed for cross-origin request sharing (CORS) when accessing the API. This should usually include the host of the UI deployment. |
 | core.service.port | int | `8081` | The port to use for the core service (API). |
+| core.cli.keycloakBaseUrl | string | `""` | The Keycloak base URL the ORT Server CLI should use for authentication. |
+| core.cli.keycloakRealm | string | `""` | The Keycloak realm the ORT Server CLI should use for authentication. |
+| core.cli.keycloakClientId | string | `""` | The Keycloak client ID the ORT Server CLI should use for authentication. |
 | core.keycloak.jwtUri | string | `"https://keycloak.ortserver.org/realms/master/protocol/openid-connect/certs"` | The URI of the Keycloak server's JWKS endpoint for validating JWTs. |
 | core.keycloak.jwtIssuer | string | `"https://keycloak.ortserver.org/realms/master"` | The expected issuer claim in the JWTs. |
 | core.keycloak.jwtAudience | string | `"ort-server"` | The expected audience claim in the JWTs. |
