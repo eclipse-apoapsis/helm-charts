@@ -100,6 +100,20 @@ spec:
             - name: UI_HOSTS
               value: {{ .Values.core.uiHosts }}
 
+            # CLI
+            {{- if .Values.core.cli.keycloakBaseUrl }}
+            - name: CLI_KEYCLOAK_BASE_URL
+              value: {{ .Values.core.cli.keycloakBaseUrl }}
+            {{- end }}
+            {{- if .Values.core.cli.keycloakRealm }}
+            - name: CLI_KEYCLOAK_REALM
+              value: {{ .Values.core.cli.keycloakRealm }}
+            {{- end }}
+            {{- if .Values.core.cli.keycloakClientId }}
+            - name: CLI_KEYCLOAK_CLIENT_ID
+              value: {{ .Values.core.cli.keycloakClientId }}
+            {{- end }}
+
             # Keycloak
             - name: JWT_URI
               value: {{ .Values.core.keycloak.jwtUri }}
