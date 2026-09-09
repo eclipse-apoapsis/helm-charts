@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.22.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.21.10...ort-server-v0.22.0) (2026-09-09)
+
+
+### Features
+
+* Add options to configure the CLI authentication ([bb17b37](https://github.com/eclipse-apoapsis/helm-charts/commit/bb17b377caa777b80c56c164fb8422101241cf41))
+
 ## [0.21.10](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.21.9...ort-server-v0.21.10) (2026-09-07)
 
 
