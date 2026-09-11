@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.23.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.22.0...ort-server-v0.23.0) (2026-09-11)
+
+
+### Features
+
+* add support for existing Kubernetes secrets ([aa10715](https://github.com/eclipse-apoapsis/helm-charts/commit/aa10715192472815b311b4c0db9e1b51a0b745bb))
+
 ## [0.22.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.21.10...ort-server-v0.22.0) (2026-09-09)
 
 
