@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.24.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.23.0...ort-server-v0.24.0) (2026-09-17)
+
+
+### Features
+
+* Configure config file provider for core ([3925408](https://github.com/eclipse-apoapsis/helm-charts/commit/3925408dc0f325123c95a4ad7cf7abe26b06cdc1))
+
+
+### Dependencies
+
+* update dependency eclipse-apoapsis/ort-server to v0.92.0 ([c82e9b6](https://github.com/eclipse-apoapsis/helm-charts/commit/c82e9b6078b683a73287db7295ac9d2a2bd2369a))
+
 ## [0.23.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.22.0...ort-server-v0.23.0) (2026-09-11)
 
 
