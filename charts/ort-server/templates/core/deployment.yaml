@@ -94,6 +94,14 @@ spec:
             - name: CORE_SECRET_FILES
               value: {{ .Values.configSecrets.files }}
 
+            # Config file provider
+            {{- if .Values.configFileProvider.gitConfig.enabled}}
+            - name: CONFIG_FILE_PROVIDER
+              value: git-config
+            - name: CONFIG_GIT_URL
+              value: {{ .Values.configFileProvider.gitConfig.repositoryUrl }}
+            {{- end }}
+
             # Webserver
             - name: PORT
               value: "8080"
