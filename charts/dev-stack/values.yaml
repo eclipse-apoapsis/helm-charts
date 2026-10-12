@@ -12,7 +12,12 @@ ort-server:
       advisor:
         mountPvcs: secrets-pvc->/mnt/secrets,r
       analyzer:
-        mountPvcs: secrets-pvc->/mnt/secrets,r
+        mountPvcs: secrets=secrets-pvc->/mnt/secrets,r
+        phases:
+          preparationVolumeMounts:
+            - secrets
+          analysisEnvironmentAllowlist:
+            - LOG_FORMAT
       config:
         mountPvcs: secrets-pvc->/mnt/secrets,r
       evaluator:
