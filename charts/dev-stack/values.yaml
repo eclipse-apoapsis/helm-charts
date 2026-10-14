@@ -9,6 +9,23 @@ ort-server:
   transport:
     kubernetes:
       imagePullPolicy: IfNotPresent
+      advisor:
+        mountPvcs: secrets-pvc->/mnt/secrets,r
+      analyzer:
+        mountPvcs: secrets=secrets-pvc->/mnt/secrets,r
+        phases:
+          preparationVolumeMounts:
+            - secrets
+          analysisEnvironmentAllowlist:
+            - LOG_FORMAT
+      config:
+        mountPvcs: secrets-pvc->/mnt/secrets,r
+      evaluator:
+        mountPvcs: secrets-pvc->/mnt/secrets,r
+      reporter:
+        mountPvcs: secrets-pvc->/mnt/secrets,r
+      scanner:
+        mountPvcs: secrets-pvc->/mnt/secrets,r
     rabbitmq:
       enabled: true
       serverUri: amqp://dev-dev-rabbitmq:5672
@@ -79,18 +96,6 @@ ort-server:
     extraEnv:
       - name: LOG_FORMAT
         value: json
-  advisor:
-    mountPvcs: secrets-pvc->/mnt/secrets,r
-  analyzer:
-    mountPvcs: secrets-pvc->/mnt/secrets,r
-  config:
-    mountPvcs: secrets-pvc->/mnt/secrets,r
-  evaluator:
-    mountPvcs: secrets-pvc->/mnt/secrets,r
-  reporter:
-    mountPvcs: secrets-pvc->/mnt/secrets,r
-  scanner:
-    mountPvcs: secrets-pvc->/mnt/secrets,r
   ui:
     url: http://localhost:8082
     apiUrl: http://localhost:8081

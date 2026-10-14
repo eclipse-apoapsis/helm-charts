@@ -262,6 +262,19 @@ transport:
       # the Secret to mount.
       mountSecrets: ""
     analyzer:
+      # Analyzer phase setup.
+      phases:
+        # -- Run preparation, analysis, and result in separate containers. Disable to use the legacy single-container worker.
+        enabled: true
+        # -- Names of secret or PVC mounts needed by the preparation container. Declare these mounts with a name (for example, 
+        # "secrets=my-secret->/mnt/secrets|secrets") in analyzer.mountSecrets or analyzer.mountPvcs. Unnamed mounts are shared with analysis.
+        preparationVolumeMounts: []
+        # -- Names of secret or PVC mounts needed by the result container. Declare these mounts with a name (for example, 
+        # "secrets=my-secret->/mnt/secrets|secrets") in analyzer.mountSecrets or analyzer.mountPvcs. Unnamed mounts are shared with analysis.
+        resultVolumeMounts: []
+        # -- Names of environment variables that should be inherited by the analysis container when phases are enabled. Use [] to inherit
+        # none.
+        analysisEnvironmentAllowlist: []
       # -- CPU request for analyzer worker pods. If not set, no CPU request is defined.
       cpuRequest: ""
       # -- CPU limit for analyzer worker pods. If not set, no CPU limit is defined.
