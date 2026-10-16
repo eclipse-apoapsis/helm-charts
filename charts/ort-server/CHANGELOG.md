@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.24.4](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.24.3...ort-server-v0.24.4) (2026-10-16)
+
+
+### Dependencies
+
+* update dependency eclipse-apoapsis/ort-server to v0.96.0 ([2c02662](https://github.com/eclipse-apoapsis/helm-charts/commit/2c026622902ccbad9dbbb836278445dc163a913c))
+
+
+### Documentation
+
+* Update description of `mountEmptyDirs` and `mountPvcs` ([015f95a](https://github.com/eclipse-apoapsis/helm-charts/commit/015f95a9e20276e91538670f88f7859d1c929c6c))
+
 ## [0.24.3](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.24.2...ort-server-v0.24.3) (2026-10-09)
 
 
