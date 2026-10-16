@@ -249,13 +249,14 @@ transport:
       memoryRequest: 1Gi
       # -- Memory limit for advisor worker pods. If not set, no memory limit is defined.
       memoryLimit: 1Gi
-      # -- EmptyDir volumes to mount into the advisor worker pods. Each entry must be in the format "name->path", where "name" is the name
-      # of the EmptyDir volume and "path" is the path inside the container to mount the volume to. Multiple entries must be separated by
-      # whitespace.
+      # -- EmptyDir volumes to mount into the advisor worker pods. Each entry must be in the format "name->path|subPath", where "name" is
+      # the name of the EmptyDir volume, "path" is the path inside the container to mount the volume to, and "subPath" is an optional
+      # subPath of the volume to mount. Multiple entries must be separated by whitespace.
       mountEmptyDirs: ""
-      # -- PVCs to mount into the advisor worker pods. Each entry must be in the format "pvcName->path,access", where "pvcName" is the name
-      # of the PVC to mount, "path" is the path inside the container to mount the PVC to, and "access" is either "R" for read-only or "W"
-      # for read-write access. Multiple entries must be separated by whitespace.
+      # -- PVCs to mount into the advisor worker pods. Each entry must be in the format "pvcName->path|subPath,access", where "pvcName" is
+      # the name of the PVC to mount, "path" is the path inside the container to mount the PVC to, "subPath" is an optional subPath of the
+      # PVC to mount, and "access" is either "R" for read-only or "W" for read-write access. Multiple entries must be separated by
+      # whitespace.
       mountPvcs: ""
       # -- Secrets to mount into the advisor worker pods. Each entry must be in the format "secret->path|subPath", where "secret" is the
       # name of the Secret to mount, "path" is the path inside the container to mount the Secret to, and "subPath" is an optional subPath of
@@ -270,13 +271,14 @@ transport:
       memoryRequest: 4Gi
       # -- Memory limit for analyzer worker pods. If not set, no memory limit is defined.
       memoryLimit: 4Gi
-      # -- EmptyDir volumes to mount into the analyzer worker pods. Each entry must be in the format "name->path", where "name" is the name
-      # of the EmptyDir volume and "path" is the path inside the container to mount the volume to. Multiple entries must be separated by
-      # whitespace.
+      # -- EmptyDir volumes to mount into the analyzer worker pods. Each entry must be in the format "name->path|subPath", where "name" is
+      # the name of the EmptyDir volume, "path" is the path inside the container to mount the volume to, and "subPath" is an optional
+      # subPath of the volume to mount. Multiple entries must be separated by whitespace.
       mountEmptyDirs: ""
-      # -- PVCs to mount into the analyzer worker pods. Each entry must be in the format "pvcName->path,access", where "pvcName" is the name
-      # of the PVC to mount, "path" is the path inside the container to mount the PVC to, and "access" is either "R" for read-only or "W"
-      # for read-write access. Multiple entries must be separated by whitespace.
+      # -- PVCs to mount into the analyzer worker pods. Each entry must be in the format "pvcName->path|subPath,access", where "pvcName" is
+      # the name of the PVC to mount, "path" is the path inside the container to mount the PVC to, "subPath" is an optional subPath of the
+      # PVC to mount, and "access" is either "R" for read-only or "W" for read-write access. Multiple entries must be separated by
+      # whitespace.
       mountPvcs: ""
       # -- Secrets to mount into the analyzer worker pods. Each entry must be in the format "secret->path|subPath", where "secret" is the
       # name of the Secret to mount, "path" is the path inside the container to mount the Secret to, and "subPath" is an optional subPath of
@@ -291,13 +293,14 @@ transport:
       memoryRequest: 1Gi
       # -- Memory limit for config worker pods. If not set, no memory limit is defined.
       memoryLimit: 1Gi
-      # -- EmptyDir volumes to mount into the config worker pods. Each entry must be in the format "name->path", where "name" is the name of
-      # the EmptyDir volume and "path" is the path inside the container to mount the volume to. Multiple entries must be separated by
-      # whitespace.
+      # -- EmptyDir volumes to mount into the config worker pods. Each entry must be in the format "name->path|subPath", where "name" is
+      # the name of the EmptyDir volume, "path" is the path inside the container to mount the volume to, and "subPath" is an optional
+      # subPath of the volume to mount. Multiple entries must be separated by whitespace.
       mountEmptyDirs: ""
-      # -- PVCs to mount into the config worker pods. Each entry must be in the format "pvcName->path,access", where "pvcName" is the name
-      # of the PVC to mount, "path" is the path inside the container to mount the PVC to, and "access" is either "R" for read-only or "W"
-      # for read-write access. Multiple entries must be separated by whitespace.
+      # -- PVCs to mount into the config worker pods. Each entry must be in the format "pvcName->path|subPath,access", where "pvcName" is
+      # the name of the PVC to mount, "path" is the path inside the container to mount the PVC to, "subPath" is an optional subPath of the
+      # PVC to mount, and "access" is either "R" for read-only or "W" for read-write access. Multiple entries must be separated by
+      # whitespace.
       mountPvcs: ""
       # -- Secrets to mount into the config worker pods. Each entry must be in the format "secret->path|subPath", where "secret" is the name
       # of the Secret to mount, "path" is the path inside the container to mount the Secret to, and "subPath" is an optional subPath of the
@@ -312,13 +315,14 @@ transport:
       memoryRequest: 4Gi
       # -- Memory limit for evaluator worker pods. If not set, no memory limit is defined.
       memoryLimit: 4Gi
-      # -- EmptyDir volumes to mount into the evaluator worker pods. Each entry must be in the format "name->path", where "name" is the name
-      # of the EmptyDir volume and "path" is the path inside the container to mount the volume to. Multiple entries must be separated by
-      # whitespace.
+      # -- EmptyDir volumes to mount into the evaluator worker pods. Each entry must be in the format "name->path|subPath", where "name" is
+      # the name of the EmptyDir volume, "path" is the path inside the container to mount the volume to, and "subPath" is an optional
+      # subPath of the volume to mount. Multiple entries must be separated by whitespace.
       mountEmptyDirs: ""
-      # -- PVCs to mount into the evaluator worker pods. Each entry must be in the format "pvcName->path,access", where "pvcName" is the
-      # name of the PVC to mount, "path" is the path inside the container to mount the PVC to, and "access" is either "R" for read-only or
-      # "W" for read-write access. Multiple entries must be separated by whitespace.
+      # -- PVCs to mount into the evaluator worker pods. Each entry must be in the format "pvcName->path|subPath,access", where "pvcName" is
+      # the name of the PVC to mount, "path" is the path inside the container to mount the PVC to, "subPath" is an optional subPath of the
+      # PVC to mount, and "access" is either "R" for read-only or "W" for read-write access. Multiple entries must be separated by
+      # whitespace.
       mountPvcs: ""
       # -- Secrets to mount into the evaluator worker pods. Each entry must be in the format "secret->path|subPath", where "secret" is the
       # name of the Secret to mount, "path" is the path inside the container to mount the Secret to, and "subPath" is an optional subPath of
@@ -333,13 +337,14 @@ transport:
       memoryRequest: 4Gi
       # -- Memory limit for reporter worker pods. If not set, no memory limit is defined.
       memoryLimit: 4Gi
-      # -- EmptyDir volumes to mount into the reporter worker pods. Each entry must be in the format "name->path", where "name" is the name
-      # of the EmptyDir volume and "path" is the path inside the container to mount the volume to. Multiple entries must be separated by
-      # whitespace.
+      # -- EmptyDir volumes to mount into the reporter worker pods. Each entry must be in the format "name->path|subPath", where "name" is
+      # the name of the EmptyDir volume, "path" is the path inside the container to mount the volume to, and "subPath" is an optional
+      # subPath of the volume to mount. Multiple entries must be separated by whitespace.
       mountEmptyDirs: ""
-      # -- PVCs to mount into the reporter worker pods. Each entry must be in the format "pvcName->path,access", where "pvcName" is the name
-      # of the PVC to mount, "path" is the path inside the container to mount the PVC to, and "access" is either "R" for read-only or "W"
-      # for read-write access. Multiple entries must be separated by whitespace.
+      # -- PVCs to mount into the reporter worker pods. Each entry must be in the format "pvcName->path|subPath,access", where "pvcName" is
+      # the name of the PVC to mount, "path" is the path inside the container to mount the PVC to, "subPath" is an optional subPath of the
+      # PVC to mount, and "access" is either "R" for read-only or "W" for read-write access. Multiple entries must be separated by
+      # whitespace.
       mountPvcs: ""
       # -- Secrets to mount into the reporter worker pods. Each entry must be in the format "secret->path|subPath", where "secret" is the
       # name of the Secret to mount, "path" is the path inside the container to mount the Secret to, and "subPath" is an optional subPath of
@@ -354,13 +359,14 @@ transport:
       memoryRequest: 8Gi
       # -- Memory limit for scanner worker pods. If not set, no memory limit is defined.
       memoryLimit: 8Gi
-      # -- EmptyDir volumes to mount into the scanner worker pods. Each entry must be in the format "name->path", where "name" is the name
-      # of the EmptyDir volume and "path" is the path inside the container to mount the volume to. Multiple entries must be separated by
-      # whitespace.
+      # -- EmptyDir volumes to mount into the scanner worker pods. Each entry must be in the format "name->path|subPath", where "name" is
+      # the name of the EmptyDir volume, "path" is the path inside the container to mount the volume to, and "subPath" is an optional
+      # subPath of the volume to mount. Multiple entries must be separated by whitespace.
       mountEmptyDirs: ""
-      # -- PVCs to mount into the scanner worker pods. Each entry must be in the format "pvcName->path,access", where "pvcName" is the name
-      # of the PVC to mount, "path" is the path inside the container to mount the PVC to, and "access" is either "R" for read-only or "W"
-      # for read-write access. Multiple entries must be separated by whitespace.
+      # -- PVCs to mount into the scanner worker pods. Each entry must be in the format "pvcName->path|subPath,access", where "pvcName" is
+      # the name of the PVC to mount, "path" is the path inside the container to mount the PVC to, "subPath" is an optional subPath of the
+      # PVC to mount, and "access" is either "R" for read-only or "W" for read-write access. Multiple entries must be separated by
+      # whitespace.
       mountPvcs: ""
       # -- Secrets to mount into the scanner worker pods. Each entry must be in the format "secret->path|subPath", where "secret" is the
       # name of the Secret to mount, "path" is the path inside the container to mount the Secret to, and "subPath" is an optional subPath of
