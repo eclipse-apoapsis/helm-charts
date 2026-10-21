@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.24.5](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.24.4...ort-server-v0.24.5) (2026-10-21)
+
+
+### Dependencies
+
+* update dependency eclipse-apoapsis/ort-server to v0.97.0 ([385d0be](https://github.com/eclipse-apoapsis/helm-charts/commit/385d0bec1234be7ca493e0c8f5324ac37dcc5dea))
+
 ## [0.24.4](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.24.3...ort-server-v0.24.4) (2026-10-16)
 
 
