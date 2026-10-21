@@ -263,6 +263,20 @@ transport:
       # the Secret to mount.
       mountSecrets: ""
     analyzer:
+      phases:
+        # -- Run preparation, analysis, and result in separate containers. This helps to limit access to infrastructure credentials in the
+        # analysis phase where package managers can execute potentially harmful build scripts. Disable to use the legacy single-container
+        # worker. See the [Securing the Analyzer](https://eclipse-apoapsis.github.io/ort-server/docs/admin-guide/guides/secure-analyzer-setup/) guide for more information.
+        enabled: true
+        # -- Names of secret or PVC mounts needed by the preparation container. Declare these mounts with a name (for example, 
+        # "secrets=my-secret->/mnt/secrets|secrets") in analyzer.mountSecrets or analyzer.mountPvcs. Unnamed mounts are shared with analysis.
+        preparationVolumeMounts: []
+        # -- Names of secret or PVC mounts needed by the result container. Declare these mounts with a name (for example, 
+        # "secrets=my-secret->/mnt/secrets|secrets") in analyzer.mountSecrets or analyzer.mountPvcs. Unnamed mounts are shared with analysis.
+        resultVolumeMounts: []
+        # -- Names of environment variables that should be inherited by the analysis container when phases are enabled. Use [] to inherit
+        # none.
+        analysisEnvironmentAllowlist: []
       # -- CPU request for analyzer worker pods. If not set, no CPU request is defined.
       cpuRequest: ""
       # -- CPU limit for analyzer worker pods. If not set, no CPU limit is defined.
@@ -278,11 +292,14 @@ transport:
       # -- PVCs to mount into the analyzer worker pods. Each entry must be in the format "pvcName->path|subPath,access", where "pvcName" is
       # the name of the PVC to mount, "path" is the path inside the container to mount the PVC to, "subPath" is an optional subPath of the
       # PVC to mount, and "access" is either "R" for read-only or "W" for read-write access. Multiple entries must be separated by
-      # whitespace.
+      # whitespace. Optionally prefix an entry with "mountName=" and reference that name in phases.preparationVolumeMounts or
+      # phases.resultVolumeMounts to mount it only in the selected containers. Unnamed mounts are added to all containers.
       mountPvcs: ""
       # -- Secrets to mount into the analyzer worker pods. Each entry must be in the format "secret->path|subPath", where "secret" is the
       # name of the Secret to mount, "path" is the path inside the container to mount the Secret to, and "subPath" is an optional subPath of
-      # the Secret to mount.
+      # the Secret to mount. Multiple entries must be separated by whitespace. Optionally prefix an entry with "mountName=" and
+      # reference that name in phases.preparationVolumeMounts or phases.resultVolumeMounts to mount it only in the selected containers.
+      # Unnamed mounts are added to all containers.
       mountSecrets: ""
     config:
       # -- CPU request for config worker pods. If not set, no CPU request is defined.
