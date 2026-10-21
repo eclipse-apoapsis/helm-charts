@@ -222,11 +222,35 @@ spec:
               value: {{ .Values.configFileProvider.gitConfig.repositoryUrl }}
             {{- end }}
             - name: ANALYZER_MOUNT_EMPTY_DIRS
-              value: {{ .Values.transport.kubernetes.analyzer.mountEmptyDirs }}
+              {{- if .Values.transport.kubernetes.analyzer.phases.enabled }}
+              value: {{ printf "%s exchange->/mnt/exchange" .Values.transport.kubernetes.analyzer.mountEmptyDirs | trim | quote }}
+              {{- else }}
+              value: {{ .Values.transport.kubernetes.analyzer.mountEmptyDirs | quote }}
+              {{- end }}
             - name: ANALYZER_MOUNT_PVCS
               value: {{ .Values.transport.kubernetes.analyzer.mountPvcs }}
             - name: ANALYZER_MOUNT_SECRETS
               value: {{ .Values.transport.kubernetes.analyzer.mountSecrets }}
+            {{- if .Values.transport.kubernetes.analyzer.phases.enabled }}
+            - name: ANALYZER_ADDITIONAL_CONTAINERS
+              value: analyzerinit,analyzerresult
+            - name: ANALYZERINIT_INIT_CONTAINER
+              value: "true"
+            - name: ANALYZER_COMMANDS
+              value: /bin/sh
+            - name: ANALYZER_ARGS
+              value: '-c "exec java $JAVA_OPTS -cp $(cat /app/jib-classpath-file) @/app/jib-main-class-file analysis /mnt/exchange /mnt/exchange/sync/ready"'
+            - name: ANALYZERINIT_ARGS
+              value: '-c "exec java $JAVA_OPTS -cp $(cat /app/jib-classpath-file) @/app/jib-main-class-file preparation /mnt/exchange"'
+            - name: ANALYZERRESULT_ARGS
+              value: '-c "/etc/analyzer_scripts/await.sh /mnt/exchange/sync/ready && exec java $JAVA_OPTS -cp $(cat /app/jib-classpath-file) @/app/jib-main-class-file result /mnt/exchange"'
+            - name: ANALYZER_ENVIRONMENT_ALLOWLIST
+              value: {{ join "," .Values.transport.kubernetes.analyzer.phases.analysisEnvironmentAllowlist | quote }}
+            - name: ANALYZERINIT_VOLUME_MOUNTS
+              value: {{ join "," .Values.transport.kubernetes.analyzer.phases.preparationVolumeMounts | quote }}
+            - name: ANALYZERRESULT_VOLUME_MOUNTS
+              value: {{ join "," .Values.transport.kubernetes.analyzer.phases.resultVolumeMounts | quote }}
+            {{- end }}
             - name: ANALYZER_SECRET_PROVIDER
               value: {{ .Values.configSecrets.name }}
             - name: ANALYZER_SECRET_FILES
