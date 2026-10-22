@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.25.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.24.5...ort-server-v0.25.0) (2026-10-22)
+
+
+### Features
+
+* Add support for analyzer phases ([cf7a9a5](https://github.com/eclipse-apoapsis/helm-charts/commit/cf7a9a5a953240ca31c015b599e8752001fc8e29))
+
 ## [0.24.5](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.24.4...ort-server-v0.24.5) (2026-10-21)
 
 
