@@ -121,6 +121,8 @@ A generic Helm chart for the ORT Server.
 | transport.kubernetes.analyzer.phases.preparationVolumeMounts | list | `[]` | Names of secret or PVC mounts needed by the preparation container. Declare these mounts with a name (for example,  "secrets=my-secret->/mnt/secrets|secrets") in analyzer.mountSecrets or analyzer.mountPvcs. Unnamed mounts are shared with analysis. |
 | transport.kubernetes.analyzer.phases.resultVolumeMounts | list | `[]` | Names of secret or PVC mounts needed by the result container. Declare these mounts with a name (for example,  "secrets=my-secret->/mnt/secrets|secrets") in analyzer.mountSecrets or analyzer.mountPvcs. Unnamed mounts are shared with analysis. |
 | transport.kubernetes.analyzer.phases.analysisEnvironmentAllowlist | list | `[]` | Names of environment variables that should be inherited by the analysis container when phases are enabled. Use [] to inherit none. |
+| transport.kubernetes.analyzer.phases.analysisCommands | string | `"/bin/sh"` | Command of the analysis container when phases are enabled. |
+| transport.kubernetes.analyzer.phases.analysisArgs | string | `"-c \"exec java $JAVA_OPTS -cp $(cat /app/jib-classpath-file) @/app/jib-main-class-file analysis /mnt/exchange /mnt/exchange/sync/ready\""` | Arguments of the analysis container when phases are enabled. |
 | transport.kubernetes.analyzer.cpuRequest | string | `""` | CPU request for analyzer worker pods. If not set, no CPU request is defined. |
 | transport.kubernetes.analyzer.cpuLimit | string | `""` | CPU limit for analyzer worker pods. If not set, no CPU limit is defined. |
 | transport.kubernetes.analyzer.memoryRequest | string | `"4Gi"` | Memory request for analyzer worker pods. If not set, no memory request is defined. |
