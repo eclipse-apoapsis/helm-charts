@@ -237,9 +237,9 @@ spec:
             - name: ANALYZERINIT_INIT_CONTAINER
               value: "true"
             - name: ANALYZER_COMMANDS
-              value: /bin/sh
+              value: {{ .Values.transport.kubernetes.analyzer.phases.analysisCommands | quote }}
             - name: ANALYZER_ARGS
-              value: '-c "exec java $JAVA_OPTS -cp $(cat /app/jib-classpath-file) @/app/jib-main-class-file analysis /mnt/exchange /mnt/exchange/sync/ready"'
+              value: {{ .Values.transport.kubernetes.analyzer.phases.analysisArgs | quote }}
             - name: ANALYZERINIT_ARGS
               value: '-c "exec java $JAVA_OPTS -cp $(cat /app/jib-classpath-file) @/app/jib-main-class-file preparation /mnt/exchange"'
             - name: ANALYZERRESULT_ARGS

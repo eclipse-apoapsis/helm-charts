@@ -277,6 +277,10 @@ transport:
         # -- Names of environment variables that should be inherited by the analysis container when phases are enabled. Use [] to inherit
         # none.
         analysisEnvironmentAllowlist: []
+        # -- Command of the analysis container when phases are enabled.
+        analysisCommands: /bin/sh
+        # -- Arguments of the analysis container when phases are enabled.
+        analysisArgs: '-c "exec java $JAVA_OPTS -cp $(cat /app/jib-classpath-file) @/app/jib-main-class-file analysis /mnt/exchange /mnt/exchange/sync/ready"'
       # -- CPU request for analyzer worker pods. If not set, no CPU request is defined.
       cpuRequest: ""
       # -- CPU limit for analyzer worker pods. If not set, no CPU limit is defined.
