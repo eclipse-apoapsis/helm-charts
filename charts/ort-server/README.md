@@ -198,7 +198,7 @@ A generic Helm chart for the ORT Server.
 | core.certificates.path | string | `""` | Path to a directory containing PEM-encoded certificates to import into the Java keystore at startup. Each file in the directory must contain one PEM-encoded certificate. When set, the container command is overridden to run the import script before starting the application. Typical usage: mount a Kubernetes Secret (one key per certificate) via extraVolumes and extraVolumeMounts, then set this to the mount path. |
 | core.extraVolumes | list | `[]` | Additional volumes for the core deployment |
 | core.extraVolumeMounts | list | `[]` | Additional volume mounts for the core deployment |
-| core.extraEnv | list | `[]` | Additional environment variables for the core deployment |
+| core.extraEnv | list | `[]` | Additional environment variables for the core deployment. Must not contain variables that are already set by the chart, as duplicate entries are rejected by server-side apply. |
 | core.extraInitContainers | list | `[]` | Additional init containers for the core deployment |
 | orchestrator.strategy | object | `{"type":"RollingUpdate"}` | Deployment strategy for the orchestrator component |
 | orchestrator.resources | object | `{"limits":{"cpu":1,"memory":"1Gi"},"requests":{"cpu":"100m","memory":"256Mi"}}` | CPU and memory requests and limits for the orchestrator deployment |
@@ -216,13 +216,13 @@ A generic Helm chart for the ORT Server.
 | orchestrator.readinessProbe.failureThreshold | int | `3` | Minimum consecutive failures for the readiness probe to be considered failed |
 | orchestrator.extraVolumes | list | `[]` | Additional volumes for the orchestrator deployment |
 | orchestrator.extraVolumeMounts | list | `[]` | Additional volume mounts for the orchestrator deployment |
-| orchestrator.extraEnv | list | `[]` | Additional environment variables for the orchestrator deployment |
+| orchestrator.extraEnv | list | `[]` | Additional environment variables for the orchestrator deployment. Must not contain variables that are already set by the chart, as duplicate entries are rejected by server-side apply. |
 | orchestrator.extraInitContainers | list | `[]` | Additional init containers for the orchestrator deployment |
 | tasks.resources | object | `{"limits":{"cpu":1,"memory":"1Gi"},"requests":{"cpu":"100m","memory":"256Mi"}}` | CPU and memory requests and limits for the task cron jobs |
 | tasks.certificates.path | string | `""` | Path to a directory containing PEM-encoded certificates to import into the Java keystore at startup. Each file in the directory must contain one PEM-encoded certificate. When set, the container command is overridden to run the import script before starting the application. Typical usage: mount a Kubernetes Secret (one key per certificate) via extraVolumes and extraVolumeMounts, then set this to the mount path. |
 | tasks.extraVolumes | list | `[]` | Additional volumes for the task cron jobs |
 | tasks.extraVolumeMounts | list | `[]` | Additional volume mounts for the task cron jobs |
-| tasks.extraEnv | list | `[]` | Additional environment variables for the task cron jobs |
+| tasks.extraEnv | list | `[]` | Additional environment variables for the task cron jobs. Must not contain variables that are already set by the chart, as duplicate entries are rejected by server-side apply. |
 | tasks.extraInitContainers | list | `[]` | Additional init containers for the task cron jobs |
 | tasks.configs[0].name | string | `"delete-old-ort-runs"` |  |
 | tasks.configs[0].schedule | string | `"15 0 * * *"` |  |

@@ -496,7 +496,8 @@ core:
   extraVolumes: []
   # -- Additional volume mounts for the core deployment
   extraVolumeMounts: []
-  # -- Additional environment variables for the core deployment
+  # -- Additional environment variables for the core deployment. Must not contain variables that are already set by the chart, as
+  # duplicate entries are rejected by server-side apply.
   extraEnv: []
   # -- Additional init containers for the core deployment
   extraInitContainers: []
@@ -543,7 +544,8 @@ orchestrator:
   extraVolumes: []
   # -- Additional volume mounts for the orchestrator deployment
   extraVolumeMounts: []
-  # -- Additional environment variables for the orchestrator deployment
+  # -- Additional environment variables for the orchestrator deployment. Must not contain variables that are already set by the chart, as
+  # duplicate entries are rejected by server-side apply.
   extraEnv: []
   # -- Additional init containers for the orchestrator deployment
   extraInitContainers: []
@@ -567,7 +569,8 @@ tasks:
   extraVolumes: []
   # -- Additional volume mounts for the task cron jobs
   extraVolumeMounts: []
-  # -- Additional environment variables for the task cron jobs
+  # -- Additional environment variables for the task cron jobs. Must not contain variables that are already set by the chart, as
+  # duplicate entries are rejected by server-side apply.
   extraEnv: []
   # -- Additional init containers for the task cron jobs
   extraInitContainers: []
