@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.26.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.25.1...ort-server-v0.26.0) (2026-11-03)
+
+
+### Features
+
+* Make the analysis container command configurable ([d3d6b18](https://github.com/eclipse-apoapsis/helm-charts/commit/d3d6b18069d29fee1ce982b08ddcb01dcceb522c))
+
+
+### Documentation
+
+* Clarify that `extraEnv` must not override chart variables ([fed9a9a](https://github.com/eclipse-apoapsis/helm-charts/commit/fed9a9a4409fe9dcb114fc4994ffb9418e629d82))
+
 ## [0.25.1](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.25.0...ort-server-v0.25.1) (2026-10-28)
 
 
