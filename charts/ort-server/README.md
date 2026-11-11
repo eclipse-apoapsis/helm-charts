@@ -252,6 +252,11 @@ A generic Helm chart for the ORT Server.
 | tasks.configs[4].name | string | `"kubernetes-lost-jobs-finder"` |  |
 | tasks.configs[4].schedule | string | `"*/2 * * * *"` |  |
 | tasks.configs[4].lostJobsMinAge | int | `30` |  |
+| tasks.configs[5].name | string | `"sync-keycloak-users"` |  |
+| tasks.configs[5].schedule | string | `"0 * * * *"` |  |
+| tasks.configs[5].maxDeletedUsers | int | `5` | Number of users a sync may always mark deleted, or usernames whose roles it may remove. The larger of this count and the count calculated using maxDeletedShare applies. The role removal limit is checked only after the first successful sync. |
+| tasks.configs[5].maxDeletedShare | float | `0.1` | Share of stored users a sync may mark deleted, or of usernames with role assignments whose roles it may remove (0 to 1). |
+| tasks.configs[5].pageSize | int | `5000` | Number of users to request from Keycloak per page. |
 | ui.strategy | object | `{"type":"RollingUpdate"}` | Deployment strategy for the UI component |
 | ui.url | string | `""` |  |
 | ui.apiUrl | string | `""` |  |
