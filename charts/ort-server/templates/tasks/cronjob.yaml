@@ -140,6 +140,34 @@ spec:
                 - name: MONITOR_LOST_JOBS_MIN_AGE
                   value: "{{ .lostJobsMinAge }}"
                 {{- end }}
+
+                # sync-keycloak-users task
+                {{- if eq .name "sync-keycloak-users" }}
+                - name: KEYCLOAK_ACCESS_TOKEN_URL
+                  value: {{ $.Values.core.keycloak.accessTokenUrl | quote }}
+                - name: KEYCLOAK_API_URL
+                  value: {{ $.Values.core.keycloak.apiUrl | quote }}
+                - name: KEYCLOAK_API_USER
+                  value: {{ $.Values.core.keycloak.apiUser | quote }}
+                - name: KEYCLOAK_API_SECRET
+                {{- if $.Values.core.keycloak.existingSecret }}
+                  valueFrom:
+                    secretKeyRef:
+                      name: {{ $.Values.core.keycloak.existingSecret }}
+                      key: {{ $.Values.core.keycloak.secretKeys.apiSecretKey }}
+                {{- else }}
+                  value: {{ $.Values.core.keycloak.apiSecret | quote }}
+                {{- end }}
+                - name: KEYCLOAK_CLIENT_ID
+                  value: {{ $.Values.core.keycloak.clientId | quote }}
+                - name: USER_SYNC_MAX_DELETED_USERS
+                  value: {{ .maxDeletedUsers | quote }}
+                - name: USER_SYNC_MAX_DELETED_SHARE
+                  value: {{ .maxDeletedShare | quote }}
+                - name: USER_SYNC_PAGE_SIZE
+                  value: {{ .pageSize | quote }}
+                {{- end }}
+
                 {{- with $.Values.tasks.extraEnv }}
                 {{- toYaml . | nindent 16 }}
                 {{- end }}
