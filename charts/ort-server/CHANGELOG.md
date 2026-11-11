@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.27.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.26.3...ort-server-v0.27.0) (2026-11-11)
+
+
+### Features
+
+* Add `sync-keycloak-users` task ([23de73a](https://github.com/eclipse-apoapsis/helm-charts/commit/23de73ac6a2651d0ef6823b413dfca57cc35b315))
+
+
+### Dependencies
+
+* update dependency eclipse-apoapsis/ort-server to v0.102.0 ([b0f82a2](https://github.com/eclipse-apoapsis/helm-charts/commit/b0f82a2b3ef95f5e385b346a255920856b91dba9))
+
 ## [0.26.3](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.26.2...ort-server-v0.26.3) (2026-11-10)
 
 
