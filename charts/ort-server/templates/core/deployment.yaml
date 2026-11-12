@@ -149,6 +149,22 @@ spec:
             - name: KEYCLOAK_CLIENT_ID
               value: {{ .Values.core.keycloak.clientId }}
 
+            # Projections
+            - name: PROJECTIONS_LEASE_DURATION_SECONDS
+              value: "{{ .Values.core.projections.leaseDurationSeconds }}"
+            - name: PROJECTIONS_MAX_PARALLEL_BUILDS
+              value: "{{ .Values.core.projections.maxParallelBuilds }}"
+            - name: PROJECTIONS_RECOVERY_INTERVAL_SECONDS
+              value: "{{ .Values.core.projections.recoveryIntervalSeconds }}"
+            - name: PROJECTIONS_MAX_ATTEMPTS
+              value: "{{ .Values.core.projections.maxAttempts }}"
+            - name: PROJECTIONS_RETRY_DELAY_SECONDS
+              value: "{{ .Values.core.projections.retryDelaySeconds }}"
+            - name: PROJECTIONS_ASYNC_REQUEST_WAIT_MILLIS
+              value: "{{ .Values.core.projections.asyncRequestWaitMillis }}"
+            - name: PROJECTIONS_SYNC_REQUEST_WAIT_MILLIS
+              value: "{{ .Values.core.projections.syncRequestWaitMillis }}"
+
             # Orchestrator sender
             {{- if .Values.transport.rabbitmq.enabled }}
             - name: ORCHESTRATOR_SENDER_TRANSPORT_TYPE
