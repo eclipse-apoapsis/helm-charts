@@ -450,6 +450,21 @@ core:
       apiSecretKey: "keycloak-api-secret"
     # -- The client ID to use for authenticating to the Keycloak admin API.
     clientId: admin-cli
+  projections:
+    # -- The duration of a lease on a projection build in seconds.
+    leaseDurationSeconds: 300
+    # -- The maximum number of projection builds running in parallel in one core instance.
+    maxParallelBuilds: 2
+    # -- The interval in seconds for claiming projection builds that were not started or were abandoned.
+    recoveryIntervalSeconds: 30
+    # -- The maximum number of attempts before a failed projection build is not retried.
+    maxAttempts: 3
+    # -- The delay in seconds after which a failed projection build is retried.
+    retryDelaySeconds: 60
+    # -- The maximum time in milliseconds a request with `Prefer: respond-async` waits for a projection build.
+    asyncRequestWaitMillis: 2000
+    # -- The maximum time in milliseconds other requests wait for a projection build to finish.
+    syncRequestWaitMillis: 30000
   livenessProbe:
     # -- Enable livenessProbe for the core deployment
     enabled: true

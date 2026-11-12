@@ -181,6 +181,13 @@ A generic Helm chart for the ORT Server.
 | core.keycloak.existingSecret | string | `""` | Name of an existing secret to use for the Keycloak admin API password, instead of setting it in plain text via `apiSecret`. |
 | core.keycloak.secretKeys.apiSecretKey | string | `"keycloak-api-secret"` | Name of the key in the existing secret that contains the Keycloak admin API password. |
 | core.keycloak.clientId | string | `"admin-cli"` | The client ID to use for authenticating to the Keycloak admin API. |
+| core.projections.leaseDurationSeconds | int | `300` | The duration of a lease on a projection build in seconds. |
+| core.projections.maxParallelBuilds | int | `2` | The maximum number of projection builds running in parallel in one core instance. |
+| core.projections.recoveryIntervalSeconds | int | `30` | The interval in seconds for claiming projection builds that were not started or were abandoned. |
+| core.projections.maxAttempts | int | `3` | The maximum number of attempts before a failed projection build is not retried. |
+| core.projections.retryDelaySeconds | int | `60` | The delay in seconds after which a failed projection build is retried. |
+| core.projections.asyncRequestWaitMillis | int | `2000` | The maximum time in milliseconds a request with `Prefer: respond-async` waits for a projection build. |
+| core.projections.syncRequestWaitMillis | int | `30000` | The maximum time in milliseconds other requests wait for a projection build to finish. |
 | core.livenessProbe.enabled | bool | `true` | Enable livenessProbe for the core deployment |
 | core.livenessProbe.initialDelaySeconds | int | `60` | Initial delay before the liveness probe is initiated |
 | core.livenessProbe.periodSeconds | int | `10` | Period between liveness probe checks |
