@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.28.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.27.0...ort-server-v0.28.0) (2026-11-12)
+
+
+### Features
+
+* Add `delete-unused-projections` task ([699dff3](https://github.com/eclipse-apoapsis/helm-charts/commit/699dff385acb7713415b1ae42c9cd79036ea97e3))
+* Make the projection build options of core configurable ([f9d7874](https://github.com/eclipse-apoapsis/helm-charts/commit/f9d7874283f4251e112a6bf5e4842c6ff98b996b))
+
+
+### Dependencies
+
+* update dependency eclipse-apoapsis/ort-server to v0.103.0 ([e997916](https://github.com/eclipse-apoapsis/helm-charts/commit/e997916d722ae762cccb52c3d24f081b50b9da97))
+
+
+### Documentation
+
+* Document the remaining options of the ort-server chart ([887a9f6](https://github.com/eclipse-apoapsis/helm-charts/commit/887a9f6d174370a08d7c064d1049cf72142ca8f0))
+
 ## [0.27.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.26.3...ort-server-v0.27.0) (2026-11-11)
 
 
