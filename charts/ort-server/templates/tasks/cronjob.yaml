@@ -111,6 +111,12 @@ spec:
                   value: "{{ .snippetFindings.chunkSize }}"
                 {{- end }}
 
+                # delete-unused-projections task
+                {{- if eq .name "delete-unused-projections" }}
+                - name: PROJECTIONS_RETENTION_DAYS
+                  value: "{{ .retentionDays }}"
+                {{- end }}
+
                 # kubernetes-reaper task
                 {{- if eq .name "kubernetes-reaper" }}
                 - name: MONITOR_REAPER_MAX_AGE

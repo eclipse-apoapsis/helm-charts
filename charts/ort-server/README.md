@@ -257,6 +257,9 @@ A generic Helm chart for the ORT Server.
 | tasks.configs[5].maxDeletedUsers | int | `5` | Number of users a sync may always mark deleted, or usernames whose roles it may remove. The larger of this count and the count calculated using maxDeletedShare applies. The role removal limit is checked only after the first successful sync. |
 | tasks.configs[5].maxDeletedShare | float | `0.1` | Share of stored users a sync may mark deleted, or of usernames with role assignments whose roles it may remove (0 to 1). |
 | tasks.configs[5].pageSize | int | `5000` | Number of users to request from Keycloak per page. |
+| tasks.configs[6].name | string | `"delete-unused-projections"` |  |
+| tasks.configs[6].schedule | string | `"45 2 * * *"` | Cron schedule of the task. Running it more often than daily is not useful, because the retention is configured in days and the last access time of projections is only updated once a day. |
+| tasks.configs[6].retentionDays | int | `30` | Number of days to keep projections after their last access. Deleted projections are built again on their next request. Must be at least 2. |
 | ui.strategy | object | `{"type":"RollingUpdate"}` | Deployment strategy for the UI component |
 | ui.url | string | `""` |  |
 | ui.apiUrl | string | `""` |  |
