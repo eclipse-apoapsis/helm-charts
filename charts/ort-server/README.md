@@ -10,7 +10,7 @@ A generic Helm chart for the ORT Server.
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| containerRegistry | string | `"ghcr.io/eclipse-apoapsis"` |  |
+| containerRegistry | string | `"ghcr.io/eclipse-apoapsis"` | The container registry to pull the ORT Server images from. |
 | imagePullSecret | string | `nil` | Name of the image pull secret to use for pulling the Docker images |
 | nameOverride | string | `""` | String to partially override ortserver.fullname |
 | fullnameOverride | string | `""` | String to fully override ortserver.fullname |
@@ -79,8 +79,8 @@ A generic Helm chart for the ORT Server.
 | secrets.vault.rootPath | string | `""` | The path in Vault where secrets are stored. |
 | secrets.vault.prefix | string | `"secret"` | The path prefix under which the secrets engine is located. |
 | secrets.vault.namespace | string | `nil` | The Vault namespace to use for storing secrets. This is only relevant if Vault namespaces are enabled in the Vault server. |
-| configSecrets.name | string | `"secret-file"` |  |
-| configSecrets.files | string | `""` |  |
+| configSecrets.name | string | `"secret-file"` | The name of the config secret provider used to read secrets from the configuration. The default `secret-file` reads secrets from the files configured in `files`. |
+| configSecrets.files | string | `""` | Comma-separated list of paths to files containing secrets in the format `key=value`, used by the `secret-file` provider. If a secret is defined in multiple files, the file listed first takes precedence. |
 | configSecrets.allowSecretsFromConfig | bool | `true` | If enabled, secrets are read from environment variables, otherwise from the configured files. |
 | storage.azureBlob.enabled | bool | `false` | If enabled, Azure Blob Storage is used for storing file archives, file lists, and reports. |
 | storage.azureBlob.endpointUrl | string | `""` | The endpoint URL of the Azure Blob Storage account. Mutually exclusive with accountName. |
@@ -231,48 +231,48 @@ A generic Helm chart for the ORT Server.
 | tasks.extraVolumeMounts | list | `[]` | Additional volume mounts for the task cron jobs |
 | tasks.extraEnv | list | `[]` | Additional environment variables for the task cron jobs. Must not contain variables that are already set by the chart, as duplicate entries are rejected by server-side apply. |
 | tasks.extraInitContainers | list | `[]` | Additional init containers for the task cron jobs |
-| tasks.configs[0].name | string | `"delete-old-ort-runs"` |  |
-| tasks.configs[0].schedule | string | `"15 0 * * *"` |  |
-| tasks.configs[0].dataRetention.ortRunDays | int | `90` |  |
-| tasks.configs[1].name | string | `"delete-orphaned-entities"` |  |
-| tasks.configs[1].schedule | string | `"30 1 * * *"` |  |
-| tasks.configs[1].vcsInfo.limit | int | `1024` |  |
-| tasks.configs[1].vcsInfo.chunkSize | int | `64` |  |
-| tasks.configs[1].remoteArtifacts.limit | int | `1024` |  |
-| tasks.configs[1].remoteArtifacts.chunkSize | int | `64` |  |
-| tasks.configs[1].snippets.limit | int | `1048576` |  |
-| tasks.configs[1].snippets.chunkSize | int | `1024` |  |
-| tasks.configs[1].snippetFindings.limit | int | `1048576` |  |
-| tasks.configs[1].snippetFindings.chunkSize | int | `1024` |  |
-| tasks.configs[2].name | string | `"kubernetes-reaper"` |  |
-| tasks.configs[2].schedule | string | `"*/5 * * * *"` |  |
-| tasks.configs[2].reaperMaxAge | int | `600` |  |
-| tasks.configs[3].name | string | `"kubernetes-long-running-jobs-finder"` |  |
-| tasks.configs[3].schedule | string | `"*/5 * * * *"` |  |
-| tasks.configs[3].timeouts.configWorker | int | `1` |  |
-| tasks.configs[3].timeouts.analyzerWorker | int | `120` |  |
-| tasks.configs[3].timeouts.advisorWorker | int | `2` |  |
-| tasks.configs[3].timeouts.scannerWorker | int | `1440` |  |
-| tasks.configs[3].timeouts.evaluatorWorker | int | `5` |  |
-| tasks.configs[3].timeouts.reporterWorker | int | `30` |  |
-| tasks.configs[3].timeouts.notifierWorker | int | `10` |  |
-| tasks.configs[4].name | string | `"kubernetes-lost-jobs-finder"` |  |
-| tasks.configs[4].schedule | string | `"*/2 * * * *"` |  |
-| tasks.configs[4].lostJobsMinAge | int | `30` |  |
-| tasks.configs[5].name | string | `"sync-keycloak-users"` |  |
-| tasks.configs[5].schedule | string | `"0 * * * *"` |  |
+| tasks.configs[0].name | string | `"delete-old-ort-runs"` | Name of the task, which selects the task to run. Must not be changed. |
+| tasks.configs[0].schedule | string | `"15 0 * * *"` | Cron schedule of the task. |
+| tasks.configs[0].dataRetention.ortRunDays | int | `90` | Number of days to keep ORT runs. Older runs are deleted together with their data. |
+| tasks.configs[1].name | string | `"delete-orphaned-entities"` | Name of the task, which selects the task to run. Must not be changed. |
+| tasks.configs[1].schedule | string | `"30 1 * * *"` | Cron schedule of the task. |
+| tasks.configs[1].vcsInfo.limit | int | `1024` | Maximum number of orphaned VCS info entries to delete in one task run. |
+| tasks.configs[1].vcsInfo.chunkSize | int | `64` | Number of orphaned VCS info entries to delete in one transaction. |
+| tasks.configs[1].remoteArtifacts.limit | int | `1024` | Maximum number of orphaned remote artifacts to delete in one task run. |
+| tasks.configs[1].remoteArtifacts.chunkSize | int | `64` | Number of orphaned remote artifacts to delete in one transaction. |
+| tasks.configs[1].snippets.limit | int | `1048576` | Maximum number of orphaned snippets to delete in one task run. |
+| tasks.configs[1].snippets.chunkSize | int | `1024` | Number of orphaned snippets to delete in one transaction. |
+| tasks.configs[1].snippetFindings.limit | int | `1048576` | Maximum number of orphaned snippet findings to delete in one task run. |
+| tasks.configs[1].snippetFindings.chunkSize | int | `1024` | Number of orphaned snippet findings to delete in one transaction. |
+| tasks.configs[2].name | string | `"kubernetes-reaper"` | Name of the task, which selects the task to run. Must not be changed. |
+| tasks.configs[2].schedule | string | `"*/5 * * * *"` | Cron schedule of the task. |
+| tasks.configs[2].reaperMaxAge | int | `600` | Minimum age in seconds of completed worker jobs before they are deleted. |
+| tasks.configs[3].name | string | `"kubernetes-long-running-jobs-finder"` | Name of the task, which selects the task to run. Must not be changed. |
+| tasks.configs[3].schedule | string | `"*/5 * * * *"` | Cron schedule of the task. |
+| tasks.configs[3].timeouts.configWorker | int | `1` | Timeout in minutes after which a running Config worker job is considered stuck and is terminated. |
+| tasks.configs[3].timeouts.analyzerWorker | int | `120` | Timeout in minutes after which a running Analyzer worker job is considered stuck and is terminated. |
+| tasks.configs[3].timeouts.advisorWorker | int | `2` | Timeout in minutes after which a running Advisor worker job is considered stuck and is terminated. |
+| tasks.configs[3].timeouts.scannerWorker | int | `1440` | Timeout in minutes after which a running Scanner worker job is considered stuck and is terminated. |
+| tasks.configs[3].timeouts.evaluatorWorker | int | `5` | Timeout in minutes after which a running Evaluator worker job is considered stuck and is terminated. |
+| tasks.configs[3].timeouts.reporterWorker | int | `30` | Timeout in minutes after which a running Reporter worker job is considered stuck and is terminated. |
+| tasks.configs[3].timeouts.notifierWorker | int | `10` | Timeout in minutes after which a running Notifier worker job is considered stuck and is terminated. |
+| tasks.configs[4].name | string | `"kubernetes-lost-jobs-finder"` | Name of the task, which selects the task to run. Must not be changed. |
+| tasks.configs[4].schedule | string | `"*/2 * * * *"` | Cron schedule of the task. |
+| tasks.configs[4].lostJobsMinAge | int | `30` | Minimum age in seconds of a job in the database before it is considered lost if no matching Kubernetes job exists. |
+| tasks.configs[5].name | string | `"sync-keycloak-users"` | Name of the task, which selects the task to run. Must not be changed. |
+| tasks.configs[5].schedule | string | `"0 * * * *"` | Cron schedule of the task. |
 | tasks.configs[5].maxDeletedUsers | int | `5` | Number of users a sync may always mark deleted, or usernames whose roles it may remove. The larger of this count and the count calculated using maxDeletedShare applies. The role removal limit is checked only after the first successful sync. |
 | tasks.configs[5].maxDeletedShare | float | `0.1` | Share of stored users a sync may mark deleted, or of usernames with role assignments whose roles it may remove (0 to 1). |
 | tasks.configs[5].pageSize | int | `5000` | Number of users to request from Keycloak per page. |
-| tasks.configs[6].name | string | `"delete-unused-projections"` |  |
+| tasks.configs[6].name | string | `"delete-unused-projections"` | Name of the task, which selects the task to run. Must not be changed. |
 | tasks.configs[6].schedule | string | `"45 2 * * *"` | Cron schedule of the task. Running it more often than daily is not useful, because the retention is configured in days and the last access time of projections is only updated once a day. |
 | tasks.configs[6].retentionDays | int | `30` | Number of days to keep projections after their last access. Deleted projections are built again on their next request. Must be at least 2. |
 | ui.strategy | object | `{"type":"RollingUpdate"}` | Deployment strategy for the UI component |
-| ui.url | string | `""` |  |
-| ui.apiUrl | string | `""` |  |
-| ui.authority | string | `""` |  |
-| ui.clientId | string | `""` |  |
-| ui.service.port | int | `8082` |  |
+| ui.url | string | `""` | The URL under which the UI is reachable. It is used as the redirect URI after login and logout. If empty, the default of the UI image is used. |
+| ui.apiUrl | string | `""` | The URL of the ORT Server API that the UI connects to. If empty, the default of the UI image is used. |
+| ui.authority | string | `""` | The URL of the OpenID Connect authority (the Keycloak realm URL) used by the UI for authentication. If empty, the default of the UI image is used. |
+| ui.clientId | string | `""` | The OpenID Connect client ID used by the UI for authentication. If empty, the default of the UI image is used. |
+| ui.service.port | int | `8082` | The port to use for the UI service. |
 | ui.resources | object | `{"limits":{"cpu":"500m","memory":"256Mi"},"requests":{"cpu":"50m","memory":"64Mi"}}` | CPU and memory requests and limits for the UI deployment |
 | ui.livenessProbe.enabled | bool | `true` | Enable livenessProbe for the UI deployment |
 | ui.livenessProbe.initialDelaySeconds | int | `15` | Initial delay before the liveness probe is initiated |
@@ -288,7 +288,7 @@ A generic Helm chart for the ORT Server.
 | ui.readinessProbe.failureThreshold | int | `6` | Minimum consecutive failures for the readiness probe to be considered failed |
 | ui.extraVolumes | list | `[]` | Additional volumes for the UI deployment |
 | ui.extraVolumeMounts | list | `[]` | Additional volume mounts for the UI deployment |
-| extraObjects | list | `[]` |  |
+| extraObjects | list | `[]` | Additional Kubernetes objects to deploy with the chart. The objects are rendered as templates, so they can reference chart values. |
 
 <!-- x-release-please-start-version -->
 [version-badge]: https://img.shields.io/badge/Version-0.27.0%2Dinformational?style=flat-square

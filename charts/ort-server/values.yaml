@@ -1,3 +1,4 @@
+# -- The container registry to pull the ORT Server images from.
 containerRegistry: ghcr.io/eclipse-apoapsis
 # -- Name of the image pull secret to use for pulling the Docker images
 imagePullSecret: null
@@ -162,7 +163,11 @@ secrets:
     namespace: null
 
 configSecrets:
+  # -- The name of the config secret provider used to read secrets from the configuration. The default `secret-file`
+  # reads secrets from the files configured in `files`.
   name: secret-file
+  # -- Comma-separated list of paths to files containing secrets in the format `key=value`, used by the `secret-file`
+  # provider. If a secret is defined in multiple files, the file listed first takes precedence.
   files: ""
   # -- If enabled, secrets are read from environment variables, otherwise from the configured files.
   allowSecretsFromConfig: true
@@ -590,41 +595,71 @@ tasks:
   # -- Additional init containers for the task cron jobs
   extraInitContainers: []
   configs:
-    - name: delete-old-ort-runs
+    - # -- Name of the task, which selects the task to run. Must not be changed.
+      name: delete-old-ort-runs
+      # -- Cron schedule of the task.
       schedule: "15 0 * * *"
       dataRetention:
+        # -- Number of days to keep ORT runs. Older runs are deleted together with their data.
         ortRunDays: 90
-    - name: delete-orphaned-entities
+    - # -- Name of the task, which selects the task to run. Must not be changed.
+      name: delete-orphaned-entities
+      # -- Cron schedule of the task.
       schedule: "30 1 * * *"
       vcsInfo:
+        # -- Maximum number of orphaned VCS info entries to delete in one task run.
         limit: 1024
+        # -- Number of orphaned VCS info entries to delete in one transaction.
         chunkSize: 64
       remoteArtifacts:
+        # -- Maximum number of orphaned remote artifacts to delete in one task run.
         limit: 1024
+        # -- Number of orphaned remote artifacts to delete in one transaction.
         chunkSize: 64
       snippets:
+        # -- Maximum number of orphaned snippets to delete in one task run.
         limit: 1048576
+        # -- Number of orphaned snippets to delete in one transaction.
         chunkSize: 1024
       snippetFindings:
+        # -- Maximum number of orphaned snippet findings to delete in one task run.
         limit: 1048576
+        # -- Number of orphaned snippet findings to delete in one transaction.
         chunkSize: 1024
-    - name: kubernetes-reaper
+    - # -- Name of the task, which selects the task to run. Must not be changed.
+      name: kubernetes-reaper
+      # -- Cron schedule of the task.
       schedule: "*/5 * * * *"
+      # -- Minimum age in seconds of completed worker jobs before they are deleted.
       reaperMaxAge: 600
-    - name: kubernetes-long-running-jobs-finder
+    - # -- Name of the task, which selects the task to run. Must not be changed.
+      name: kubernetes-long-running-jobs-finder
+      # -- Cron schedule of the task.
       schedule: "*/5 * * * *"
       timeouts:
+        # -- Timeout in minutes after which a running Config worker job is considered stuck and is terminated.
         configWorker: 1
+        # -- Timeout in minutes after which a running Analyzer worker job is considered stuck and is terminated.
         analyzerWorker: 120
+        # -- Timeout in minutes after which a running Advisor worker job is considered stuck and is terminated.
         advisorWorker: 2
+        # -- Timeout in minutes after which a running Scanner worker job is considered stuck and is terminated.
         scannerWorker: 1440
+        # -- Timeout in minutes after which a running Evaluator worker job is considered stuck and is terminated.
         evaluatorWorker: 5
+        # -- Timeout in minutes after which a running Reporter worker job is considered stuck and is terminated.
         reporterWorker: 30
+        # -- Timeout in minutes after which a running Notifier worker job is considered stuck and is terminated.
         notifierWorker: 10
-    - name: kubernetes-lost-jobs-finder
+    - # -- Name of the task, which selects the task to run. Must not be changed.
+      name: kubernetes-lost-jobs-finder
+      # -- Cron schedule of the task.
       schedule: "*/2 * * * *"
+      # -- Minimum age in seconds of a job in the database before it is considered lost if no matching Kubernetes job exists.
       lostJobsMinAge: 30
-    - name: sync-keycloak-users
+    - # -- Name of the task, which selects the task to run. Must not be changed.
+      name: sync-keycloak-users
+      # -- Cron schedule of the task.
       schedule: "0 * * * *"
       # -- Number of users a sync may always mark deleted, or usernames whose roles it may remove. The larger of this count and
       # the count calculated using maxDeletedShare applies. The role removal limit is checked only after the first successful sync.
@@ -633,7 +668,8 @@ tasks:
       maxDeletedShare: 0.1
       # -- Number of users to request from Keycloak per page.
       pageSize: 5000
-    - name: delete-unused-projections
+    - # -- Name of the task, which selects the task to run. Must not be changed.
+      name: delete-unused-projections
       # -- Cron schedule of the task. Running it more often than daily is not useful, because the retention is configured in
       # days and the last access time of projections is only updated once a day.
       schedule: "45 2 * * *"
@@ -645,11 +681,18 @@ ui:
   # -- Deployment strategy for the UI component
   strategy:
     type: RollingUpdate
+  # -- The URL under which the UI is reachable. It is used as the redirect URI after login and logout. If empty, the default of
+  # the UI image is used.
   url: ""
+  # -- The URL of the ORT Server API that the UI connects to. If empty, the default of the UI image is used.
   apiUrl: ""
+  # -- The URL of the OpenID Connect authority (the Keycloak realm URL) used by the UI for authentication. If empty, the
+  # default of the UI image is used.
   authority: ""
+  # -- The OpenID Connect client ID used by the UI for authentication. If empty, the default of the UI image is used.
   clientId: ""
   service:
+    # -- The port to use for the UI service.
     port: 8082
   # -- CPU and memory requests and limits for the UI deployment
   resources:
@@ -690,4 +733,6 @@ ui:
   # -- Additional volume mounts for the UI deployment
   extraVolumeMounts: []
 
+# -- Additional Kubernetes objects to deploy with the chart. The objects are rendered as templates, so they can reference
+# chart values.
 extraObjects: []
