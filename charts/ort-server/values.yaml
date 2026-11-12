@@ -618,6 +618,13 @@ tasks:
       maxDeletedShare: 0.1
       # -- Number of users to request from Keycloak per page.
       pageSize: 5000
+    - name: delete-unused-projections
+      # -- Cron schedule of the task. Running it more often than daily is not useful, because the retention is configured in
+      # days and the last access time of projections is only updated once a day.
+      schedule: "45 2 * * *"
+      # -- Number of days to keep projections after their last access. Deleted projections are built again on their next
+      # request. Must be at least 2.
+      retentionDays: 30
 
 ui:
   # -- Deployment strategy for the UI component
