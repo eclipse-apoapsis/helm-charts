@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.29.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.28.0...ort-server-v0.29.0) (2026-11-13)
+
+
+### Features
+
+* Do not retry failed maintenance tasks ([501b17d](https://github.com/eclipse-apoapsis/helm-charts/commit/501b17d6211e5db19b730fa8ea8a44816c560dcd))
+* Fall back to the log as termination message of failed tasks ([45fa0a0](https://github.com/eclipse-apoapsis/helm-charts/commit/45fa0a037924f64fe5dcb87d5122f431f8ab5cd5))
+
+
+### Dependencies
+
+* update dependency eclipse-apoapsis/ort-server to v0.104.0 ([f1d93a9](https://github.com/eclipse-apoapsis/helm-charts/commit/f1d93a9b82f36318c8f115d23d03ad6497a613ff))
+
 ## [0.28.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.27.0...ort-server-v0.28.0) (2026-11-12)
 
 
