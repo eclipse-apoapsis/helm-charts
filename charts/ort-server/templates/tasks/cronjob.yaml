@@ -14,6 +14,8 @@ spec:
   successfulJobsHistoryLimit: 1
   jobTemplate:
     spec:
+      # Failed tasks are not retried, the next run starts at the next scheduled time.
+      backoffLimit: 0
       template:
         metadata:
           labels:
