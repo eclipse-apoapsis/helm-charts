@@ -38,6 +38,9 @@ spec:
           containers:
             - name: {{ include "ortserver.fullname" $ }}-{{ .name }}-task
               image: "{{ $.Values.containerRegistry }}/ort-server-maintenance-tasks:{{ $.Chart.AppVersion }}"
+              # Show the end of the log as termination message if the task runner could not write one, for example because
+              # the container failed before the task runner started.
+              terminationMessagePolicy: FallbackToLogsOnError
               {{- with $.Values.tasks.certificates.path }}
               command: ["/bin/sh"]
               args: ["-c", "/etc/scripts/import_certificates.sh {{ . }} && exec java -cp @/app/jib-classpath-file @/app/jib-main-class-file"]
