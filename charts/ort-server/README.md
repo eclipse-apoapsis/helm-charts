@@ -72,6 +72,7 @@ A generic Helm chart for the ORT Server.
 | secrets.scaleway.region | string | `"fr-par"` | The region where the Scaleway Secret Manager is hosted. |
 | secrets.scaleway.projectId | string | `""` | The ID of the Scaleway project where secrets are stored. |
 | secrets.scaleway.secretKey | string | `""` | The secret key for accessing the Scaleway Secret Manager. |
+| secrets.scaleway.rootPath | string | `""` | The root path in Scaleway Secret Manager where secrets are stored. |
 | secrets.vault.enabled | bool | `false` | If enabled, user secrets are stored in HashiCorp Vault. |
 | secrets.vault.uri | string | `""` | The URI of the Vault server. |
 | secrets.vault.roleId | string | `""` | The role ID assigned to this client application. |
