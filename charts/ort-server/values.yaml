@@ -146,6 +146,8 @@ secrets:
     projectId: ""
     # -- The secret key for accessing the Scaleway Secret Manager.
     secretKey: ""
+    # -- The root path in Scaleway Secret Manager where secrets are stored.
+    rootPath: ""
   vault:
     # -- If enabled, user secrets are stored in HashiCorp Vault.
     enabled: false

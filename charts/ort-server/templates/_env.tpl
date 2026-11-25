@@ -134,6 +134,8 @@ Environment variable entry for a RabbitMQ password (used for CONFIG_FORCE_* over
   value: {{ .Values.secrets.scaleway.projectId | quote }}
 - name: SCW_SECRET_KEY
   value: {{ .Values.secrets.scaleway.secretKey | quote }}
+- name: SCW_ROOT_PATH
+  value: {{ .Values.secrets.scaleway.rootPath | quote }}
 {{- else if .Values.secrets.vault.enabled }}
 - name: SECRETS_PROVIDER_NAME
   value: vault
