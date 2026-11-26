@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.30.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.29.1...ort-server-v0.30.0) (2026-11-26)
+
+
+### Features
+
+* Support root path for the Scaleway secrets provider ([c0e2415](https://github.com/eclipse-apoapsis/helm-charts/commit/c0e2415bb617fbdb5bdbcbf8ca1cdf59b672e265))
+
+
+### Bug Fixes
+
+* Configure the file archive storage for core ([6b7cc12](https://github.com/eclipse-apoapsis/helm-charts/commit/6b7cc1299967ea93bbd6800f828060c6ed0dca55))
+* Use the correct env var names for the Azure storage account ([c6fb094](https://github.com/eclipse-apoapsis/helm-charts/commit/c6fb094d2249ed3299e1008dcd32ffe23f61d3d4))
+
+
+### Dependencies
+
+* update dependency eclipse-apoapsis/ort-server to v0.106.0 ([70c714e](https://github.com/eclipse-apoapsis/helm-charts/commit/70c714eb073e9005441a6e48f573657b994e5c32))
+
 ## [0.29.1](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.29.0...ort-server-v0.29.1) (2026-11-19)
 
 
