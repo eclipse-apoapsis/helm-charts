@@ -234,7 +234,7 @@ properties have environment variable substitutions configured.
   value: {{ . | quote }}
 {{- end }}
 {{- with .Values.storage.azureBlob.accountName }}
-- name: FILE_ARCHIVE_STORAGE_ACCOUNT_NAME
+- name: FILE_ARCHIVE_STORAGE_STORAGE_ACCOUNT_NAME
   value: {{ . | quote }}
 {{- end }}
 - name: FILE_ARCHIVE_STORAGE_CONTAINER_NAME
@@ -282,7 +282,7 @@ properties have environment variable substitutions configured.
   value: {{ . | quote }}
 {{- end }}
 {{- with .Values.storage.azureBlob.accountName }}
-- name: FILE_LIST_STORAGE_ACCOUNT_NAME
+- name: FILE_LIST_STORAGE_STORAGE_ACCOUNT_NAME
   value: {{ . | quote }}
 {{- end }}
 - name: FILE_LIST_STORAGE_CONTAINER_NAME
@@ -330,7 +330,7 @@ properties have environment variable substitutions configured.
   value: {{ . | quote }}
 {{- end }}
 {{- with .Values.storage.azureBlob.accountName }}
-- name: REPORT_STORAGE_ACCOUNT_NAME
+- name: REPORT_STORAGE_STORAGE_ACCOUNT_NAME
   value: {{ . | quote }}
 {{- end }}
 - name: REPORT_STORAGE_CONTAINER_NAME
