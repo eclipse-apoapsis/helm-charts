@@ -82,6 +82,7 @@ spec:
           env:
             {{- include "ortserver.env.adminSecrets" . | nindent 12 }}
             {{- include "ortserver.env.database" . | nindent 12 }}
+            {{- include "ortserver.env.fileArchiveStorage" . | nindent 12 }}
             {{- include "ortserver.env.fileListStorage" . | nindent 12 }}
             {{- include "ortserver.env.logFileService" . | nindent 12 }}
             {{- include "ortserver.env.reportStorage" . | nindent 12 }}
