@@ -189,6 +189,10 @@ A generic Helm chart for the ORT Server.
 | core.projections.retryDelaySeconds | int | `60` | The delay in seconds after which a failed projection build is retried. |
 | core.projections.asyncRequestWaitMillis | int | `2000` | The maximum time in milliseconds a request with `Prefer: respond-async` waits for a projection build. |
 | core.projections.syncRequestWaitMillis | int | `30000` | The maximum time in milliseconds other requests wait for a projection build to finish. |
+| core.rateLimit.public.maxRequests | int | `100` | The maximum number of requests a client can send to public routes within the time window. Requests are counted per client IP. |
+| core.rateLimit.public.windowMs | int | `60000` | The time window in milliseconds for the rate limit of public routes. |
+| core.rateLimit.authorized.maxRequests | int | `1000` | The maximum number of requests a user can send to authorized routes within the time window. Requests are counted per user. |
+| core.rateLimit.authorized.windowMs | int | `60000` | The time window in milliseconds for the rate limit of authorized routes. |
 | core.livenessProbe.enabled | bool | `true` | Enable livenessProbe for the core deployment |
 | core.livenessProbe.initialDelaySeconds | int | `60` | Initial delay before the liveness probe is initiated |
 | core.livenessProbe.periodSeconds | int | `10` | Period between liveness probe checks |

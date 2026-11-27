@@ -472,6 +472,19 @@ core:
     asyncRequestWaitMillis: 2000
     # -- The maximum time in milliseconds other requests wait for a projection build to finish.
     syncRequestWaitMillis: 30000
+  rateLimit:
+    public:
+      # -- The maximum number of requests a client can send to public routes within the time window. Requests are counted per
+      # client IP.
+      maxRequests: 100
+      # -- The time window in milliseconds for the rate limit of public routes.
+      windowMs: 60000
+    authorized:
+      # -- The maximum number of requests a user can send to authorized routes within the time window. Requests are counted per
+      # user.
+      maxRequests: 1000
+      # -- The time window in milliseconds for the rate limit of authorized routes.
+      windowMs: 60000
   livenessProbe:
     # -- Enable livenessProbe for the core deployment
     enabled: true

@@ -166,6 +166,16 @@ spec:
             - name: PROJECTIONS_SYNC_REQUEST_WAIT_MILLIS
               value: "{{ .Values.core.projections.syncRequestWaitMillis }}"
 
+            # Rate limits
+            - name: RATE_LIMIT_MAX_REQUESTS
+              value: "{{ .Values.core.rateLimit.public.maxRequests }}"
+            - name: RATE_LIMIT_WINDOW_MS
+              value: "{{ .Values.core.rateLimit.public.windowMs }}"
+            - name: RATE_LIMIT_AUTHORIZED_MAX_REQUESTS
+              value: "{{ .Values.core.rateLimit.authorized.maxRequests }}"
+            - name: RATE_LIMIT_AUTHORIZED_WINDOW_MS
+              value: "{{ .Values.core.rateLimit.authorized.windowMs }}"
+
             # Orchestrator sender
             {{- if .Values.transport.rabbitmq.enabled }}
             - name: ORCHESTRATOR_SENDER_TRANSPORT_TYPE
