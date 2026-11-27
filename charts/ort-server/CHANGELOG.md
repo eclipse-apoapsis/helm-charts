@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.31.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.30.0...ort-server-v0.31.0) (2026-11-27)
+
+
+### Features
+
+* Make the rate limits of core configurable ([6f7267a](https://github.com/eclipse-apoapsis/helm-charts/commit/6f7267a1f1a0f9d508aea0a420e0c53d0406b849))
+* Make the trusted proxies of core configurable ([d7f84a9](https://github.com/eclipse-apoapsis/helm-charts/commit/d7f84a90f558f505820134e2ddf7f8179787f5a0))
+
+
+### Dependencies
+
+* update dependency eclipse-apoapsis/ort-server to v0.107.0 ([19a059c](https://github.com/eclipse-apoapsis/helm-charts/commit/19a059c894154d89f5865ea98fa292e0dd91da5b))
+
 ## [0.30.0](https://github.com/eclipse-apoapsis/helm-charts/compare/ort-server-v0.29.1...ort-server-v0.30.0) (2026-11-26)
 
 
