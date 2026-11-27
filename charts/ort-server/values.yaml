@@ -485,6 +485,12 @@ core:
       maxRequests: 1000
       # -- The time window in milliseconds for the rate limit of authorized routes.
       windowMs: 60000
+  # -- (string) Comma-separated list of IP addresses or ranges in CIDR notation of proxies that are trusted to set the
+  # `X-Forwarded-For` header, which is used to determine the client IP for rate limiting. If not set, loopback, private, and
+  # link-local addresses are trusted. Set to an empty string to ignore the header. Clients with a trusted address can choose
+  # their IP for the rate limit of public routes, so if clients connect from a private network, set this to the addresses of
+  # the actual proxies only, for example the pod CIDR of the ingress controller.
+  trustedProxies:
   livenessProbe:
     # -- Enable livenessProbe for the core deployment
     enabled: true
