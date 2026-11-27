@@ -1,6 +1,6 @@
 # ort-server
 
-![Version: 0.30.0][version-badge] <!-- x-release-please-version -->
+![Version: 0.31.0][version-badge] <!-- x-release-please-version -->
 ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 ![AppVersion: 0.107.0](https://img.shields.io/badge/AppVersion-0.107.0-informational?style=flat-square)
 
@@ -297,5 +297,5 @@ A generic Helm chart for the ORT Server.
 | extraObjects | list | `[]` | Additional Kubernetes objects to deploy with the chart. The objects are rendered as templates, so they can reference chart values. |
 
 <!-- x-release-please-start-version -->
-[version-badge]: https://img.shields.io/badge/Version-0.30.0%2Dinformational?style=flat-square
+[version-badge]: https://img.shields.io/badge/Version-0.31.0%2Dinformational?style=flat-square
 <!-- x-release-please-end -->
