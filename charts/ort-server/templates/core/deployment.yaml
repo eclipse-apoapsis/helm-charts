@@ -175,6 +175,10 @@ spec:
               value: "{{ .Values.core.rateLimit.authorized.maxRequests }}"
             - name: RATE_LIMIT_AUTHORIZED_WINDOW_MS
               value: "{{ .Values.core.rateLimit.authorized.windowMs }}"
+            {{- if not (kindIs "invalid" .Values.core.trustedProxies) }}
+            - name: TRUSTED_PROXIES
+              value: {{ .Values.core.trustedProxies | quote }}
+            {{- end }}
 
             # Orchestrator sender
             {{- if .Values.transport.rabbitmq.enabled }}

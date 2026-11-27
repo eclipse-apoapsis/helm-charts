@@ -193,6 +193,7 @@ A generic Helm chart for the ORT Server.
 | core.rateLimit.public.windowMs | int | `60000` | The time window in milliseconds for the rate limit of public routes. |
 | core.rateLimit.authorized.maxRequests | int | `1000` | The maximum number of requests a user can send to authorized routes within the time window. Requests are counted per user. |
 | core.rateLimit.authorized.windowMs | int | `60000` | The time window in milliseconds for the rate limit of authorized routes. |
+| core.trustedProxies | string | `nil` | Comma-separated list of IP addresses or ranges in CIDR notation of proxies that are trusted to set the `X-Forwarded-For` header, which is used to determine the client IP for rate limiting. If not set, loopback, private, and link-local addresses are trusted. Set to an empty string to ignore the header. Clients with a trusted address can choose their IP for the rate limit of public routes, so if clients connect from a private network, set this to the addresses of the actual proxies only, for example the pod CIDR of the ingress controller. |
 | core.livenessProbe.enabled | bool | `true` | Enable livenessProbe for the core deployment |
 | core.livenessProbe.initialDelaySeconds | int | `60` | Initial delay before the liveness probe is initiated |
 | core.livenessProbe.periodSeconds | int | `10` | Period between liveness probe checks |
